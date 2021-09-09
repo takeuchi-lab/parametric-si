@@ -22,7 +22,7 @@ def sfs(X,y,k):
         A.append(j_t)
         s.append(np.sign(correlation[j_t]))
     
-    return A,s
+    return A
 
 def sfs_CV(X,y,K,k_cv):
     k = K[np.argmin([cv.cv_error(sfs(X,y,k)[0],X,y,k_cv) for k in K])]
