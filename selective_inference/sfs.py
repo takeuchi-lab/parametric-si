@@ -8,17 +8,11 @@ def sfs(X,y,k):
     A_c = list(range(X.shape[1]))
     s = []
 
-    correlation = y.T @ X
-    j_0 = A_c[np.argmax(np.abs(correlation))]
-    s_0 = np.sign(correlation[j_0])
-
-    A.append(j_0)
-    s.append(s_0)
-
-    for t in range(1,k):
+    for t in range(0,k):
         X_A = X[:,A]
         correlation = (y - X_A @ np.linalg.inv(X_A.T @ X_A) @ X_A.T @ y).T @ X[:,A_c]
         j_t = A_c[np.argmax(np.abs(correlation))]
+        A_c.remove(j_t)
         A.append(j_t)
         s.append(np.sign(correlation[j_t]))
     

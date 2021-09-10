@@ -2,7 +2,8 @@ import numpy as np
 import portion as P
 
 from .quadratic import Quadratic
-from .cv import k_fold_index,train_val_index,train_val_split_mat,train_val_split_vec
+from .cv import train_val_index,train_val_split_mat,train_val_split_vec
+from . import si
 
 def validation_error(X_train,X_val,a_train,a_val,b_train,b_val):
 
@@ -12,17 +13,17 @@ def validation_error(X_train,X_val,a_train,a_val,b_train,b_val):
 
     return Quadratic(b.T@b, 2*a.T@b ,a.T @ a)
 
-def compute_val_error_path(k,X_train,X_val,a_train,a_val,b_train,b_val,z_min,z_max):
+def compute_val_error_path(k,X_train,X_val,a_train,a_val,b_train,b_val,z_min,z_max,region):
 
     #TODO : change each compute path function of sfs,lars,lasso 
-    z_k,A_k = compute_solution_path(k,X_train,a_train,b_train,z_min,z_max)
+    z_k,A_k = si.compute_solution_path(k,X_train,a_train,b_train,z_min,z_max,region)
     E_k = [validation_error(X_train[:,A],X_val[:,A],a_train,a_val,b_train,b_val) for A in A_k]
 
     return z_k,E_k
 
-def compute_cv_path(k,X,a,b,z_min,z_max,k_cv):
+def compute_cv_path(k,X,a,b,z_min,z_max,k_cv,region):
 
-    index = cv.k_fold_index(len(a),k_cv)
+    index = train_val_index(len(a),k_cv)
     paths = []
 
     for i in range(k_cv):
@@ -30,7 +31,7 @@ def compute_cv_path(k,X,a,b,z_min,z_max,k_cv):
         X_train,X_val = train_val_split_mat(X,index[i],index[i+1])
         a_train,a_val = train_val_split_vec(a,index[i],index[i+1])
         b_train,b_val = train_val_split_vec(b,index[i],index[i+1])
-        z_k,E_k = compute_val_error_path(k,X_train,X_val,a_train,a_val,b_train,b_val,z_min,z_max)
+        z_k,E_k = compute_val_error_path(k,X_train,X_val,a_train,a_val,b_train,b_val,z_min,z_max,region)
         paths.append([z_k,E_k])
 
     Z_k = [paths[i][0] for i in range(k_cv)]

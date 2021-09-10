@@ -1,0 +1,135 @@
+import numpy as np
+import portion as p
+
+from . import lars
+from . import si
+from . import ci
+from . import p_value
+
+def parametric_lars_si(X,y,k):
+
+    A = lars.lars(X,y,k)[0][-1]
+    Sigma = np.identity(X.shape[0])
+
+    return si.parametric_si_p(X,y,k,Sigma,region)
+
+def parametric_lars_ci(X,y,k):
+
+    A = lars.lars(X,y,k)[0][-1]
+    Sigma = np.identity(X.shape[0])
+
+    return si.parametric_si_p(X,y,k,Sigma,region)
+
+#TODO need refactaring because it is too complicated and durty
+def region(X,y,step,a,b):
+
+    A,s,A_c,S,Sb = lars.Lars(X,y)
+
+    L = -np.inf
+    U = np.inf
+
+    # 1st step
+    jk = A[0]
+    xk = X[:,jk]
+    sk = s[0]
+
+    # when s = -1
+    for l in A_c[0]:
+        alpha = X[:,l] - (sk * xk).reshape(-1)
+        beta = 0
+        L, U = solve_inequality(alpha,beta,a,b,L,U)
+    
+    # when s = +1
+    for l in A_c[0]:
+        alpha = -1 * X[:,l] - (sk * xk).reshape(-1)
+        beta = 0
+        L, U = solve_inequality(alpha,beta,a,b,L,U)
+
+    # after 2step 
+    for k in range(1,step):
+        jk_1 = jk
+        sk_1 = sk
+        jk = A[k][-1]
+        sk = s[k][-1]
+
+        s_1 = s[k-1]
+        s_2 = []
+        A_1 = A[k-1]
+
+        X_A1 = X[:,A[k-1]]
+        X_A2 = []
+
+        if k > 1:
+            X_A2 = X[:,A[k-2]]
+            s_2 = s[k-2]
+        
+        invk1 = np.linalg.inv(X_A1.T @ X_A1)
+        invk2 = []
+
+        if k > 1:
+            invk2 = np.linalg.inv(X_A2.T @ X_A2)
+        
+        P_1 = (np.identity(X.shape[0]) - X_A1 @ invk1 @ X_A1.T)
+        P_2 = []
+
+        if k > 1:
+            P_2 = (np.identity(X.shape[0]) - X_A2 @ invk2 @ X_A2.T)
+
+        # c(jk,sk)>c(j,s) for all (j,s) \in S[k] \ {(jk,sk)}
+        Sk = S[k]
+        Sk.remove([jk,sk])
+        for (j,s) in Sk:
+            alpha = c(j,s,P_1,invk1,X_A1,s_1,X) - c(jk,sk,P_1,invk1,X_A1,s_1,X)
+            L,U = solve_inequality(alpha,0,a,b,L,U)
+        
+        # -c() < 0 
+        alpha = -1 * c_(jk,sk,A_1,s_1,X)
+        L,U = solve_inequality(alpha,0,a,b,L,U)
+
+        # c(j,s,Ak-1,sk-2) < c(jk-1,sk-1,Ak-2,sk-2) for (j,s) \in Sk
+        for (j,s) in S[k]:
+            if k == 1:
+                alpha = c(j,s,P_1,invk1,X_A1,s_1,X) - (sk_1 * X[:,jk_1]).reshape(-1)
+                L,U = solve_inequality(alpha,0,a,b,L,U)
+            else :
+                alpha = c(j,s,P_1,invk1,X_A1,s_1,X) - c(jk_1 , sk_1,P_2,invk2,X_A2,s[k-2],X)
+                L,U = solve_inequality(alpha,0,a,b,L,U)
+        
+        # c(jk-1,sk-1,Ak-2,sk-2)-c(j,s,Ak-1,sk-1) for all (j,s) \in A_C*{-1,1}\Sk
+        for (j,s) in Sb[k]:
+            if k == 1:
+                alpha =  (sk * X[:,jk_1]).reshape(-1) - c(j,s,P_1,invk1,X_A1,s_1,X)
+                L,U = solve_inequality(alpha,0,a,b,L,U)
+            else : 
+                alpha =  c(jk_1,sk_1,P_2,invk2,X_A2,s_2,X) - c(j,s,P_1,invk1,X_A1,s_1,X)
+                L,U = solve_inequality(alpha,0,a,b,L,U)
+        
+    return p.closed(L,U),A[-1]
+
+def c_(j,s,A,S,X):
+    n,d = X.shape
+    X_A = X[:,A]
+    X_j = X[:,j]
+    P = (np.identity(n) - X_A @ np.linalg.inv(X_A.T @ X_A) @ X_A.T)
+    temp = (P @ X_j) /(s - X_j @ X_A @ np.linalg.inv(X_A.T @ X_A) @ S)
+    return temp
+
+def c(j,s,P,X_inv,X_A,S,X):
+    X_j = X[:,j]
+    return (P @ X_j) / (s - X_j @ X_A @ X_inv @ S)
+
+def solve_inequality(alpha,beta,a,b,L,U):
+    temp1 = alpha @ b
+    temp2 = beta - (alpha @ a)
+
+    l = L
+    u = U
+
+    if temp1 > 0:
+        u = min(U,temp2 / temp1)
+    elif temp1 < 0:
+        l = max(L, temp2 / temp1)
+    else:
+        return L,U
+
+    return l,u

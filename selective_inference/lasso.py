@@ -1,7 +1,7 @@
 from sklearn import linear_model
 import numpy as np
 
-import cv
+from . import cv
 
 def lasso(X,y,alpha):
 

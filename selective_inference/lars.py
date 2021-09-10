@@ -11,7 +11,7 @@ def knot_value(j,s_j,A,s,X):
 
     return temp
 
-#TODO: require refactraring
+#TODO need to refactaring
 def lars(X,y,k):
 
     S = []
@@ -20,10 +20,9 @@ def lars(X,y,k):
     Sb= []
     s= []
 
-    step = k
     features = list(range(X.shape[1]))
 
-    k = 0
+    t = 0
     c = X.T @ y
     j = np.abs(c).argmax()
     s_j = np.sign(c[j])
@@ -38,16 +37,16 @@ def lars(X,y,k):
     Sb.append([])
 
     knot = s_j * X[:,j] @ y
-    k += 1
-    while k < d and k < step:
+    t += 1
+    while t < X.shape[0] and t < k:
 
         S_k = []
         Sb_k = []
         
-        Lambda = np.zeros((len(A_c[k-1]),2))
-        for i,feature in enumerate(A_c[k-1]):
+        Lambda = np.zeros((len(A_c[t-1]),2))
+        for i,feature in enumerate(A_c[t-1]):
             for j,sign in enumerate([-1,1]):
-                temp = knot_value(feature,sign,A[k-1],s[k-1],X) @ y 
+                temp = knot_value(feature,sign,A[t-1],s[t-1],X) @ y 
                 Lambda[i,j] = temp if temp <= knot else 0
                 if Lambda[i,j] <= knot:
                     S_k.append([feature,sign])
@@ -57,17 +56,17 @@ def lars(X,y,k):
         knot = np.max(Lambda)
         j,s_j = np.unravel_index(np.argmax(Lambda),Lambda.shape)
 
-        A.append(A[k-1] + [A_c[k-1][j]])
-        s.append(s[k-1] + [[-1,1][s_j]])
-        A_c_j = copy.copy(A_c[k-1])
-        A_c_j.remove(A_c[k-1][j])
+        A.append(A[t-1] + [A_c[t-1][j]])
+        s.append(s[t-1] + [[-1,1][s_j]])
+        A_c_j = copy.copy(A_c[t-1])
+        A_c_j.remove(A_c[t-1][j])
         A_c.append(A_c_j)
         S.append(S_k)
         Sb.append(Sb_k)
 
-        k += 1
+        t += 1
 
-    return A[-1]
+    return A,A_c,s,S,Sb
 
 def lars_CV(X,y,k_candidate,k_cv):
     error = list(map(lambda x:cv.cv_error(x,X,y,k_cv),k_candidate))
