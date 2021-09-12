@@ -3,9 +3,8 @@ import portion as p
 
 from . import p_value 
 from . import ci
-from . import sfs
 
-EPS = 1e-4
+EPS = 5e-3
 
 def construct_teststatistics(A,i,X,y,Sigma):
 
@@ -34,10 +33,16 @@ def compute_solution_path(k,X,a,b,z_min,z_max,region):
         y = a + b * z 
 
         L,U,model_z = region(X,y,k,a,b)
-        models.append(model_z)
-        intervals.append([max(L,z_min),min(U,z_max)])
-
-        z = U + EPS
+        
+        if z-EPS == U:
+            print(z_min,z_max)
+            z = U + 5e-2
+            print(z,U)
+            print("stack!")
+        else:
+            models.append(model_z)
+            intervals.append([max(L,z_min),min(U,z_max)])
+            z = U + EPS
     
     return intervals,models
 
@@ -51,15 +56,16 @@ def parametric_si_p(X,y,A,k,Sigma,region):
         a,b,var,z_obs = construct_teststatistics(A,i,X,y,Sigma)
 
         sigma = np.sqrt(var)
-        z_min = -1 * sigma * 20
-        z_max = sigma * 20
-        print(sigma)
+        z_min = -1 * sigma * 10
+        z_max = sigma * 10
 
         regions,models = compute_solution_path(k,X,a,b,z_min,z_max,region)
 
         for r,model in zip(regions,models):
+            print(r,model)
             if set(A) == set(model):
                 intervals.append(r)
+        print("finished search in statistic line")
         
         p_values[i] = p_value.compute_p_value(z_obs,intervals,sigma)
 

@@ -7,6 +7,7 @@ from . import si
 def parametric_lasso_si(X,y,alpha):
 
     A,s = lasso.lasso(X,y,alpha)
+    print(A)
     Sigma = np.identity(X.shape[0])
 
     return si.parametric_si_p(X,y,A,alpha,Sigma,region)
@@ -24,41 +25,36 @@ def region(X,y,alpha,a,b):
     A,s = lasso.lasso(X,y,alpha)
 
     Ac = [i for i in range(X.shape[1]) if i not in A]
-    print(A)
-    print(Ac)
 
     X_A = X[:,A]
     X_Ac = X[:,Ac]
 
-    P = X_A @ np.linalg.inv(X_A.T @ X_A) @ X_A.T
+    P = X_A @ np.linalg.pinv(X_A.T @ X_A) @ X_A.T
 
-    X_A_inv = np.linalg.inv(X_A.T @ X_A)
+    X_A_pinv = np.linalg.pinv(X_A.T @ X_A)
 
     # please refer to lee et al paper
-    A0_plus  = 1 / alpha * (X_Ac.T @ (np.identity(X.shape[0]) - P))
-    A0_minus  = 1 / alpha * (-1 * X_Ac.T @ (np.identity(X.shape[0]) - P))
-    b0_plus =  np.ones(X_Ac.shape[1]) - (X_Ac.T @ np.linalg.inv(X_A @ X_A.T) @ X_A @ s)
-    b0_minus =  np.ones(X_Ac.shape[1]) + (X_Ac.T @ np.linalg.inv(X_A @ X_A.T) @ X_A @ s)
-    A1 = -1 * np.diag(s) @ X_A_inv @ X_A.T
-    b1 = -1 * alpha * np.diag(s) @ X_A_inv @ s
+    A0_plus  = 1 / (alpha*X.shape[0]) * (X_Ac.T @ (np.identity(X.shape[0]) - P))
+    A0_minus  = 1 / (alpha*X.shape[0]) * (-1 * X_Ac.T @ (np.identity(X.shape[0]) - P))
+    b0_plus =  np.ones(X_Ac.shape[1]) - (X_Ac.T @ np.linalg.pinv(X_A @ X_A.T) @ X_A @ s)
+    b0_minus =  np.ones(X_Ac.shape[1]) + (X_Ac.T @ np.linalg.pinv(X_A @ X_A.T) @ X_A @ s)
+    A1 = -1 * np.diag(s) @ X_A_pinv @ X_A.T
+    b1 = -1 * (alpha*X.shape[0]) * np.diag(s) @ X_A_pinv @ s
 
-    # A_mat(a+bz) \leq b_vec
-    A_mat = np.vstack([A0_plus,A0_minus,A1])
-    b_vec = np.hstack([b0_plus,b0_minus,b1])
+    L,U = solve(A0_plus,b0_plus,a,b,L,U)
+    L,U = solve(A0_minus,b0_minus,a,b,L,U)
+    L,U = solve(A1,b1,a,b,L,U)
 
-    Ab = A_mat @ b
-    Aa = A_mat @ a
+    return L,U,A
 
-    temp = (b_vec - Aa) / Ab
-    print(temp[Ab < 0])
-    print(temp[Ab > 0])
+def solve(C,d,a,b,L,U):
 
-    # caliculate interval
-    L = np.max(temp[Ab < 0])
-    U = np.min(temp[Ab > 0])
+    for i in range(C.shape[0]):
+        numerator = d[i] - C[i,:] @ a
+        denominator = C[i,:] @ b
+        if denominator > 0:
+            U = min(U,numerator/denominator)
+        elif denominator < 0:
+            L = max(L,numerator/denominator)
 
-    temp = p.closed(L,U)
-    print(L,U)
-    print(temp)
-
-    return p.closed(L,U),A
+    return L,U
