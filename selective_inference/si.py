@@ -3,13 +3,14 @@ import portion as p
 
 from . import p_value 
 from . import ci
+from . import sfs
 
 EPS = 1e-4
 
-def construct_teststatistics(model,i,X,y,Sigma):
+def construct_teststatistics(A,i,X,y,Sigma):
 
-    X_A = X[:,model]
-    e = np.zeros(model.shape[0])
+    X_A = X[:,A]
+    e = np.zeros(len(A))
     e[i] = 1
 
     eta = X_A @ np.linalg.inv(X_A.T @ X_A) @ e
@@ -30,44 +31,46 @@ def compute_solution_path(k,X,a,b,z_min,z_max,region):
 
     while z < z_max:
 
-        y = a + b*z 
+        y = a + b * z 
 
-        interval,model_z = region(k,X,y,a,b)
+        L,U,model_z = region(X,y,k,a,b)
         models.append(model_z)
-        intervals.append(interval)
+        intervals.append([max(L,z_min),min(U,z_max)])
 
-        z = interval.upper + EPS
+        z = U + EPS
     
     return intervals,models
 
 def parametric_si_p(X,y,A,k,Sigma,region):
 
-    intervals = p.empty()
-    p_values = np.zeros(k)
+    p_values = np.zeros(len(A))
 
     for i in range(len(A)):
+        intervals = []
+
         a,b,var,z_obs = construct_teststatistics(A,i,X,y,Sigma)
 
         sigma = np.sqrt(var)
         z_min = -1 * sigma * 20
         z_max = sigma * 20
+        print(sigma)
 
         regions,models = compute_solution_path(k,X,a,b,z_min,z_max,region)
 
         for r,model in zip(regions,models):
             if set(A) == set(model):
-                intervals = intervals | r
-    
-        p_values[i] = p_value.compute_p_value(z_obs,regions,sigma)
-    
+                intervals.append(r)
+        
+        p_values[i] = p_value.compute_p_value(z_obs,intervals,sigma)
+
     return p_values, A
 
 def parametric_si_ci(X,y,A,k,Sigma,region,alpha=0.05):
 
-    intervals = p.empty()
-    cis = np.zeros(k)
+    cis = []
 
     for i in range(len(A)):
+        intervals = []
         a,b,var,z_obs = construct_teststatistics(A,i,X,y,Sigma)
 
         sigma = np.sqrt(var)
@@ -78,7 +81,7 @@ def parametric_si_ci(X,y,A,k,Sigma,region,alpha=0.05):
 
         for r,model in zip(regions,models):
             if set(A) == set(model):
-                intervals = intervals | r
+                intervals.append(r)
     
         cis.append(ci.confidence_interval(intervals,z_obs,sigma,alpha))
     

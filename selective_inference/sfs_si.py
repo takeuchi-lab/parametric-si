@@ -25,16 +25,17 @@ def region(X,y,k,a,b):
     L,U = -np.inf,np.inf
 
     for i in range(k):
-        X_Ai = X[:,A[0:k]]
+        X_Ai = X[:,A[0:i]]
+        x_ji = X[:,A[i]]
         P = np.identity(X.shape[0]) - X_Ai @ np.linalg.inv(X_Ai.T @ X_Ai) @ X_Ai.T
+        A_c.remove(A[i])
         for j in A_c:
             x_j = X[:,j]
-            x_ji = X[:,A[j]]
 
-            a_plus = (x_j.T - s[j] * x_ji).T @ P @ a
-            b_plus = (x_j.T - s[j] * x_ji).T @ P @ b
-            a_minus = (-x_j.T - s[j] * x_ji).T @ P @ a
-            b_minus = (-x_j.T - s[j] * x_ji).T @ P @ b
+            a_plus = (x_j - s[i] * x_ji).T @ P @ a
+            b_plus = (x_j - s[i] * x_ji).T @ P @ b
+            a_minus = (-x_j - s[i] * x_ji).T @ P @ a
+            b_minus = (-x_j - s[i] * x_ji).T @ P @ b
 
             if b_plus < 0:
                 L = max(L,-a_plus/b_plus)
@@ -43,7 +44,7 @@ def region(X,y,k,a,b):
             
             if b_minus < 0:
                 L = max(L,-a_minus/b_minus)
-            elif b_plus < 0:
+            elif b_minus > 0:
                 U = min(U,-a_minus/b_minus)
 
-    return p.closed(L,U),A
+    return L,U,A

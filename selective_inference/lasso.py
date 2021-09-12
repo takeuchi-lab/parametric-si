@@ -7,9 +7,11 @@ def lasso(X,y,alpha):
 
     clf = linear_model.Lasso(alpha=alpha,fit_intercept=False,normalize=False)
     clf.fit(X,y)
-    A = clf.coef_
+    coef = clf.coef_
+    A = np.where(coef!=0)[0].tolist()
+    s = np.sign(coef[A])
 
-    return np.where(A!=0)[0].tolist()
+    return A,s
 
 def lasso_CV(X,y,alpha_candidate,k_cv):
 

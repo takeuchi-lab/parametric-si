@@ -2,7 +2,7 @@ import numpy as np
 import portion as p
 from scipy import stats
 from scipy import optimize
-import probability as prob
+from . import probability as prob
 
 def f_inverse(p,z,intervals,sigma):
 

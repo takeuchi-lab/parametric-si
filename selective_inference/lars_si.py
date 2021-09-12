@@ -11,19 +11,19 @@ def parametric_lars_si(X,y,k):
     A = lars.lars(X,y,k)[0][-1]
     Sigma = np.identity(X.shape[0])
 
-    return si.parametric_si_p(X,y,k,Sigma,region)
+    return si.parametric_si_p(X,y,A,k,Sigma,region)
 
 def parametric_lars_ci(X,y,k):
 
     A = lars.lars(X,y,k)[0][-1]
     Sigma = np.identity(X.shape[0])
 
-    return si.parametric_si_p(X,y,k,Sigma,region)
+    return si.parametric_si_p(X,y,A,k,Sigma,region)
 
 #TODO need refactaring because it is too complicated and durty
 def region(X,y,step,a,b):
 
-    A,s,A_c,S,Sb = lars.Lars(X,y)
+    A,A_c,signs,S,Sb = lars.lars(X,y,step)
 
     L = -np.inf
     U = np.inf
@@ -31,7 +31,7 @@ def region(X,y,step,a,b):
     # 1st step
     jk = A[0]
     xk = X[:,jk]
-    sk = s[0]
+    sk = signs[0]
 
     # when s = -1
     for l in A_c[0]:
@@ -49,10 +49,11 @@ def region(X,y,step,a,b):
     for k in range(1,step):
         jk_1 = jk
         sk_1 = sk
-        jk = A[k][-1]
-        sk = s[k][-1]
 
-        s_1 = s[k-1]
+        jk = A[k][-1]
+        sk = signs[k][-1]
+
+        s_1 = signs[k-1]
         s_2 = []
         A_1 = A[k-1]
 
@@ -61,7 +62,7 @@ def region(X,y,step,a,b):
 
         if k > 1:
             X_A2 = X[:,A[k-2]]
-            s_2 = s[k-2]
+            s_2 = signs[k-2]
         
         invk1 = np.linalg.inv(X_A1.T @ X_A1)
         invk2 = []
@@ -92,7 +93,7 @@ def region(X,y,step,a,b):
                 alpha = c(j,s,P_1,invk1,X_A1,s_1,X) - (sk_1 * X[:,jk_1]).reshape(-1)
                 L,U = solve_inequality(alpha,0,a,b,L,U)
             else :
-                alpha = c(j,s,P_1,invk1,X_A1,s_1,X) - c(jk_1 , sk_1,P_2,invk2,X_A2,s[k-2],X)
+                alpha = c(j,s,P_1,invk1,X_A1,s_1,X) - c(jk_1 , sk_1,P_2,invk2,X_A2,s_2,X)
                 L,U = solve_inequality(alpha,0,a,b,L,U)
         
         # c(jk-1,sk-1,Ak-2,sk-2)-c(j,s,Ak-1,sk-1) for all (j,s) \in A_C*{-1,1}\Sk
@@ -104,7 +105,7 @@ def region(X,y,step,a,b):
                 alpha =  c(jk_1,sk_1,P_2,invk2,X_A2,s_2,X) - c(j,s,P_1,invk1,X_A1,s_1,X)
                 L,U = solve_inequality(alpha,0,a,b,L,U)
         
-    return p.closed(L,U),A[-1]
+    return L,U,A[-1]
 
 def c_(j,s,A,S,X):
     n,d = X.shape

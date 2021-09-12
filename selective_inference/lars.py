@@ -25,7 +25,7 @@ def lars(X,y,k):
     t = 0
     c = X.T @ y
     j = np.abs(c).argmax()
-    s_j = np.sign(c[j])
+    s_j = int(np.sign(c[j]))
     S_j = [[l,m] for l in features for m in [-1,1]]
 
     S.append(S_j)
