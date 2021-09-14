@@ -3,6 +3,8 @@ import portion as p
 
 from . import p_value 
 from . import ci
+from . import cv
+from . import si_cv
 
 EPS = 5e-3
 
@@ -34,15 +36,11 @@ def compute_solution_path(k,X,a,b,z_min,z_max,region):
 
         L,U,model_z = region(X,y,k,a,b)
         
-        if z-EPS == U:
-            print(z_min,z_max)
-            z = U + 5e-2
-            print(z,U)
-            print("stack!")
-        else:
-            models.append(model_z)
-            intervals.append([max(L,z_min),min(U,z_max)])
-            z = U + EPS
+        models.append(model_z)
+        intervals.append(p.closed(max(L,z_min),min(U,z_max)))
+        if type(intervals[-1].upper) == type(p.empty().upper):
+            assert False
+        z = intervals[-1].upper + EPS
     
     return intervals,models
 
@@ -51,7 +49,7 @@ def parametric_si_p(X,y,A,k,Sigma,region):
     p_values = np.zeros(len(A))
 
     for i in range(len(A)):
-        intervals = []
+        intervals = p.empty()
 
         a,b,var,z_obs = construct_teststatistics(A,i,X,y,Sigma)
 
@@ -62,10 +60,8 @@ def parametric_si_p(X,y,A,k,Sigma,region):
         regions,models = compute_solution_path(k,X,a,b,z_min,z_max,region)
 
         for r,model in zip(regions,models):
-            print(r,model)
             if set(A) == set(model):
-                intervals.append(r)
-        print("finished search in statistic line")
+                intervals = intervals | r
         
         p_values[i] = p_value.compute_p_value(z_obs,intervals,sigma)
 
@@ -91,4 +87,63 @@ def parametric_si_ci(X,y,A,k,Sigma,region,alpha=0.05):
     
         cis.append(ci.confidence_interval(intervals,z_obs,sigma,alpha))
     
+    return cis
+
+def parametric_si_cv_p(X,y,A,k_obs,k_candidates,Sigma,region,k_folds):
+
+    p_values = []
+
+    for i in range(len(A)):
+        a,b,var,z_obs = construct_teststatistics(A,i,X,y,Sigma)
+        sigma = np.sqrt(var)
+        z_min = -20 * sigma
+        z_max = 20 * sigma
+
+        paths = [si_cv.compute_cv_path(k,X,a,b,z_min,z_max,k_folds,region) for k in k_candidates]
+
+        Z = [paths[i][0] for i,j in enumerate(k_candidates)]
+        E = [paths[i][1] for i,j in enumerate(k_candidates)]
+
+        Z_CV = si_cv.compute_Z_CV(k_obs,k_candidates,Z,E)
+        
+        Z_alg = p.empty()
+        intervals,models = compute_solution_path(k_obs,X,a,b,z_min,z_max,region)
+
+        for interval,model in zip(intervals,models):
+            if set(A) == set(model):
+                Z_alg = Z_alg | interval
+        
+        Z = Z_alg & Z_CV
+
+        p_values.append(p_value.compute_p_value(z_obs,Z,sigma))
+
+    return p_values,A,k_obs
+
+def parametric_si_cv_ci(X,y,A,k,k_candidates,Sigma,region,k_folds,alpha=0.05):
+
+    cis = []
+
+    for i in range(len(A[-1])):
+        a,b,var,z_obs = construct_teststatistics(k,i,X,y,i,Sigma)
+        sigma = np.sqrt(var)
+        z_min = -20 * sigma
+        z_max = 20 * sigma
+
+        paths = [si_cv.compute_cv_path(k,X,a,b,z_min,z_max,k_folds,region) for k in k_candidates]
+        Z = [paths[i][0] for i,j in enumerate(k_candidates)]
+        E = [paths[i][1] for i,j in enumerate(k_candidates)]
+
+        Z_CV = si_cv.compute_Z_CV(k,k_candidates,Z,E)
+        Z_alg = p.empty()
+
+        intervals,models = compute_solution_path(k,X,a,b,z_min,z_max,region)
+
+        for interval,model in zip(intervals,models):
+            if set(A) == set(model):
+                Z_alg = Z_alg | p.closed(interval[0],interval[1])
+
+        Z = Z_alg & Z_CV
+
+        cis.append(ci.confidence_interval(Z,z_obs,sigma,alpha))
+
     return cis, A

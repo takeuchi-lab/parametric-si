@@ -15,5 +15,5 @@ def lasso(X,y,alpha):
 
 def lasso_CV(X,y,alpha_candidate,k_cv):
 
-    alpha = alpha_candidate[np.argmin([cv.cv_error(lasso(X,y,alpha),X,y,k_cv) for alpha in alpha_candidate])]
-    return lasso(X,y,alpha)
+    alpha = alpha_candidate[np.argmin([cv.cv_error(alpha,X,y,k_cv,lambda X,y,k:lasso(X,y,k)[0]) for alpha in alpha_candidate])]
+    return lasso(X,y,alpha)[0],alpha

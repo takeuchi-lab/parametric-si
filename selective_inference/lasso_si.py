@@ -19,6 +19,14 @@ def parametric_lasso_ci(X,y,alpha):
 
     return si.parametric_si_ci(X,y,A,alpha,Sigma,region)
 
+def parametric_lasso_cv_si(X,y,k_candidates,k_folds):
+
+    A,k = lasso.lasso_CV(X,y,k_candidates,k_folds)
+    Sigma = np.identity(X.shape[0])
+
+    return si.parametric_si_cv_p(X,y,A,k,k_candidates,Sigma,region,k_folds)
+
+
 def region(X,y,alpha,a,b):
 
     L,U = -np.inf,np.inf

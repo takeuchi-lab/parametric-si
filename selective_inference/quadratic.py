@@ -15,6 +15,30 @@ class Quadratic:
 
         h = Quadratic(a,b,c)
 
+        return h.or_less_zero()
+    
+    def mean1(array):
+
+        a = np.average([x.a for x in array])
+        b = np.average([x.b for x in array])
+        c = np.average([x.c for x in array])
+
+        return Quadratic(a,b,c)
+    
+    @staticmethod
+    def mean(quadratic_array):
+        a = 0
+        b = 0
+        c = 0
+
+        n = len(quadratic_array)
+        for q in quadratic_array:
+            a += q.a
+            b += q.b
+            c += q.c
+
+        return Quadratic(a/n,b/n,c/n)
+
     def or_less_zero(self):
 
         if self.a == 0:
@@ -39,6 +63,5 @@ class Quadratic:
                     return p.closed(x_left,x_right)
                 else :
                     return p.closed(-np.inf,x_right) | p.closed(x_left,np.inf)
-            
-
-        
+    def  f(self,x):
+        return self.a*x**2 + self.b*x + self.c

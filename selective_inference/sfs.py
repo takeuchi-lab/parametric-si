@@ -19,5 +19,6 @@ def sfs(X,y,k):
     return A,s
 
 def sfs_CV(X,y,K,k_cv):
-    k = K[np.argmin([cv.cv_error(sfs(X,y,k)[0],X,y,k_cv) for k in K])]
-    return sfs(X,y,k),k
+    k = K[np.argmin([cv.cv_error(k,X,y,k_cv,lambda X,y,k:sfs(X,y,k)[0]) for k in K])]
+    A,s = sfs(X,y,k)
+    return A,k

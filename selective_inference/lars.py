@@ -69,6 +69,7 @@ def lars(X,y,k):
     return A,A_c,s,S,Sb
 
 def lars_CV(X,y,k_candidate,k_cv):
-    error = list(map(lambda x:cv.cv_error(x,X,y,k_cv),k_candidate))
+    error = list(map(lambda k:cv.cv_error(k,X,y,k_cv,lambda X,y,k:lars(X,y,k)[0][-1]),k_candidate))
     k = k_candidate[np.argmin(error)]
-    return lars(X,y,k)
+    model = lars(X,y,k)[0][-1]
+    return model,k
