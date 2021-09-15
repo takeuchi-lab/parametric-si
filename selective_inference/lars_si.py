@@ -18,7 +18,7 @@ def parametric_lars_ci(X,y,k):
     A = lars.lars(X,y,k)[0][-1]
     Sigma = np.identity(X.shape[0])
 
-    return si.parametric_si_p(X,y,A,k,Sigma,region)
+    return si.parametric_si_ci(X,y,A,k,Sigma,region)
 
 def parametric_lars_cv_si(X,y,k_candidates,k_folds):
 
@@ -28,7 +28,7 @@ def parametric_lars_cv_si(X,y,k_candidates,k_folds):
     return si.parametric_si_cv_p(X,y,A,k,k_candidates,Sigma,region,k_folds)
     
 
-#TODO need refactaring because it is too complicated and durty
+#TODO need refactaring because it is too complicated
 def region(X,y,step,a,b):
 
     A,A_c,signs,S,Sb = lars.lars(X,y,step)

@@ -53,6 +53,8 @@ def region(X,y,alpha,a,b):
     L,U = solve(A0_minus,b0_minus,a,b,L,U)
     L,U = solve(A1,b1,a,b,L,U)
 
+    assert L < U
+
     return L,U,A
 
 def solve(C,d,a,b,L,U):

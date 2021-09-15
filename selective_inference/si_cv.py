@@ -1,6 +1,6 @@
 from operator import index
 import numpy as np
-import portion as P
+import portion as p
 import matplotlib.pyplot as plt
 
 from .quadratic import Quadratic
@@ -47,7 +47,7 @@ def compute_cv_path(k,X,a,b,z_min,z_max,k_cv,region):
         temp = [Z_k[i][pointers[i]].upper for i in range(k_cv)]
         next_point = np.argmin(temp)
         z_right = Z_k[next_point][pointers[next_point]].upper
-        Z.append(P.closed(z_left,z_right))
+        Z.append(p.closed(z_left,z_right))
         E.append(Quadratic.mean([E_k[j][pointers[j]] for j in range(k_cv)]))
 
         z_left = z_right
@@ -58,7 +58,7 @@ def compute_cv_path(k,X,a,b,z_min,z_max,k_cv,region):
 def compute_Z_CV(k_obs,k_candidates,Z,E):
     index_k_obs = k_candidates.index(k_obs)
     z_min,z_max = Z[index_k_obs][0].lower,Z[index_k_obs][-1].upper
-    Z_CV = P.empty()
+    Z_CV = p.empty()
     pointers = np.zeros(len(k_candidates),dtype=int)
     z_left,z_right = z_min,z_min
 
@@ -70,13 +70,13 @@ def compute_Z_CV(k_obs,k_candidates,Z,E):
             pointers[k_next]+=1
             continue
 
-        I = P.closed(z_left,z_right)
+        I = p.closed(z_left,z_right)
         for i,k in enumerate(k_candidates):
+
             if k_obs == k:
                 continue
             
             Z_I = E[index_k_obs][pointers[index_k_obs]].or_less(E[i][pointers[i]])
-
             I = I & Z_I
 
         Z_CV = Z_CV | I

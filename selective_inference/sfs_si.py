@@ -53,5 +53,7 @@ def region(X,y,k,a,b):
                 L = max(L,-a_minus/b_minus)
             elif b_minus > 0:
                 U = min(U,-a_minus/b_minus)
+    
+    assert L < U
 
     return L,U,A
