@@ -6,7 +6,8 @@ from . import si
 from . import ci
 from . import p_value
 
-def parametric_lars_si(X,y,k):
+
+def parametric_lars_si(X:np.matrix,y:np.matrix,k:int):
 
     A = lars.lars(X,y,k)[0][-1]
     Sigma = np.identity(X.shape[0])

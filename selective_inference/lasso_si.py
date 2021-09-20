@@ -1,6 +1,5 @@
 import numpy as np
 import portion as p
-
 from . import lasso
 from . import si
 
@@ -49,9 +48,15 @@ def region(X,y,alpha,a,b):
     A1 = -1 * np.diag(s) @ X_A_pinv @ X_A.T
     b1 = -1 * (alpha*X.shape[0]) * np.diag(s) @ X_A_pinv @ s
 
-    L,U = solve(A0_plus,b0_plus,a,b,L,U)
-    L,U = solve(A0_minus,b0_minus,a,b,L,U)
-    L,U = solve(A1,b1,a,b,L,U)
+    A_mat = np.vstack((A0_plus,A0_minus,A1))
+    b_vec = np.hstack((b0_plus,b0_minus,b1))
+
+    b_Aa = b_vec - (A_mat @ a)
+    temp1 = A_mat @ b
+    temp2 = b_Aa / temp1
+
+    L = max(temp2[temp1 < 0],default=-np.inf)
+    U = min(temp2[temp1 > 0],default=np.inf)
 
     assert L < U
 
