@@ -32,10 +32,6 @@ def region(X,y,step,a,b):
     A,A_c,signs,S,Sb = lars.lars(X,y,step)
 
     A_mat = np.empty(0)
-    b_vec = np.empty(0)
-
-    L = -np.inf
-    U = np.inf
 
     # 1st step
     jk = A[0]
@@ -43,20 +39,18 @@ def region(X,y,step,a,b):
     sk = signs[0]
 
     # when s = -1
-    for l in A_c[0]:
+    A_tmp1 = np.empty([len(A_c[0]),X.shape[0]])
+    for i,l in enumerate(A_c[0]):
         alpha = X[:,l] - (sk * xk).reshape(-1)
-        beta = 0
-        L, U = solve_inequality(alpha,beta,a,b,L,U)
-    
-    A_tmp1 = X[:,A_c[0]].T - (sk * xk).reshape(-1)
+        A_tmp1[i,:] = alpha
     
     # when s = +1
-    for l in A_c[0]:
+    A_tmp2 = np.empty([len(A_c[0]),X.shape[0]])
+    for i,l in enumerate(A_c[0]):
         alpha = -1 * X[:,l] - (sk * xk).reshape(-1)
-        beta = 0
-        L, U = solve_inequality(alpha,beta,a,b,L,U)
+        A_tmp2[i,:] = alpha
     
-    A_tmp2 = X[:,A_c[0]].T + (sk * xk).reshape(-1)
+    A_mat = np.vstack([A_tmp1,A_tmp2])
 
     # after 2step 
     for k in range(1,step):
@@ -92,34 +86,45 @@ def region(X,y,step,a,b):
         # c(jk,sk)>c(j,s) for all (j,s) \in S[k] \ {(jk,sk)}
         Sk = S[k]
         Sk.remove([jk,sk])
-        for (j,s) in Sk:
-            # second term be the same as it is now, but the first term should be different
+        A_tmp3 = np.empty([len(Sk),X.shape[0]])
+        for i,(j,s) in enumerate(Sk):
             alpha = c(j,s,P_1,pinvk1,X_A1,s_1,X) - c(jk,sk,P_1,pinvk1,X_A1,s_1,X)
-            L,U = solve_inequality(alpha,0,a,b,L,U)
+            A_tmp3[i,:] = alpha.reshape(-1)
         
         # -c() < 0 
-        alpha = -1 * c_(jk,sk,A_1,s_1,X)
-        L,U = solve_inequality(alpha,0,a,b,L,U)
+        A_tmp4 = (-1 * c_(jk,sk,A_1,s_1,X)).reshape(1,-1)
 
         # c(j,s,Ak-1,sk-2) < c(jk-1,sk-1,Ak-2,sk-2) for (j,s) \in Sk
-        for (j,s) in S[k]:
+        A_tmp5 = np.empty([len(Sk),X.shape[0]])
+        for i,(j,s) in enumerate(S[k]):
+            alpha = np.empty(0)
             if k == 1:
                 alpha = c(j,s,P_1,pinvk1,X_A1,s_1,X) - (sk_1 * X[:,jk_1]).reshape(-1)
-                L,U = solve_inequality(alpha,0,a,b,L,U)
             else :
                 alpha = c(j,s,P_1,pinvk1,X_A1,s_1,X) - c(jk_1 , sk_1,P_2,pinvk2,X_A2,s_2,X)
-                L,U = solve_inequality(alpha,0,a,b,L,U)
-        
+            A_tmp5[i,:] = alpha.reshape(-1)
+
         # c(jk-1,sk-1,Ak-2,sk-2)-c(j,s,Ak-1,sk-1) for all (j,s) \in A_C*{-1,1}\Sk
-        for (j,s) in Sb[k]:
+        A_tmp6 = np.empty([len(Sb[k]),X.shape[0]])
+        for i,(j,s) in enumerate(Sb[k]):
+            alpha = np.empty(0)
             if k == 1:
                 alpha =  (sk * X[:,jk_1]).reshape(-1) - c(j,s,P_1,pinvk1,X_A1,s_1,X)
-                L,U = solve_inequality(alpha,0,a,b,L,U)
             else : 
                 alpha =  c(jk_1,sk_1,P_2,pinvk2,X_A2,s_2,X) - c(j,s,P_1,pinvk1,X_A1,s_1,X)
-                L,U = solve_inequality(alpha,0,a,b,L,U)
+
+            A_tmp6[i,:] = alpha.reshape(-1)
         
-        assert L < U
+        A_mat = np.vstack([A_mat,A_tmp3,A_tmp4,A_tmp5,A_tmp6])
+    
+    b_Aa = -1 * (A_mat @ a)
+    temp1 = A_mat @ b
+    temp2 = b_Aa / temp1
+
+    L = max(temp2[temp1 < 0],default=-np.inf)
+    U = min(temp2[temp1 > 0],default=np.inf)
+
+    print(L,U)
         
     return L,U,A[-1]
 
