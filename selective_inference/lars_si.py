@@ -3,9 +3,6 @@ import portion as p
 
 from . import lars
 from . import si
-from . import ci
-from . import p_value
-
 
 def parametric_lars_si(X:np.matrix,y:np.matrix,k:int):
 
@@ -28,11 +25,14 @@ def parametric_lars_cv_si(X,y,k_candidates,k_folds):
 
     return si.parametric_si_cv_p(X,y,A,k,k_candidates,Sigma,region,k_folds)
     
-
-#TODO need refactaring because it is too complicated
+#TODO need refactaring 
+# Ay \leq b
 def region(X,y,step,a,b):
 
     A,A_c,signs,S,Sb = lars.lars(X,y,step)
+
+    A_mat = np.empty(0)
+    b_vec = np.empty(0)
 
     L = -np.inf
     U = np.inf
@@ -48,11 +48,15 @@ def region(X,y,step,a,b):
         beta = 0
         L, U = solve_inequality(alpha,beta,a,b,L,U)
     
+    A_tmp1 = X[:,A_c[0]].T - (sk * xk).reshape(-1)
+    
     # when s = +1
     for l in A_c[0]:
         alpha = -1 * X[:,l] - (sk * xk).reshape(-1)
         beta = 0
         L, U = solve_inequality(alpha,beta,a,b,L,U)
+    
+    A_tmp2 = X[:,A_c[0]].T + (sk * xk).reshape(-1)
 
     # after 2step 
     for k in range(1,step):
@@ -89,6 +93,7 @@ def region(X,y,step,a,b):
         Sk = S[k]
         Sk.remove([jk,sk])
         for (j,s) in Sk:
+            # second term be the same as it is now, but the first term should be different
             alpha = c(j,s,P_1,pinvk1,X_A1,s_1,X) - c(jk,sk,P_1,pinvk1,X_A1,s_1,X)
             L,U = solve_inequality(alpha,0,a,b,L,U)
         
