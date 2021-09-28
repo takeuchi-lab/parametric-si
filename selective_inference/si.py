@@ -9,6 +9,20 @@ from .p_value import p_value
 EPS = 5e-3
 
 def construct_teststatistics(A,i,X,y,Sigma):
+    """construct variables for selective inference
+
+    Args:
+        A (list): active features
+        i (int): number of the active feature of interest
+        X (numpy.ndarray): design matrix(n x p)
+        y (numpy.ndarray): object variable(n x 1)
+        Sigma (numpy.ndarray): covariance matrix of y(n x n)
+
+    Returns:
+        Tuples: a,b(n x 1) are used to construct y on the direction of test statistic.
+                var(float) is variance for truncated normal distribution.
+                z_obs(float) is the observed value of the test statistic.
+    """
 
     X_A = X[:,A]
     e = np.zeros(len(A))
@@ -24,6 +38,21 @@ def construct_teststatistics(A,i,X,y,Sigma):
     return a,b,var,z_obs
 
 def compute_solution_path(k,X,a,b,z_min,z_max,region):
+    """compute list of interval and its model on the direction of test statistic
+
+    Args:
+        k (step number): step number of algorithm(in lasso this is regulization parameter,in sfs or lars this is number of features to choose)
+        X (numpy.ndarray): design matrix(n x p)
+        a (numpy.ndarray): direction of test statistic(n x 1)
+        b (numpy.ndarray): direction of test statistic(n x 1)
+        z_min (): minumum value of test statistic to search
+        z_max (): maximum value of test statistic to search
+        region (function): function to compute interval for each algorithm
+
+    Returns:
+        tuple : intervals is a list of closed interval that is [lower,upper]
+                models is a list of active features that are in the interval
+    """
 
     z = z_min
 
@@ -45,6 +74,20 @@ def compute_solution_path(k,X,a,b,z_min,z_max,region):
     return intervals,models
 
 def parametric_si_p(X,y,A,k,Sigma,region):
+    """calculate selective p-value for each active feature
+
+    Args:
+        X (numpy.ndarray): design matrix(n x p)
+        y (numpy.ndarray): object variable(n x 1)
+        A (list): active features
+        k (int): hyperparameter
+        Sigma (numpy.ndarray): covariance matrix of y(n x n)
+        region (function): function to compute interval for each algorithm
+
+    Returns:
+        tuple : p_valus is a list of p-value for each active features
+                A is list of active features
+    """
 
     p_values = []
 
@@ -68,6 +111,20 @@ def parametric_si_p(X,y,A,k,Sigma,region):
     return p_values, A
 
 def parametric_si_ci(X,y,A,k,Sigma,region,alpha=0.05):
+    """calculate selective p-value for each active feature
+
+    Args:
+        X (numpy.ndarray): design matrix(n x p)
+        y (numpy.ndarray): object variable(n x 1)
+        A (list): active features
+        k (int): hyperparameter
+        Sigma (numpy.ndarray): covariance matrix of y(n x n)
+        region (function): function to compute interval for each algorithm
+
+    Returns:
+        tuple : cis is a list of selective confidence interval for each active features
+                A is list of active feature
+    """
 
     cis = []
 
