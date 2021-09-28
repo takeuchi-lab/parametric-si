@@ -6,6 +6,67 @@ import matplotlib.pyplot as plt
 from .quadratic import Quadratic
 from .cv import train_val_index,train_val_split_mat,train_val_split_vec
 from . import si
+from . import ci
+from .p_value import p_value
+
+def parametric_si_cv_p(X,y,A,k_obs,k_candidates,Sigma,region,k_folds):
+
+    p_values = []
+
+    for i in range(len(A)):
+        a,b,var,z_obs = si.construct_teststatistics(A,i,X,y,Sigma)
+        sigma = np.sqrt(var)
+        z_min = -20 * sigma
+        z_max = 20 * sigma
+
+        paths = [compute_cv_path(k,X,a,b,z_min,z_max,k_folds,region) for k in k_candidates]
+
+        Z = [paths[i][0] for i,j in enumerate(k_candidates)]
+        E = [paths[i][1] for i,j in enumerate(k_candidates)]
+
+        Z_CV = compute_Z_CV(k_obs,k_candidates,Z,E)
+        
+        Z_alg = p.empty()
+        intervals,models = si.compute_solution_path(k_obs,X,a,b,z_min,z_max,region)
+
+        for interval,model in zip(intervals,models):
+            if set(A) == set(model):
+                Z_alg = Z_alg | interval
+        
+        Z = Z_alg & Z_CV
+
+        p_values.append(p_value(z_obs,Z,sigma))
+
+    return p_values,A,k_obs
+
+def parametric_si_cv_ci(X,y,A,k_obs,k_candidates,Sigma,region,k_folds,alpha=0.05):
+
+    cis = []
+
+    for i in range(len(A[-1])):
+        a,b,var,z_obs = si.construct_teststatistics(k_obs,i,X,y,i,Sigma)
+        sigma = np.sqrt(var)
+        z_min = -20 * sigma
+        z_max = 20 * sigma
+
+        paths = [compute_cv_path(k,X,a,b,z_min,z_max,k_folds,region) for k in k_candidates]
+        Z = [paths[i][0] for i,j in enumerate(k_candidates)]
+        E = [paths[i][1] for i,j in enumerate(k_candidates)]
+
+        Z_CV = compute_Z_CV(k_obs,k_candidates,Z,E)
+        Z_alg = p.empty()
+
+        intervals,models = si.compute_solution_path(k_obs,X,a,b,z_min,z_max,region)
+
+        for interval,model in zip(intervals,models):
+            if set(A) == set(model):
+                Z_alg = Z_alg | p.closed(interval[0],interval[1])
+
+        Z = Z_alg & Z_CV
+
+        cis.append(ci.confidence_interval(Z,z_obs,sigma,alpha))
+
+    return cis, A, k_obs
 
 def validation_error(X_train,X_val,a_train,a_val,b_train,b_val):
 
