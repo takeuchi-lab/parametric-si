@@ -17,14 +17,6 @@ class Quadratic:
 
         return h.or_less_zero()
     
-    def mean1(array):
-
-        a = np.average([x.a for x in array])
-        b = np.average([x.b for x in array])
-        c = np.average([x.c for x in array])
-
-        return Quadratic(a,b,c)
-    
     @staticmethod
     def mean(quadratic_array):
         a = 0
