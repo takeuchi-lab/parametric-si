@@ -111,7 +111,7 @@ def parametric_si_p(X,y,A,k,Sigma,region):
     return p_values, A
 
 def parametric_si_ci(X,y,A,k,Sigma,region,alpha=0.05):
-    """calculate selective p-value for each active feature
+    """calculate selective confidence intervals for each active feature
 
     Args:
         X (numpy.ndarray): design matrix(n x p)
