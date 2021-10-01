@@ -3,6 +3,7 @@ import portion as p
 
 from . import sfs
 from . import si
+from . import si_cv
 
 def parametric_sfs_si(X,y,k):
 
@@ -23,9 +24,11 @@ def parametric_sfs_cv_si(X,y,k_candidates,k_folds):
     A,k = sfs.sfs_CV(X,y,k_candidates,k_folds)
     Sigma = np.identity(X.shape[0])
 
-    return si.parametric_si_cv_p(X,y,A,k,k_candidates,Sigma,region,k_folds)
+    return si_cv.parametric_si_cv_p(X,y,A,k,k_candidates,Sigma,region,k_folds)
 
-def region(X,y,k,a,b):
+def region(X,z,k,a,b):
+
+    y =  a + b * z
 
     A,s = sfs.sfs(X,y,k)
     A_c = list(range(X.shape[1]))

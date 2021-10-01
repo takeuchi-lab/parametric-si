@@ -19,7 +19,7 @@ def construct_teststatistics(A,i,X,y,Sigma):
         Sigma (numpy.ndarray): covariance matrix of y(n x n)
 
     Returns:
-        Tuples: a,b(n x 1) are used to construct y on the direction of test statistic.
+        Tuples: a and b(n x 1) are used to construct y on the direction of test statistic.
                 var(float) is variance for truncated normal distribution.
                 z_obs(float) is the observed value of the test statistic.
     """
@@ -61,9 +61,7 @@ def compute_solution_path(k,X,a,b,z_min,z_max,region):
 
     while z < z_max:
 
-        y = a + b * z 
-
-        L,U,model_z = region(X,y,k,a,b)
+        L,U,model_z = region(X,z,k,a,b)
         
         models.append(model_z)
         intervals.append(p.closed(max(L,z_min),min(U,z_max)))
@@ -105,6 +103,8 @@ def parametric_si_p(X,y,A,k,Sigma,region):
         for r,model in zip(regions,models):
             if set(A) == set(model):
                 intervals = intervals | r
+        
+        print(regions,models)
         
         p_values.append(p_value(z_obs,intervals,sigma))
 

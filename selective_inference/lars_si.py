@@ -3,6 +3,7 @@ import portion as p
 
 from . import lars
 from . import si
+from . import si_cv
 
 def parametric_lars_si(X:np.matrix,y:np.matrix,k:int):
 
@@ -23,11 +24,11 @@ def parametric_lars_cv_si(X,y,k_candidates,k_folds):
     A,k = lars.lars_CV(X,y,k_candidates,k_folds)
     Sigma = np.identity(X.shape[0])
 
-    return si.parametric_si_cv_p(X,y,A,k,k_candidates,Sigma,region,k_folds)
+    return si_cv.parametric_si_cv_p(X,y,A,k,k_candidates,Sigma,region,k_folds)
     
-#TODO need refactaring 
-# Ay \leq b
-def region(X,y,step,a,b):
+def region(X,z,step,a,b):
+
+    y = a + b * z
 
     A,A_c,signs,S,Sb = lars.lars(X,y,step)
 
@@ -52,7 +53,7 @@ def region(X,y,step,a,b):
     
     A_mat = np.vstack([A_tmp1,A_tmp2])
 
-    # after 2step 
+    # after first step 
     for k in range(1,step):
         jk_1 = jk
         sk_1 = sk
@@ -124,8 +125,6 @@ def region(X,y,step,a,b):
     L = max(temp2[temp1 < 0],default=-np.inf)
     U = min(temp2[temp1 > 0],default=np.inf)
 
-    print(L,U)
-        
     return L,U,A[-1]
 
 def c_(j,s,A,S,X):
@@ -139,19 +138,3 @@ def c_(j,s,A,S,X):
 def c(j,s,P,X_pinv,X_A,S,X):
     X_j = X[:,j]
     return (P @ X_j) / (s - X_j @ X_A @ X_pinv @ S)
-
-def solve_inequality(alpha,beta,a,b,L,U):
-    temp1 = alpha @ b
-    temp2 = beta - (alpha @ a)
-
-    l = L
-    u = U
-
-    if temp1 > 0:
-        u = min(U,temp2 / temp1)
-    elif temp1 < 0:
-        l = max(L, temp2 / temp1)
-    else:
-        return L,U
-
-    return l,u

@@ -69,6 +69,19 @@ def parametric_si_cv_ci(X,y,A,k_obs,k_candidates,Sigma,region,k_folds,alpha=0.05
     return cis, A, k_obs
 
 def validation_error(X_train,X_val,a_train,a_val,b_train,b_val):
+    """compute validation error for a given model expressed as Quadratic objects
+
+    Args:
+        X_train (numpy.ndarray): design matrix for train set
+        X_val ([type]): design matrix for validation set
+        a_train ([type]): vector of test statistics for train set
+        a_val ([type]): vector of test statistics for validation set
+        b_train ([type]): vector of test statistics for train set
+        b_val ([type]): vector of test statistics for validation set
+
+    Returns:
+        Quadratic: validation error for a given model
+    """
 
     X_inv = np.linalg.pinv(X_train.T @ X_train) @ X_train.T
     a = a_val - X_val @ X_inv @ a_train
@@ -77,6 +90,23 @@ def validation_error(X_train,X_val,a_train,a_val,b_train,b_val):
     return Quadratic(b.T@b, 2*a.T@b ,a.T @ a)
 
 def compute_val_error_path(k,X_train,X_val,a_train,a_val,b_train,b_val,z_min,z_max,region):
+    """ compute list of model and its interval and validation error on direction of test statistic
+
+    Args:
+        k ([type]): [description]
+        X_train ([type]): [description]
+        X_val ([type]): [description]
+        a_train ([type]): [description]
+        a_val ([type]): [description]
+        b_train ([type]): [description]
+        b_val ([type]): [description]
+        z_min ([type]): [description]
+        z_max ([type]): [description]
+        region ([type]): [description]
+
+    Returns:
+        [type]: [description]
+    """
 
     z_k,A_k = si.compute_solution_path(k,X_train,a_train,b_train,z_min,z_max,region)
     E_k = [validation_error(X_train[:,A],X_val[:,A],a_train,a_val,b_train,b_val) for A in A_k]
