@@ -9,6 +9,20 @@ from .p_value import p_value
 EPS = 5e-3
 
 def construct_teststatistics(A,i,X,y,Sigma):
+    """construct variables for selective inference
+
+    Args:
+        A (list): active features
+        i (int): number of the active feature of interest
+        X (numpy.ndarray): design matrix(n x p)
+        y (numpy.ndarray): object variable(n x 1)
+        Sigma (numpy.ndarray): covariance matrix of y(n x n)
+
+    Returns:
+        Tuples: a and b(n x 1) are used to construct y on the direction of test statistic.
+                var(float) is variance for truncated normal distribution.
+                z_obs(float) is the observed value of the test statistic.
+    """
 
     X_A = X[:,A]
     e = np.zeros(len(A))
@@ -24,6 +38,21 @@ def construct_teststatistics(A,i,X,y,Sigma):
     return a,b,var,z_obs
 
 def compute_solution_path(k,X,a,b,z_min,z_max,region):
+    """compute list of interval and its model on the direction of test statistic
+
+    Args:
+        k (step number): step number of algorithm(in lasso this is regulization parameter,in sfs or lars this is number of features to choose)
+        X (numpy.ndarray): design matrix(n x p)
+        a (numpy.ndarray): direction of test statistic(n x 1)
+        b (numpy.ndarray): direction of test statistic(n x 1)
+        z_min (): minumum value of test statistic to search
+        z_max (): maximum value of test statistic to search
+        region (function): function to compute interval for each algorithm
+
+    Returns:
+        tuple : intervals is a list of closed interval that is [lower,upper]
+                models is a list of active features that are in the interval
+    """
 
     z = z_min
 
@@ -32,9 +61,7 @@ def compute_solution_path(k,X,a,b,z_min,z_max,region):
 
     while z < z_max:
 
-        y = a + b * z 
-
-        L,U,model_z = region(X,y,k,a,b)
+        L,U,model_z = region(X,z,k,a,b)
         
         models.append(model_z)
         intervals.append(p.closed(max(L,z_min),min(U,z_max)))
@@ -45,6 +72,20 @@ def compute_solution_path(k,X,a,b,z_min,z_max,region):
     return intervals,models
 
 def parametric_si_p(X,y,A,k,Sigma,region):
+    """calculate selective p-value for each active feature
+
+    Args:
+        X (numpy.ndarray): design matrix(n x p)
+        y (numpy.ndarray): object variable(n x 1)
+        A (list): active features
+        k (int): hyperparameter
+        Sigma (numpy.ndarray): covariance matrix of y(n x n)
+        region (function): function to compute interval for each algorithm
+
+    Returns:
+        tuple : p_valus is a list of p-value for each active features
+                A is list of active features
+    """
 
     p_values = []
 
@@ -63,11 +104,27 @@ def parametric_si_p(X,y,A,k,Sigma,region):
             if set(A) == set(model):
                 intervals = intervals | r
         
+        print(regions,models)
+        
         p_values.append(p_value(z_obs,intervals,sigma))
 
     return p_values, A
 
 def parametric_si_ci(X,y,A,k,Sigma,region,alpha=0.05):
+    """calculate selective confidence intervals for each active feature
+
+    Args:
+        X (numpy.ndarray): design matrix(n x p)
+        y (numpy.ndarray): object variable(n x 1)
+        A (list): active features
+        k (int): hyperparameter
+        Sigma (numpy.ndarray): covariance matrix of y(n x n)
+        region (function): function to compute interval for each algorithm
+
+    Returns:
+        tuple : cis is a list of selective confidence interval for each active features
+                A is list of active feature
+    """
 
     cis = []
 
@@ -89,61 +146,3 @@ def parametric_si_ci(X,y,A,k,Sigma,region,alpha=0.05):
     
     return cis
 
-def parametric_si_cv_p(X,y,A,k_obs,k_candidates,Sigma,region,k_folds):
-
-    p_values = []
-
-    for i in range(len(A)):
-        a,b,var,z_obs = construct_teststatistics(A,i,X,y,Sigma)
-        sigma = np.sqrt(var)
-        z_min = -20 * sigma
-        z_max = 20 * sigma
-
-        paths = [si_cv.compute_cv_path(k,X,a,b,z_min,z_max,k_folds,region) for k in k_candidates]
-
-        Z = [paths[i][0] for i,j in enumerate(k_candidates)]
-        E = [paths[i][1] for i,j in enumerate(k_candidates)]
-
-        Z_CV = si_cv.compute_Z_CV(k_obs,k_candidates,Z,E)
-        
-        Z_alg = p.empty()
-        intervals,models = compute_solution_path(k_obs,X,a,b,z_min,z_max,region)
-
-        for interval,model in zip(intervals,models):
-            if set(A) == set(model):
-                Z_alg = Z_alg | interval
-        
-        Z = Z_alg & Z_CV
-
-        p_values.append(p_value(z_obs,Z,sigma))
-
-    return p_values,A,k_obs
-
-def parametric_si_cv_ci(X,y,A,k_obs,k_candidates,Sigma,region,k_folds,alpha=0.05):
-
-    cis = []
-
-    for i in range(len(A[-1])):
-        a,b,var,z_obs = construct_teststatistics(k_obs,i,X,y,i,Sigma)
-        sigma = np.sqrt(var)
-        z_min = -20 * sigma
-        z_max = 20 * sigma
-
-        paths = [si_cv.compute_cv_path(k,X,a,b,z_min,z_max,k_folds,region) for k in k_candidates]
-        Z = [paths[i][0] for i,j in enumerate(k_candidates)]
-        E = [paths[i][1] for i,j in enumerate(k_candidates)]
-
-        Z_CV = si_cv.compute_Z_CV(k_obs,k_candidates,Z,E)
-        Z_alg = p.empty()
-
-        intervals,models = compute_solution_path(k_obs,X,a,b,z_min,z_max,region)
-
-        for interval,model in zip(intervals,models):
-            if set(A) == set(model):
-                Z_alg = Z_alg | p.closed(interval[0],interval[1])
-
-        Z = Z_alg & Z_CV
-
-        cis.append(ci.confidence_interval(Z,z_obs,sigma,alpha))
-
-    return cis, A, k_obs
