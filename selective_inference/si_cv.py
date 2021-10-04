@@ -37,7 +37,7 @@ def parametric_si_cv(X,y,A,k_obs,k_candidates,Sigma,region,k_folds,alpha=0.05):
         Z = Z_alg & Z_CV
 
         p_values.append(p_value(z_obs,Z,sigma))
-        CIs.append(ci.confidence_interval(Z,z_obs,sigma,alpha))
+        # CIs.append(ci.confidence_interval(Z,z_obs,sigma,alpha))
 
     return si.SI_result(A,k_obs,p_values,CIs)
 

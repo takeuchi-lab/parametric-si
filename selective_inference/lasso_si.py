@@ -4,19 +4,9 @@ from sklearn import linear_model
 
 from . import lasso
 from . import si
+from . import si_cv
 
 from typing import List
-
-def compute_quotient(numerator,denominator):
-    if denominator == 0:
-        return np.Inf
-    else:
-        quotient = numerator / denominator
-
-        if quotient <= 0:
-            return np.Inf
-
-        return quotient
 
 def parametric_lasso_si(X,y,alpha):
     """parametric selective inference for lasso
@@ -57,7 +47,7 @@ def parametric_lasso_cv_si(X,y,k_candidates,k_folds):
     A,k = lasso.lasso_CV(X,y,k_candidates,k_folds)
     Sigma = np.identity(X.shape[0])
 
-    return si.parametric_si_cv(X,y,A,k,k_candidates,Sigma,region,k_folds)
+    return si_cv.parametric_si_cv(X,y,A,k,k_candidates,Sigma,region,k_folds)
 
 def region(X,z,alpha,a,b):
 
@@ -146,14 +136,13 @@ def region(X,z,alpha,a,b):
 
     return L,U,A
 
-def solve(C,d,a,b,L,U):
+def compute_quotient(numerator,denominator):
+    if denominator == 0:
+        return np.Inf
+    else:
+        quotient = numerator / denominator
 
-    for i in range(C.shape[0]):
-        numerator = d[i] - C[i,:] @ a
-        denominator = C[i,:] @ b
-        if denominator > 0:
-            U = min(U,numerator/denominator)
-        elif denominator < 0:
-            L = max(L,numerator/denominator)
+        if quotient <= 0:
+            return np.Inf
 
-    return L,U
+        return quotient
