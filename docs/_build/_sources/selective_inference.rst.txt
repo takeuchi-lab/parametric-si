@@ -1,0 +1,115 @@
+selective\_inference package
+============================
+
+Submodules
+----------
+
+selective\_inference.ci module
+------------------------------
+
+.. automodule:: selective_inference.ci
+   :members:
+
+selective\_inference.cv module
+------------------------------
+
+.. automodule:: selective_inference.cv
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+selective\_inference.lars module
+--------------------------------
+
+.. automodule:: selective_inference.lars
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+selective\_inference.lars\_si module
+------------------------------------
+
+.. automodule:: selective_inference.lars_si
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+selective\_inference.lasso module
+---------------------------------
+
+.. automodule:: selective_inference.lasso
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+selective\_inference.lasso\_si module
+-------------------------------------
+
+.. automodule:: selective_inference.lasso_si
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+selective\_inference.p\_value module
+------------------------------------
+
+.. automodule:: selective_inference.p_value
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+selective\_inference.probability module
+---------------------------------------
+
+.. automodule:: selective_inference.probability
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+selective\_inference.quadratic module
+-------------------------------------
+
+.. automodule:: selective_inference.quadratic
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+selective\_inference.sfs module
+-------------------------------
+
+.. automodule:: selective_inference.sfs
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+selective\_inference.sfs\_si module
+-----------------------------------
+
+.. automodule:: selective_inference.sfs_si
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+selective\_inference.si module
+------------------------------
+
+.. automodule:: selective_inference.si
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+selective\_inference.si\_cv module
+----------------------------------
+
+.. automodule:: selective_inference.si_cv
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: selective_inference
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>selective_inference package &mdash; selective_inference v0.1.0 documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> selective_inference
+          </a>
+              <div class="version">
+                v0.1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">selective_inference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">selective_inference</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>selective_inference package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/selective_inference.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="selective-inference-package">
+<h1>selective_inference package<a class="headerlink" href="#selective-inference-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-selective_inference.ci">
+<span id="selective-inference-ci-module"></span><h2>selective_inference.ci module<a class="headerlink" href="#module-selective_inference.ci" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-selective_inference.cv">
+<span id="selective-inference-cv-module"></span><h2>selective_inference.cv module<a class="headerlink" href="#module-selective_inference.cv" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="selective_inference.cv.cv_error">
+<code class="sig-prename descclassname">selective_inference.cv.</code><code class="sig-name descname">cv_error</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">k</span></em>, <em class="sig-param"><span class="n">X</span></em>, <em class="sig-param"><span class="n">y</span></em>, <em class="sig-param"><span class="n">k_cv</span></em>, <em class="sig-param"><span class="n">algorithm</span></em><span class="sig-paren">)</span><a class="headerlink" href="#selective_inference.cv.cv_error" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="selective_inference.cv.train_val_index">
+<code class="sig-prename descclassname">selective_inference.cv.</code><code class="sig-name descname">train_val_index</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">N</span></em>, <em class="sig-param"><span class="n">k_cv</span></em><span class="sig-paren">)</span><a class="headerlink" href="#selective_inference.cv.train_val_index" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="selective_inference.cv.train_val_split_mat">
+<code class="sig-prename descclassname">selective_inference.cv.</code><code class="sig-name descname">train_val_split_mat</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">X</span></em>, <em class="sig-param"><span class="n">begin</span></em>, <em class="sig-param"><span class="n">end</span></em><span class="sig-paren">)</span><a class="headerlink" href="#selective_inference.cv.train_val_split_mat" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="selective_inference.cv.train_val_split_vec">
+<code class="sig-prename descclassname">selective_inference.cv.</code><code class="sig-name descname">train_val_split_vec</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">y</span></em>, <em class="sig-param"><span class="n">begin</span></em>, <em class="sig-param"><span class="n">end</span></em><span class="sig-paren">)</span><a class="headerlink" href="#selective_inference.cv.train_val_split_vec" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="selective_inference.cv.validation_error">
+<code class="sig-prename descclassname">selective_inference.cv.</code><code class="sig-name descname">validation_error</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">k</span></em>, <em class="sig-param"><span class="n">X_train</span></em>, <em class="sig-param"><span class="n">X_val</span></em>, <em class="sig-param"><span class="n">y_train</span></em>, <em class="sig-param"><span class="n">y_val</span></em>, <em class="sig-param"><span class="n">algorithm</span></em><span class="sig-paren">)</span><a class="headerlink" href="#selective_inference.cv.validation_error" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-selective_inference.lars">
+<span id="selective-inference-lars-module"></span><h2>selective_inference.lars module<a class="headerlink" href="#module-selective_inference.lars" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="selective_inference.lars.knot_value">
+<code class="sig-prename descclassname">selective_inference.lars.</code><code class="sig-name descname">knot_value</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">j</span></em>, <em class="sig-param"><span class="n">s_j</span></em>, <em class="sig-param"><span class="n">A</span></em>, <em class="sig-param"><span class="n">s</span></em>, <em class="sig-param"><span class="n">X</span></em><span class="sig-paren">)</span><a class="headerlink" href="#selective_inference.lars.knot_value" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="selective_inference.lars.lars">
+<code class="sig-prename descclassname">selective_inference.lars.</code><code class="sig-name descname">lars</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">X</span></em>, <em class="sig-param"><span class="n">y</span></em>, <em class="sig-param"><span class="n">k</span></em><span class="sig-paren">)</span><a class="headerlink" href="#selective_inference.lars.lars" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="selective_inference.lars.lars_CV">
+<code class="sig-prename descclassname">selective_inference.lars.</code><code class="sig-name descname">lars_CV</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">X</span></em>, <em class="sig-param"><span class="n">y</span></em>, <em class="sig-param"><span class="n">k_candidate</span></em>, <em class="sig-param"><span class="n">k_cv</span></em><span class="sig-paren">)</span><a class="headerlink" href="#selective_inference.lars.lars_CV" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-selective_inference.lars_si">
+<span id="selective-inference-lars-si-module"></span><h2>selective_inference.lars_si module<a class="headerlink" href="#module-selective_inference.lars_si" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="selective_inference.lars_si.c">
+<code class="sig-prename descclassname">selective_inference.lars_si.</code><code class="sig-name descname">c</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">j</span></em>, <em class="sig-param"><span class="n">s</span></em>, <em class="sig-param"><span class="n">P</span></em>, <em class="sig-param"><span class="n">X_pinv</span></em>, <em class="sig-param"><span class="n">X_A</span></em>, <em class="sig-param"><span class="n">S</span></em>, <em class="sig-param"><span class="n">X</span></em><span class="sig-paren">)</span><a class="headerlink" href="#selective_inference.lars_si.c" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="selective_inference.lars_si.c_">
+<code class="sig-prename descclassname">selective_inference.lars_si.</code><code class="sig-name descname">c_</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">j</span></em>, <em class="sig-param"><span class="n">s</span></em>, <em class="sig-param"><span class="n">A</span></em>, <em class="sig-param"><span class="n">S</span></em>, <em class="sig-param"><span class="n">X</span></em><span class="sig-paren">)</span><a class="headerlink" href="#selective_inference.lars_si.c_" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="selective_inference.lars_si.parametric_lars_cv_si">
+<code class="sig-prename descclassname">selective_inference.lars_si.</code><code class="sig-name descname">parametric_lars_cv_si</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">X</span></em>, <em class="sig-param"><span class="n">y</span></em>, <em class="sig-param"><span class="n">k_candidates</span></em>, <em class="sig-param"><span class="n">k_folds</span></em><span class="sig-paren">)</span><a class="headerlink" href="#selective_inference.lars_si.parametric_lars_cv_si" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="selective_inference.lars_si.parametric_lars_si">
+<code class="sig-prename descclassname">selective_inference.lars_si.</code><code class="sig-name descname">parametric_lars_si</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">X</span><span class="p">:</span> <span class="n">numpy.matrix</span></em>, <em class="sig-param"><span class="n">y</span><span class="p">:</span> <span class="n">numpy.matrix</span></em>, <em class="sig-param"><span class="n">k</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span><a class="headerlink" href="#selective_inference.lars_si.parametric_lars_si" title="Permalink to this definition">¶</a></dt>
+<dd><p>[summary]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>np.matrix</em>) – [description]</p></li>
+<li><p><strong>y</strong> (<em>np.matrix</em>) – [description]</p></li>
+<li><p><strong>k</strong> (<em>int</em>) – [description]</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>[description]</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>[type]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="selective_inference.lars_si.region">
+<code class="sig-prename descclassname">selective_inference.lars_si.</code><code class="sig-name descname">region</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">X</span></em>, <em class="sig-param"><span class="n">z</span></em>, <em class="sig-param"><span class="n">step</span></em>, <em class="sig-param"><span class="n">a</span></em>, <em class="sig-param"><span class="n">b</span></em><span class="sig-paren">)</span><a class="headerlink" href="#selective_inference.lars_si.region" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-selective_inference.lasso">
+<span id="selective-inference-lasso-module"></span><h2>selective_inference.lasso module<a class="headerlink" href="#module-selective_inference.lasso" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="selective_inference.lasso.lasso">
+<code class="sig-prename descclassname">selective_inference.lasso.</code><code class="sig-name descname">lasso</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">X</span></em>, <em class="sig-param"><span class="n">y</span></em>, <em class="sig-param"><span class="n">alpha</span></em><span class="sig-paren">)</span><a class="headerlink" href="#selective_inference.lasso.lasso" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="selective_inference.lasso.lasso_CV">
+<code class="sig-prename descclassname">selective_inference.lasso.</code><code class="sig-name descname">lasso_CV</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">X</span></em>, <em class="sig-param"><span class="n">y</span></em>, <em class="sig-param"><span class="n">alpha_candidate</span></em>, <em class="sig-param"><span class="n">k_cv</span></em><span class="sig-paren">)</span><a class="headerlink" href="#selective_inference.lasso.lasso_CV" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-selective_inference.lasso_si">
+<span id="selective-inference-lasso-si-module"></span><h2>selective_inference.lasso_si module<a class="headerlink" href="#module-selective_inference.lasso_si" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="selective_inference.lasso_si.compute_quotient">
+<code class="sig-prename descclassname">selective_inference.lasso_si.</code><code class="sig-name descname">compute_quotient</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">numerator</span></em>, <em class="sig-param"><span class="n">denominator</span></em><span class="sig-paren">)</span><a class="headerlink" href="#selective_inference.lasso_si.compute_quotient" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="selective_inference.lasso_si.parametric_lasso_cv_si">
+<code class="sig-prename descclassname">selective_inference.lasso_si.</code><code class="sig-name descname">parametric_lasso_cv_si</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">X</span></em>, <em class="sig-param"><span class="n">y</span></em>, <em class="sig-param"><span class="n">k_candidates</span></em>, <em class="sig-param"><span class="n">k_folds</span></em><span class="sig-paren">)</span><a class="headerlink" href="#selective_inference.lasso_si.parametric_lasso_cv_si" title="Permalink to this definition">¶</a></dt>
+<dd><p>[summary]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>[</em><em>type</em><em>]</em>) – [description]</p></li>
+<li><p><strong>y</strong> (<em>[</em><em>type</em><em>]</em>) – [description]</p></li>
+<li><p><strong>k_candidates</strong> (<em>[</em><em>type</em><em>]</em>) – [description]</p></li>
+<li><p><strong>k_folds</strong> (<em>[</em><em>type</em><em>]</em>) – [description]</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>[description]</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>[type]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="selective_inference.lasso_si.parametric_lasso_si">
+<code class="sig-prename descclassname">selective_inference.lasso_si.</code><code class="sig-name descname">parametric_lasso_si</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">X</span></em>, <em class="sig-param"><span class="n">y</span></em>, <em class="sig-param"><span class="n">alpha</span></em><span class="sig-paren">)</span><a class="headerlink" href="#selective_inference.lasso_si.parametric_lasso_si" title="Permalink to this definition">¶</a></dt>
+<dd><p>[summary]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>[</em><em>type</em><em>]</em>) – [description]</p></li>
+<li><p><strong>y</strong> (<em>[</em><em>type</em><em>]</em>) – [description]</p></li>
+<li><p><strong>alpha</strong> (<em>[</em><em>type</em><em>]</em>) – [description]</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>[description]</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>[type]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="selective_inference.lasso_si.region">
+<code class="sig-prename descclassname">selective_inference.lasso_si.</code><code class="sig-name descname">region</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">X</span></em>, <em class="sig-param"><span class="n">z</span></em>, <em class="sig-param"><span class="n">alpha</span></em>, <em class="sig-param"><span class="n">a</span></em>, <em class="sig-param"><span class="n">b</span></em><span class="sig-paren">)</span><a class="headerlink" href="#selective_inference.lasso_si.region" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="selective_inference.lasso_si.solve">
+<code class="sig-prename descclassname">selective_inference.lasso_si.</code><code class="sig-name descname">solve</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">C</span></em>, <em class="sig-param"><span class="n">d</span></em>, <em class="sig-param"><span class="n">a</span></em>, <em class="sig-param"><span class="n">b</span></em>, <em class="sig-param"><span class="n">L</span></em>, <em class="sig-param"><span class="n">U</span></em><span class="sig-paren">)</span><a class="headerlink" href="#selective_inference.lasso_si.solve" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-selective_inference.p_value">
+<span id="selective-inference-p-value-module"></span><h2>selective_inference.p_value module<a class="headerlink" href="#module-selective_inference.p_value" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="selective_inference.p_value.p_value">
+<code class="sig-prename descclassname">selective_inference.p_value.</code><code class="sig-name descname">p_value</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">z_obs</span></em>, <em class="sig-param"><span class="n">intervals</span></em>, <em class="sig-param"><span class="n">sigma</span></em><span class="sig-paren">)</span><a class="headerlink" href="#selective_inference.p_value.p_value" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-selective_inference.probability">
+<span id="selective-inference-probability-module"></span><h2>selective_inference.probability module<a class="headerlink" href="#module-selective_inference.probability" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="selective_inference.probability.prob">
+<code class="sig-prename descclassname">selective_inference.probability.</code><code class="sig-name descname">prob</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">interval</span></em>, <em class="sig-param"><span class="n">mu</span></em>, <em class="sig-param"><span class="n">sigma</span></em><span class="sig-paren">)</span><a class="headerlink" href="#selective_inference.probability.prob" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="selective_inference.probability.truncated_normal_cdf">
+<code class="sig-prename descclassname">selective_inference.probability.</code><code class="sig-name descname">truncated_normal_cdf</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">z</span></em>, <em class="sig-param"><span class="n">intervals</span></em>, <em class="sig-param"><span class="n">mu</span></em>, <em class="sig-param"><span class="n">sigma</span></em><span class="sig-paren">)</span><a class="headerlink" href="#selective_inference.probability.truncated_normal_cdf" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-selective_inference.quadratic">
+<span id="selective-inference-quadratic-module"></span><h2>selective_inference.quadratic module<a class="headerlink" href="#module-selective_inference.quadratic" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="selective_inference.quadratic.Quadratic">
+<em class="property">class </em><code class="sig-prename descclassname">selective_inference.quadratic.</code><code class="sig-name descname">Quadratic</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">a</span></em>, <em class="sig-param"><span class="n">b</span></em>, <em class="sig-param"><span class="n">c</span></em><span class="sig-paren">)</span><a class="headerlink" href="#selective_inference.quadratic.Quadratic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt id="selective_inference.quadratic.Quadratic.f">
+<code class="sig-name descname">f</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em><span class="sig-paren">)</span><a class="headerlink" href="#selective_inference.quadratic.Quadratic.f" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="selective_inference.quadratic.Quadratic.mean">
+<em class="property">static </em><code class="sig-name descname">mean</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">quadratic_array</span></em><span class="sig-paren">)</span><a class="headerlink" href="#selective_inference.quadratic.Quadratic.mean" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="selective_inference.quadratic.Quadratic.or_less">
+<code class="sig-name descname">or_less</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">g</span></em><span class="sig-paren">)</span><a class="headerlink" href="#selective_inference.quadratic.Quadratic.or_less" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="selective_inference.quadratic.Quadratic.or_less_zero">
+<code class="sig-name descname">or_less_zero</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#selective_inference.quadratic.Quadratic.or_less_zero" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-selective_inference.sfs">
+<span id="selective-inference-sfs-module"></span><h2>selective_inference.sfs module<a class="headerlink" href="#module-selective_inference.sfs" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="selective_inference.sfs.sfs">
+<code class="sig-prename descclassname">selective_inference.sfs.</code><code class="sig-name descname">sfs</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">X</span></em>, <em class="sig-param"><span class="n">y</span></em>, <em class="sig-param"><span class="n">k</span></em><span class="sig-paren">)</span><a class="headerlink" href="#selective_inference.sfs.sfs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="selective_inference.sfs.sfs_CV">
+<code class="sig-prename descclassname">selective_inference.sfs.</code><code class="sig-name descname">sfs_CV</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">X</span></em>, <em class="sig-param"><span class="n">y</span></em>, <em class="sig-param"><span class="n">K</span></em>, <em class="sig-param"><span class="n">k_cv</span></em><span class="sig-paren">)</span><a class="headerlink" href="#selective_inference.sfs.sfs_CV" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-selective_inference.sfs_si">
+<span id="selective-inference-sfs-si-module"></span><h2>selective_inference.sfs_si module<a class="headerlink" href="#module-selective_inference.sfs_si" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="selective_inference.sfs_si.parametric_sfs_cv_si">
+<code class="sig-prename descclassname">selective_inference.sfs_si.</code><code class="sig-name descname">parametric_sfs_cv_si</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">X</span></em>, <em class="sig-param"><span class="n">y</span></em>, <em class="sig-param"><span class="n">k_candidates</span></em>, <em class="sig-param"><span class="n">k_folds</span></em><span class="sig-paren">)</span><a class="headerlink" href="#selective_inference.sfs_si.parametric_sfs_cv_si" title="Permalink to this definition">¶</a></dt>
+<dd><p>[summary]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>[</em><em>type</em><em>]</em>) – [description]</p></li>
+<li><p><strong>y</strong> (<em>[</em><em>type</em><em>]</em>) – [description]</p></li>
+<li><p><strong>k_candidates</strong> (<em>[</em><em>type</em><em>]</em>) – [description]</p></li>
+<li><p><strong>k_folds</strong> (<em>[</em><em>type</em><em>]</em>) – [description]</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>[description]</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>[type]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="selective_inference.sfs_si.parametric_sfs_si">
+<code class="sig-prename descclassname">selective_inference.sfs_si.</code><code class="sig-name descname">parametric_sfs_si</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">X</span></em>, <em class="sig-param"><span class="n">y</span></em>, <em class="sig-param"><span class="n">k</span></em><span class="sig-paren">)</span><a class="headerlink" href="#selective_inference.sfs_si.parametric_sfs_si" title="Permalink to this definition">¶</a></dt>
+<dd><p>[summary]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>[</em><em>type</em><em>]</em>) – [description]</p></li>
+<li><p><strong>y</strong> (<em>[</em><em>type</em><em>]</em>) – [description]</p></li>
+<li><p><strong>k</strong> (<em>[</em><em>type</em><em>]</em>) – [description]</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>[description]</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>[type]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="selective_inference.sfs_si.region">
+<code class="sig-prename descclassname">selective_inference.sfs_si.</code><code class="sig-name descname">region</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">X</span></em>, <em class="sig-param"><span class="n">z</span></em>, <em class="sig-param"><span class="n">k</span></em>, <em class="sig-param"><span class="n">a</span></em>, <em class="sig-param"><span class="n">b</span></em><span class="sig-paren">)</span><a class="headerlink" href="#selective_inference.sfs_si.region" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-selective_inference.si">
+<span id="selective-inference-si-module"></span><h2>selective_inference.si module<a class="headerlink" href="#module-selective_inference.si" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="selective_inference.si.SI_result">
+<em class="property">class </em><code class="sig-prename descclassname">selective_inference.si.</code><code class="sig-name descname">SI_result</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">A</span><span class="p">:</span> <span class="n">list</span></em>, <em class="sig-param"><span class="n">k</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">p_values</span><span class="p">:</span> <span class="n">list</span></em>, <em class="sig-param"><span class="n">CIs</span><span class="p">:</span> <span class="n">list</span></em><span class="sig-paren">)</span><a class="headerlink" href="#selective_inference.si.SI_result" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt id="selective_inference.si.SI_result.A">
+<code class="sig-name descname">A</code><em class="property">: list</em><a class="headerlink" href="#selective_inference.si.SI_result.A" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="selective_inference.si.SI_result.CIs">
+<code class="sig-name descname">CIs</code><em class="property">: list</em><a class="headerlink" href="#selective_inference.si.SI_result.CIs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="selective_inference.si.SI_result.k">
+<code class="sig-name descname">k</code><em class="property">: float</em><a class="headerlink" href="#selective_inference.si.SI_result.k" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="selective_inference.si.SI_result.p_values">
+<code class="sig-name descname">p_values</code><em class="property">: list</em><a class="headerlink" href="#selective_inference.si.SI_result.p_values" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt id="selective_inference.si.compute_solution_path">
+<code class="sig-prename descclassname">selective_inference.si.</code><code class="sig-name descname">compute_solution_path</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">k</span></em>, <em class="sig-param"><span class="n">X</span></em>, <em class="sig-param"><span class="n">a</span></em>, <em class="sig-param"><span class="n">b</span></em>, <em class="sig-param"><span class="n">z_min</span></em>, <em class="sig-param"><span class="n">z_max</span></em>, <em class="sig-param"><span class="n">region</span></em><span class="sig-paren">)</span><a class="headerlink" href="#selective_inference.si.compute_solution_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>compute list of interval and its model on the direction of test statistic</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>k</strong> (<em>step number</em>) – step number of algorithm(in lasso this is regulization parameter,in sfs or lars this is number of features to choose)</p></li>
+<li><p><strong>X</strong> (<em>numpy.ndarray</em>) – design matrix(n x p)</p></li>
+<li><p><strong>a</strong> (<em>numpy.ndarray</em>) – direction of test statistic(n x 1)</p></li>
+<li><p><strong>b</strong> (<em>numpy.ndarray</em>) – direction of test statistic(n x 1)</p></li>
+<li><p><strong>(</strong><strong>)</strong> (<em>z_max</em>) – minumum value of test statistic to search</p></li>
+<li><p><strong>(</strong><strong>)</strong> – maximum value of test statistic to search</p></li>
+<li><p><strong>region</strong> (<em>function</em>) – function to compute interval for each algorithm</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>intervals is a list of closed interval that is [lower,upper]</dt><dd><p>models is a list of active features that are in the interval</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="selective_inference.si.construct_teststatistics">
+<code class="sig-prename descclassname">selective_inference.si.</code><code class="sig-name descname">construct_teststatistics</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">A</span></em>, <em class="sig-param"><span class="n">i</span></em>, <em class="sig-param"><span class="n">X</span></em>, <em class="sig-param"><span class="n">y</span></em>, <em class="sig-param"><span class="n">Sigma</span></em><span class="sig-paren">)</span><a class="headerlink" href="#selective_inference.si.construct_teststatistics" title="Permalink to this definition">¶</a></dt>
+<dd><p>construct variables for selective inference</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>A</strong> (<em>list</em>) – active features</p></li>
+<li><p><strong>i</strong> (<em>int</em>) – number of the active feature of interest</p></li>
+<li><p><strong>X</strong> (<em>numpy.ndarray</em>) – design matrix(n x p)</p></li>
+<li><p><strong>y</strong> (<em>numpy.ndarray</em>) – object variable(n x 1)</p></li>
+<li><p><strong>Sigma</strong> (<em>numpy.ndarray</em>) – covariance matrix of y(n x n)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p>4-element tuple containing</p>
+<ul class="simple">
+<li><p>numpy.ndarray: a(n x 1) are used to construct y on the direction of test statistic.</p></li>
+<li><p>numpy.ndarray: b(n x 1) are used to construct y on the direction of test statistic.</p></li>
+<li><p>float: variance for truncated normal distribution.,</p></li>
+<li><p>float: the observed value of the test statistic.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="selective_inference.si.parametric_si">
+<code class="sig-prename descclassname">selective_inference.si.</code><code class="sig-name descname">parametric_si</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">X</span></em>, <em class="sig-param"><span class="n">y</span></em>, <em class="sig-param"><span class="n">A</span></em>, <em class="sig-param"><span class="n">k</span></em>, <em class="sig-param"><span class="n">Sigma</span></em>, <em class="sig-param"><span class="n">region</span></em>, <em class="sig-param"><span class="n">alpha</span><span class="o">=</span><span class="default_value">0.05</span></em><span class="sig-paren">)</span><a class="headerlink" href="#selective_inference.si.parametric_si" title="Permalink to this definition">¶</a></dt>
+<dd><p>calculate selective p-value for each active feature</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>numpy.ndarray</em>) – design matrix(n x p)</p></li>
+<li><p><strong>y</strong> (<em>numpy.ndarray</em>) – object variable(n x 1)</p></li>
+<li><p><strong>A</strong> (<em>list</em>) – active features</p></li>
+<li><p><strong>k</strong> (<em>int</em>) – hyperparameter</p></li>
+<li><p><strong>Sigma</strong> (<em>numpy.ndarray</em>) – covariance matrix of y(n x n)</p></li>
+<li><p><strong>region</strong> (<em>function</em>) – function to compute interval for each algorithm</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>p_valus is a list of p-value for each active features</dt><dd><p>A is list of active features</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="selective_inference.si.parametric_si_ci">
+<code class="sig-prename descclassname">selective_inference.si.</code><code class="sig-name descname">parametric_si_ci</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">X</span></em>, <em class="sig-param"><span class="n">y</span></em>, <em class="sig-param"><span class="n">A</span></em>, <em class="sig-param"><span class="n">k</span></em>, <em class="sig-param"><span class="n">Sigma</span></em>, <em class="sig-param"><span class="n">region</span></em>, <em class="sig-param"><span class="n">alpha</span><span class="o">=</span><span class="default_value">0.05</span></em><span class="sig-paren">)</span><a class="headerlink" href="#selective_inference.si.parametric_si_ci" title="Permalink to this definition">¶</a></dt>
+<dd><p>calculate selective confidence intervals for each active feature</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>numpy.ndarray</em>) – design matrix(n x p)</p></li>
+<li><p><strong>y</strong> (<em>numpy.ndarray</em>) – object variable(n x 1)</p></li>
+<li><p><strong>A</strong> (<em>list</em>) – active features</p></li>
+<li><p><strong>k</strong> (<em>int</em>) – hyperparameter</p></li>
+<li><p><strong>Sigma</strong> (<em>numpy.ndarray</em>) – covariance matrix of y(n x n)</p></li>
+<li><p><strong>region</strong> (<em>function</em>) – function to compute interval for each algorithm</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>cis is a list of selective confidence interval for each active features</dt><dd><p>A is list of active feature</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-selective_inference.si_cv">
+<span id="selective-inference-si-cv-module"></span><h2>selective_inference.si_cv module<a class="headerlink" href="#module-selective_inference.si_cv" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="selective_inference.si_cv.compute_Z_CV">
+<code class="sig-prename descclassname">selective_inference.si_cv.</code><code class="sig-name descname">compute_Z_CV</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">k_obs</span></em>, <em class="sig-param"><span class="n">k_candidates</span></em>, <em class="sig-param"><span class="n">Z</span></em>, <em class="sig-param"><span class="n">E</span></em><span class="sig-paren">)</span><a class="headerlink" href="#selective_inference.si_cv.compute_Z_CV" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="selective_inference.si_cv.compute_cv_path">
+<code class="sig-prename descclassname">selective_inference.si_cv.</code><code class="sig-name descname">compute_cv_path</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">k</span></em>, <em class="sig-param"><span class="n">X</span></em>, <em class="sig-param"><span class="n">a</span></em>, <em class="sig-param"><span class="n">b</span></em>, <em class="sig-param"><span class="n">z_min</span></em>, <em class="sig-param"><span class="n">z_max</span></em>, <em class="sig-param"><span class="n">k_cv</span></em>, <em class="sig-param"><span class="n">region</span></em><span class="sig-paren">)</span><a class="headerlink" href="#selective_inference.si_cv.compute_cv_path" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="selective_inference.si_cv.compute_val_error_path">
+<code class="sig-prename descclassname">selective_inference.si_cv.</code><code class="sig-name descname">compute_val_error_path</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">k</span></em>, <em class="sig-param"><span class="n">X_train</span></em>, <em class="sig-param"><span class="n">X_val</span></em>, <em class="sig-param"><span class="n">a_train</span></em>, <em class="sig-param"><span class="n">a_val</span></em>, <em class="sig-param"><span class="n">b_train</span></em>, <em class="sig-param"><span class="n">b_val</span></em>, <em class="sig-param"><span class="n">z_min</span></em>, <em class="sig-param"><span class="n">z_max</span></em>, <em class="sig-param"><span class="n">region</span></em><span class="sig-paren">)</span><a class="headerlink" href="#selective_inference.si_cv.compute_val_error_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>compute list of model and its interval and validation error on direction of test statistic</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>k</strong> (<em>[</em><em>type</em><em>]</em>) – [description]</p></li>
+<li><p><strong>X_train</strong> (<em>[</em><em>type</em><em>]</em>) – [description]</p></li>
+<li><p><strong>X_val</strong> (<em>[</em><em>type</em><em>]</em>) – [description]</p></li>
+<li><p><strong>a_train</strong> (<em>[</em><em>type</em><em>]</em>) – [description]</p></li>
+<li><p><strong>a_val</strong> (<em>[</em><em>type</em><em>]</em>) – [description]</p></li>
+<li><p><strong>b_train</strong> (<em>[</em><em>type</em><em>]</em>) – [description]</p></li>
+<li><p><strong>b_val</strong> (<em>[</em><em>type</em><em>]</em>) – [description]</p></li>
+<li><p><strong>z_min</strong> (<em>[</em><em>type</em><em>]</em>) – [description]</p></li>
+<li><p><strong>z_max</strong> (<em>[</em><em>type</em><em>]</em>) – [description]</p></li>
+<li><p><strong>region</strong> (<em>[</em><em>type</em><em>]</em>) – [description]</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>[description]</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>[type]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="selective_inference.si_cv.parametric_si_cv">
+<code class="sig-prename descclassname">selective_inference.si_cv.</code><code class="sig-name descname">parametric_si_cv</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">X</span></em>, <em class="sig-param"><span class="n">y</span></em>, <em class="sig-param"><span class="n">A</span></em>, <em class="sig-param"><span class="n">k_obs</span></em>, <em class="sig-param"><span class="n">k_candidates</span></em>, <em class="sig-param"><span class="n">Sigma</span></em>, <em class="sig-param"><span class="n">region</span></em>, <em class="sig-param"><span class="n">k_folds</span></em>, <em class="sig-param"><span class="n">alpha</span><span class="o">=</span><span class="default_value">0.05</span></em><span class="sig-paren">)</span><a class="headerlink" href="#selective_inference.si_cv.parametric_si_cv" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="selective_inference.si_cv.parametric_si_cv_ci">
+<code class="sig-prename descclassname">selective_inference.si_cv.</code><code class="sig-name descname">parametric_si_cv_ci</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">X</span></em>, <em class="sig-param"><span class="n">y</span></em>, <em class="sig-param"><span class="n">A</span></em>, <em class="sig-param"><span class="n">k_obs</span></em>, <em class="sig-param"><span class="n">k_candidates</span></em>, <em class="sig-param"><span class="n">Sigma</span></em>, <em class="sig-param"><span class="n">region</span></em>, <em class="sig-param"><span class="n">k_folds</span></em>, <em class="sig-param"><span class="n">alpha</span><span class="o">=</span><span class="default_value">0.05</span></em><span class="sig-paren">)</span><a class="headerlink" href="#selective_inference.si_cv.parametric_si_cv_ci" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="selective_inference.si_cv.print_Z_CV">
+<code class="sig-prename descclassname">selective_inference.si_cv.</code><code class="sig-name descname">print_Z_CV</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">k_obs</span></em>, <em class="sig-param"><span class="n">k_candidates</span></em>, <em class="sig-param"><span class="n">Z</span></em>, <em class="sig-param"><span class="n">E</span></em>, <em class="sig-param"><span class="n">Z_CV</span></em><span class="sig-paren">)</span><a class="headerlink" href="#selective_inference.si_cv.print_Z_CV" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="selective_inference.si_cv.validation_error">
+<code class="sig-prename descclassname">selective_inference.si_cv.</code><code class="sig-name descname">validation_error</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">X_train</span></em>, <em class="sig-param"><span class="n">X_val</span></em>, <em class="sig-param"><span class="n">a_train</span></em>, <em class="sig-param"><span class="n">a_val</span></em>, <em class="sig-param"><span class="n">b_train</span></em>, <em class="sig-param"><span class="n">b_val</span></em><span class="sig-paren">)</span><a class="headerlink" href="#selective_inference.si_cv.validation_error" title="Permalink to this definition">¶</a></dt>
+<dd><p>compute validation error for a given model expressed as Quadratic objects</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X_train</strong> (<em>numpy.ndarray</em>) – design matrix for train set</p></li>
+<li><p><strong>X_val</strong> (<em>[</em><em>type</em><em>]</em>) – design matrix for validation set</p></li>
+<li><p><strong>a_train</strong> (<em>[</em><em>type</em><em>]</em>) – vector of test statistics for train set</p></li>
+<li><p><strong>a_val</strong> (<em>[</em><em>type</em><em>]</em>) – vector of test statistics for validation set</p></li>
+<li><p><strong>b_train</strong> (<em>[</em><em>type</em><em>]</em>) – vector of test statistics for train set</p></li>
+<li><p><strong>b_val</strong> (<em>[</em><em>type</em><em>]</em>) – vector of test statistics for validation set</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>validation error for a given model</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#selective_inference.quadratic.Quadratic" title="selective_inference.quadratic.Quadratic">Quadratic</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-selective_inference">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-selective_inference" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021 Miwa Daiki.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
