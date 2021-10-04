@@ -1,10 +1,47 @@
-Sample Module Repository
-========================
+selective_inference for feature selection algorithm
+===================================================
 
-This simple project is an example repo for Python projects.
+This package provides selective inference for feature selection algorithms.
 
-`Learn more <http://www.kennethreitz.org/essays/repository-structure-and-python>`_.
+See the paper https://arxiv.org/abs/2004.09794 for more details.
 
----------------
+add desicription about SI
 
-If you want to learn more about ``setup.py`` files, check out `this repository <https://github.com/kennethreitz/setup.py>`_.
+============
+Requirements
+============
+selective_inference requires the following packages:
+
+* numpy
+* scipy
+* skelearn
+* portion
+
+==============================
+Installing selective_inference
+==============================
+Use pip to install 
+
+.. code-block:: console
+    
+    $ pip install selective_inference
+
+=======
+Example
+=======
+
+.. code-block:: python
+
+    import selective_inference as si
+    import numpy as np
+    X = np.random.randn(100,10)
+    beta = np.zeros(10)
+    y = X @ beta + np.random.randn(100)
+    print(si.parametric_sfs_si(X,y,3))
+
+    # SI_result(A=[6, 2, 9], k=3, p_values=[0.8757497138742228, 0.8871201546774179, 0.9058273799617409], CIs=[])
+
+=============
+API Reference
+=============
+API reference is available at https://hogehoge.hogehoge
