@@ -7,11 +7,19 @@ from . import cv
 from . import si_cv
 from .p_value import p_value
 
+from typing import List
+
 EPS = 5e-3
 
 @dataclass
 class SI_result:
-    """result of feature selection algorithm and its selective inference
+    """this class have result of selective inference. each selective inference function return this class.
+
+    Attributes:
+        A(List[int]):selected feature 
+        k(float):hyperparameter of feature selection algorithm
+        p_values(List[float]):p-values of selected features
+        CIs(List[portion.interval.Interval]):confidence intervals of selected features
     """
 
     A : list

@@ -1,6 +1,5 @@
 import numpy as np
 import portion as p
-from scipy import stats
 from scipy import optimize
 from . import probability as prob
 

@@ -5,34 +5,39 @@ from . import sfs
 from . import si
 from . import si_cv
 
-def parametric_sfs_si(X,y,k):
-    """[summary]
+from typing import List
+
+def parametric_sfs_si(X:np.ndarray,y:np.ndarray,k:int,sigma:int=1,alpha:float=0.05)-> si.SI_result:
+    """parametric selective inference for stepwise feature selection
 
     Args:
-        X ([type]): [description]
-        y ([type]): [description]
-        k ([type]): [description]
+        X (np.ndarray): design matrix(n x p)
+        y (np.ndarray): obejective variable(n x 1)
+        k (int): number of feature to be selected(hyperparameter)
+        sigma (int, optional): variance for selective inference. Defaults to 1.
+        alpha (float, optional): significance level. Defaults to 0.05.
 
     Returns:
-        [type]: [description]
+        si.SI_result: reffer to document of SI_result
     """
 
     A,s = sfs.sfs(X,y,k)
     Sigma = np.identity(X.shape[0])
 
     return si.parametric_si(X,y,A,k,Sigma,region)
-
-def parametric_sfs_cv_si(X,y,k_candidates,k_folds):
-    """[summary]
+def parametric_sfs_cv_si(X:np.ndarray,y:np.ndarray,k_candidates:List[float],k_folds:int,sigma:int=1,alpha:float=0.05)-> si_cv.SI_result:
+    """parametic selective inference for stepwise feature selection with cross validation
 
     Args:
-        X ([type]): [description]
-        y ([type]): [description]
-        k_candidates ([type]): [description]
-        k_folds ([type]): [description]
+        X (np.ndarray): design matrix(n x p)
+        y (np.ndarray): obejective variable(n x 1)
+        k_candidates (list[float]): list of k candidates
+        k_folds (int): fold number in cross validation
+        sigma (int, optional): variance for selective inference. Defaults to 1.
+        alpha (float, optional): significance level. Defaults to 0.05.
 
     Returns:
-        [type]: [description]
+        si.SI_result: please reffer to document of SI_result
     """
 
     A,k = sfs.sfs_CV(X,y,k_candidates,k_folds)

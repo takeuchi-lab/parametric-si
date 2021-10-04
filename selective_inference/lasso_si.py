@@ -5,6 +5,8 @@ from sklearn import linear_model
 from . import lasso
 from . import si
 
+from typing import List
+
 def compute_quotient(numerator,denominator):
     if denominator == 0:
         return np.Inf
@@ -17,15 +19,17 @@ def compute_quotient(numerator,denominator):
         return quotient
 
 def parametric_lasso_si(X,y,alpha):
-    """[summary]
+    """parametric selective inference for lasso
 
     Args:
-        X ([type]): [description]
-        y ([type]): [description]
-        alpha ([type]): [description]
+        X (np.ndarray): design matrix(n x p)
+        y (np.ndarray): obejective variable(n x 1)
+        k (int): regularization parameter (hyperparameter)
+        sigma (int, optional): variance for selective inference. Defaults to 1.
+        alpha (float, optional): significance level. Defaults to 0.05.
 
     Returns:
-        [type]: [description]
+        si.SI_result: reffer to document of SI_result
     """
 
     A,s = lasso.lasso(X,y,alpha)
@@ -35,16 +39,19 @@ def parametric_lasso_si(X,y,alpha):
     return si.parametric_si(X,y,A,alpha,Sigma,region)
 
 def parametric_lasso_cv_si(X,y,k_candidates,k_folds):
-    """[summary]
+    """parametic selective inference for lasso with cross validation
 
     Args:
-        X ([type]): [description]
-        y ([type]): [description]
-        k_candidates ([type]): [description]
-        k_folds ([type]): [description]
+        X (np.ndarray): design matrix(n x p)
+        y (np.ndarray): obejective variable(n x 1)
+        k_candidates (List[float]): list of k candidates
+        k_folds (int): fold number in cross validation
+        sigma (int, optional): variance for selective inference. Defaults to 1.
+        alpha (float, optional): significance level. Defaults to 0.05.
 
     Returns:
-        [type]: [description]
+        si.SI_result: please reffer to document of SI_result
+
     """
 
     A,k = lasso.lasso_CV(X,y,k_candidates,k_folds)
