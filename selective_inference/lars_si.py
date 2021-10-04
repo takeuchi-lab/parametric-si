@@ -6,25 +6,39 @@ from . import si
 from . import si_cv
 
 def parametric_lars_si(X:np.matrix,y:np.matrix,k:int):
+    """[summary]
+
+    Args:
+        X (np.matrix): [description]
+        y (np.matrix): [description]
+        k (int): [description]
+
+    Returns:
+        [type]: [description]
+    """
 
     A = lars.lars(X,y,k)[0][-1]
     Sigma = np.identity(X.shape[0])
 
-    return si.parametric_si_p(X,y,A,k,Sigma,region)
-
-def parametric_lars_ci(X,y,k):
-
-    A = lars.lars(X,y,k)[0][-1]
-    Sigma = np.identity(X.shape[0])
-
-    return si.parametric_si_ci(X,y,A,k,Sigma,region)
+    return si.parametric_si(X,y,A,k,Sigma,region)
 
 def parametric_lars_cv_si(X,y,k_candidates,k_folds):
+    """[summary]
+
+    Args:
+        X ([type]): [description]
+        y ([type]): [description]
+        k_candidates ([type]): [description]
+        k_folds ([type]): [description]
+
+    Returns:
+        [type]: [description]
+    """
 
     A,k = lars.lars_CV(X,y,k_candidates,k_folds)
     Sigma = np.identity(X.shape[0])
 
-    return si_cv.parametric_si_cv_p(X,y,A,k,k_candidates,Sigma,region,k_folds)
+    return si_cv.parametric_si_cv(X,y,A,k,k_candidates,Sigma,region,k_folds)
     
 def region(X,z,step,a,b):
 

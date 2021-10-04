@@ -6,25 +6,39 @@ from . import si
 from . import si_cv
 
 def parametric_sfs_si(X,y,k):
+    """[summary]
+
+    Args:
+        X ([type]): [description]
+        y ([type]): [description]
+        k ([type]): [description]
+
+    Returns:
+        [type]: [description]
+    """
 
     A,s = sfs.sfs(X,y,k)
     Sigma = np.identity(X.shape[0])
 
-    return si.parametric_si_p(X,y,A,k,Sigma,region)
-
-def parametric_sfs_ci(X,y,k):
-
-    A,s = sfs.sfs(X,y,k)
-    Sigma = np.identity(X.shape[0])
-
-    return si.parametric_si_ci(X,y,A,k,Sigma,region)
+    return si.parametric_si(X,y,A,k,Sigma,region)
 
 def parametric_sfs_cv_si(X,y,k_candidates,k_folds):
+    """[summary]
+
+    Args:
+        X ([type]): [description]
+        y ([type]): [description]
+        k_candidates ([type]): [description]
+        k_folds ([type]): [description]
+
+    Returns:
+        [type]: [description]
+    """
 
     A,k = sfs.sfs_CV(X,y,k_candidates,k_folds)
     Sigma = np.identity(X.shape[0])
 
-    return si_cv.parametric_si_cv_p(X,y,A,k,k_candidates,Sigma,region,k_folds)
+    return si_cv.parametric_si_cv(X,y,A,k,k_candidates,Sigma,region,k_folds)
 
 def region(X,z,k,a,b):
 
