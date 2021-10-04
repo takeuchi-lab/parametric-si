@@ -1,3 +1,4 @@
+from dataclasses import dataclass
 import numpy as np
 import portion as p
 
@@ -7,6 +8,16 @@ from . import si_cv
 from .p_value import p_value
 
 EPS = 5e-3
+
+@dataclass
+class SI_result:
+    """result of feature selection algorithm and its selective inference
+    """
+
+    A : list
+    k : float
+    p_values: list
+    CIs : list
 
 def construct_teststatistics(A,i,X,y,Sigma):
     """construct variables for selective inference
@@ -19,9 +30,12 @@ def construct_teststatistics(A,i,X,y,Sigma):
         Sigma (numpy.ndarray): covariance matrix of y(n x n)
 
     Returns:
-        Tuples: a and b(n x 1) are used to construct y on the direction of test statistic.
-                var(float) is variance for truncated normal distribution.
-                z_obs(float) is the observed value of the test statistic.
+        4-element tuple containing
+
+        - numpy.ndarray: a(n x 1) are used to construct y on the direction of test statistic.
+        - numpy.ndarray: b(n x 1) are used to construct y on the direction of test statistic.
+        - float: variance for truncated normal distribution.,
+        - float: the observed value of the test statistic.
     """
 
     X_A = X[:,A]
@@ -71,7 +85,7 @@ def compute_solution_path(k,X,a,b,z_min,z_max,region):
     
     return intervals,models
 
-def parametric_si_p(X,y,A,k,Sigma,region):
+def parametric_si(X,y,A,k,Sigma,region,alpha=0.05):
     """calculate selective p-value for each active feature
 
     Args:
@@ -88,6 +102,7 @@ def parametric_si_p(X,y,A,k,Sigma,region):
     """
 
     p_values = []
+    CIs = []
 
     for i in range(len(A)):
         intervals = p.empty()
@@ -104,11 +119,10 @@ def parametric_si_p(X,y,A,k,Sigma,region):
             if set(A) == set(model):
                 intervals = intervals | r
         
-        print(regions,models)
-        
         p_values.append(p_value(z_obs,intervals,sigma))
+        # CIs.append(ci.confidence_interval(intervals,z_obs,sigma,alpha))
 
-    return p_values, A
+    return SI_result(A,k,p_values,CIs)
 
 def parametric_si_ci(X,y,A,k,Sigma,region,alpha=0.05):
     """calculate selective confidence intervals for each active feature

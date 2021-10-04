@@ -9,9 +9,10 @@ from . import si
 from . import ci
 from .p_value import p_value
 
-def parametric_si_cv_p(X,y,A,k_obs,k_candidates,Sigma,region,k_folds):
+def parametric_si_cv(X,y,A,k_obs,k_candidates,Sigma,region,k_folds,alpha=0.05):
 
     p_values = []
+    CIs = []
 
     for i in range(len(A)):
         a,b,var,z_obs = si.construct_teststatistics(A,i,X,y,Sigma)
@@ -36,8 +37,9 @@ def parametric_si_cv_p(X,y,A,k_obs,k_candidates,Sigma,region,k_folds):
         Z = Z_alg & Z_CV
 
         p_values.append(p_value(z_obs,Z,sigma))
+        CIs.append(ci.confidence_interval(Z,z_obs,sigma,alpha))
 
-    return p_values,A,k_obs
+    return si.SI_result(A,k_obs,p_values,CIs)
 
 def parametric_si_cv_ci(X,y,A,k_obs,k_candidates,Sigma,region,k_folds,alpha=0.05):
 
