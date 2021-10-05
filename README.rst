@@ -31,6 +31,7 @@ Example
 =======
 
 example for sfs 
+
 .. code-block:: python
 
     import selective_inference as si
@@ -45,6 +46,8 @@ example for sfs
     # SI_result(A=[6, 2, 9], k=3, p_values=[0.8757497138742228, 0.8871201546774179, 0.9058273799617409], CIs=[])
 
 example for lasso with cv
+
+.. code-block:: python
 
     import selective_inference as si
     import numpy as np
