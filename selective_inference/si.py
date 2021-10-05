@@ -57,7 +57,7 @@ def estimate_sigma_lasso(X:np.ndarray,y:np.ndarray)->float:
         float: estimated variacnce
     """
 
-    clf = linear_model.lassoCV()
+    clf = linear_model.LassoCV()
     clf.fit(X,y)
     coef = clf.coef_
     e = y - X @ coef
