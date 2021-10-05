@@ -46,7 +46,7 @@ def parametric_lars_cv_si(X,y,k_candidates,k_folds,sigma=1,alpha=0.05):
 
     return si_cv.parametric_si_cv(X,y,A,k,k_candidates,sigma,region,k_folds,alpha)
     
-def region(X,z,step,a,b):
+def region(X,y,z,step,a,b):
 
     y = a + b * z
 

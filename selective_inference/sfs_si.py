@@ -44,7 +44,7 @@ def parametric_sfs_cv_si(X:np.ndarray,y:np.ndarray,k_candidates:List[float],k_fo
 
     return si_cv.parametric_si_cv(X,y,A,k,k_candidates,sigma,region,k_folds,alpha)
 
-def region(X,z,k,a,b):
+def region(X,y,z,k,a,b):
 
     y =  a + b * z
 

@@ -3,8 +3,8 @@ import numpy as np
 import portion as p
 from sklearn import linear_model
 
-from . import ci
 from .p_value import p_value
+from . import ci
 
 from typing import List
 
@@ -31,8 +31,6 @@ class SI_result:
 def estimate_sigma(X:np.ndarray,y:np.ndarray)->float:
     """this function estimate variance of the mean squared residual with.
     
-
-
     Args:
         X (np.ndarray): design matrix(n x p)
         y (np.ndarray): obejective variable(n x 1)
@@ -99,12 +97,13 @@ def construct_teststatistics(A,i,X,y,Sigma):
 
     return a,b,var,z_obs
 
-def compute_solution_path(k,X,a,b,z_min,z_max,region):
+def compute_solution_path(k,X,y,a,b,z_min,z_max,region):
     """compute list of interval and its model on the direction of test statistic
 
     Args:
         k (step number): step number of algorithm(in lasso this is regulization parameter,in sfs or lars this is number of features to choose)
         X (numpy.ndarray): design matrix(n x p)
+        y (numpy.ndarray): object variable(n x 1)
         a (numpy.ndarray): direction of test statistic(n x 1)
         b (numpy.ndarray): direction of test statistic(n x 1)
         z_min (): minumum value of test statistic to search
@@ -123,7 +122,7 @@ def compute_solution_path(k,X,a,b,z_min,z_max,region):
 
     while z < z_max:
 
-        L,U,model_z = region(X,z,k,a,b)
+        L,U,model_z = region(X,y,z,k,a,b)
         
         models.append(model_z)
         intervals.append(p.closed(max(L,z_min),min(U,z_max)))
@@ -158,18 +157,18 @@ def parametric_si(X,y,A,k,sigma,region,alpha):
 
         a,b,var,z_obs = construct_teststatistics(A,i,X,y,Sigma)
 
-        sigma = np.sqrt(var)
-        z_min = -1 * sigma * 10
-        z_max = sigma * 10
+        std = np.sqrt(var)
+        z_min = -1 * std * 10
+        z_max = std * 10
 
-        regions,models = compute_solution_path(k,X,a,b,z_min,z_max,region)
+        regions,models = compute_solution_path(k,X,y,a,b,z_min,z_max,region)
 
         for r,model in zip(regions,models):
             if set(A) == set(model):
                 intervals = intervals | r
         
-        p_values.append(p_value(z_obs,intervals,sigma))
-        CIs.append(ci.confidence_interval(intervals,z_obs,sigma,alpha))
+        p_values.append(p_value(z_obs,intervals,std))
+        CIs.append(ci.confidence_interval(intervals,z_obs,std,alpha))
 
     return SI_result(A,k,sigma,p_values,CIs)
 

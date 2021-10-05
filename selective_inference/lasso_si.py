@@ -48,56 +48,19 @@ def parametric_lasso_cv_si(X,y,k_candidates,k_folds,sigma=1,alpha=0.05):
 
     return si_cv.parametric_si_cv(X,y,A,k,k_candidates,sigma,region,k_folds,alpha)
 
-def region(X,z,alpha,a,b):
+def lee_et_all_region(X,z,alpha,a,b):
+    """this function is made with reference to the lasso selection event of lee et al(2016)
 
-    y = a * b + z
+    Args:
+        X ([type]): [description]
+        z ([type]): [description]
+        alpha ([type]): [description]
+        a ([type]): [description]
+        b ([type]): [description]
 
-    n = X.shape[0]
-
-    clf = linear_model.Lasso(alpha=alpha,fit_intercept=False,normalize=False,tol=1e-10)
-    clf.fit(X,y)
-    coef = clf.coef_
-
-    A = np.where(coef!=0)[0].tolist()
-    Ac = np.where(coef==0)[0].tolist()
-    XA = X[:,A]
-    XAc = X[:,Ac]
-    beta_hat = coef[A]
-
-    psiA = np.empty(0)
-
-    if len(A) != 0:
-        psiA = np.linalg.pinv(XA.T @ XA) @ XA.T @ b
-
-    sign_hat = np.empty(0)
-    gammaA = np.empty(0)
-
-    if len(Ac) != 0:
-        if len(A) == 0:
-            e1 = y
-            gammaA = (XAc.T @ b) / n
-        else :
-            e1 = y - XA @ beta_hat
-            gammaA = ((XAc.T @ b) - (XAc.T @ XA @ psiA)) / n
-        
-        e2 = XAc.T @ e1
-        sign_hat = e2 / (alpha * n)
-
-    min1 = np.Inf
-    min2 = np.Inf
-
-    if len(A) != 0:
-        min1 = np.min(np.vectorize(compute_quotient)(beta_hat,psiA))
-    if len(Ac) != 0:
-        min2 = np.min(np.vectorize(compute_quotient)((np.sign(gammaA)-sign_hat)*alpha,gammaA))
-
-    L = z - si.EPS
-    U = min(min1,min2)
-    print(L,U)
-
-    return L,U,A
-
-def region(X,z,alpha,a,b):
+    Returns:
+        [type]: [description]
+    """
 
     y = a + b * z
 
@@ -134,6 +97,88 @@ def region(X,z,alpha,a,b):
     assert L < U
 
     return L,U,A
+
+def region(X,y,z,k,a,b):
+    n,p = X.shape
+    
+    yz_flatten = a + b * z
+    yz = yz_flatten.reshape(-1,1)
+
+    clf = linear_model.Lasso(alpha=k, fit_intercept=False,tol=1e-10)
+    clf.fit(X, yz)
+    bhz = clf.coef_
+
+    Az, XAz, Acz, XAcz, bhAz = construct_A_XA_Ac_XAc_bhA(X, bhz, n, p)
+
+    if XAz is not None:
+        inv = np.linalg.pinv(np.dot(XAz.T, XAz))
+        invXAzT = np.dot(inv, XAz.T)
+        etaAz = np.dot(invXAzT, b)
+
+    shAz = np.array([])
+    gammaAz = np.array([])
+
+    if XAcz is not None:
+        if XAz is None:
+            e1 = yz
+        else:
+            e1 = yz - np.dot(XAz, bhAz)
+
+        e2 = np.dot(XAcz.T, e1)
+        shAz = e2/(k * n)
+
+        if XAz is None:
+            gammaAz = (np.dot(XAcz.T, b)) / n
+        else:
+            gammaAz = (np.dot(XAcz.T, b) - np.dot(np.dot(XAcz.T, XAz), etaAz)) / n
+    
+    bhAz = bhAz.flatten()
+    etaAz = etaAz.flatten()
+    shAz = shAz.flatten()
+    gammaAz = gammaAz.flatten()
+
+    min1 = np.Inf
+    min2 = np.Inf
+
+    for j in range(len(etaAz)):
+        numerator = - bhAz[j]
+        denominator = etaAz[j]
+
+        quotient = compute_quotient(numerator, denominator)
+
+        if quotient < min1:
+            min1 = quotient
+
+    for j in range(len(gammaAz)):
+        numerator = (np.sign(gammaAz[j]) - shAz[j])*k
+        denominator = gammaAz[j]
+
+        quotient = compute_quotient(numerator, denominator)
+
+        if quotient < min2:
+            min2 = quotient
+
+    skz = min(min1, min2)
+    return z-si.EPS,z+skz, np.where(bhz != 0)[0].tolist()
+
+def construct_A_XA_Ac_XAc_bhA(X, bh, n, p):
+    A = []
+    Ac = []
+    bhA = []
+
+    for j in range(p):
+        bhj = bh[j]
+        if bhj != 0:
+            A.append(j)
+            bhA.append(bhj)
+        else:
+            Ac.append(j)
+
+    XA = X[:, A]
+    XAc = X[:, Ac]
+    bhA = np.array(bhA).reshape((len(A), 1))
+
+    return A, XA, Ac, XAc, bhA
 
 def compute_quotient(numerator,denominator):
     if denominator == 0:
