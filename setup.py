@@ -12,7 +12,7 @@ with open('LICENSE') as f:
 
 setup(
     name='selective_inference',
-    version='0.2.1',
+    version='0.3.1',
     description='tools for parametric selective inference',
     long_description=readme,
     author='Daiki Miwa',

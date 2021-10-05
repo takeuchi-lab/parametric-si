@@ -66,4 +66,4 @@ Example
 =============
 API Reference
 =============
-API reference is available at https://hogehoge.hogehoge
+API reference is available at https://daikimiwa.github.io/selective_inference_document/
