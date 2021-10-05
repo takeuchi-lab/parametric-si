@@ -20,7 +20,7 @@ selective_inference requires the following packages:
 ==============================
 Installing selective_inference
 ==============================
-Use pip to install selective_inference package. Required packages are also installed automatically.
+Use pip to install selective_inference package. Required packages will be also installed automatically.
 
 .. code-block:: console
     
