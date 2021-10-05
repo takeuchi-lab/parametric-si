@@ -8,6 +8,8 @@ from . import si_cv
 
 from typing import List
 
+np.seterr(divide='ignore', invalid='ignore')
+
 def parametric_lasso_si(X,y,alpha):
     """parametric selective inference for lasso
 

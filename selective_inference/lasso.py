@@ -5,7 +5,7 @@ from . import cv
 
 def lasso(X,y,alpha):
 
-    clf = linear_model.Lasso(alpha=alpha,fit_intercept=False,normalize=False)
+    clf = linear_model.Lasso(alpha=alpha,fit_intercept=False)
     clf.fit(X,y)
     coef = clf.coef_
     A = np.where(coef!=0)[0].tolist()

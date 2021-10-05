@@ -27,6 +27,12 @@ class SI_result:
     p_values: list
     CIs : list
 
+def estimate_sigma(X:np.ndarray,y:np.ndarray)->float:
+    sigma = 1
+
+    return sigma
+
+
 def construct_teststatistics(A,i,X,y,Sigma):
     """construct variables for selective inference
 
@@ -89,7 +95,7 @@ def compute_solution_path(k,X,a,b,z_min,z_max,region):
         intervals.append(p.closed(max(L,z_min),min(U,z_max)))
         if type(intervals[-1].upper) == type(p.empty().upper):
             assert False
-        z = intervals[-1].upper + EPS
+        z = U + EPS
     
     return intervals,models
 
@@ -128,7 +134,7 @@ def parametric_si(X,y,A,k,Sigma,region,alpha=0.05):
                 intervals = intervals | r
         
         p_values.append(p_value(z_obs,intervals,sigma))
-        # CIs.append(ci.confidence_interval(intervals,z_obs,sigma,alpha))
+        CIs.append(ci.confidence_interval(intervals,z_obs,sigma,alpha))
 
     return SI_result(A,k,p_values,CIs)
 

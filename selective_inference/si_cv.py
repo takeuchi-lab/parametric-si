@@ -37,7 +37,7 @@ def parametric_si_cv(X,y,A,k_obs,k_candidates,Sigma,region,k_folds,alpha=0.05):
         Z = Z_alg & Z_CV
 
         p_values.append(p_value(z_obs,Z,sigma))
-        # CIs.append(ci.confidence_interval(Z,z_obs,sigma,alpha))
+        CIs.append(ci.confidence_interval(Z,z_obs,sigma,alpha))
 
     return si.SI_result(A,k_obs,p_values,CIs)
 
@@ -136,8 +136,18 @@ def compute_cv_path(k,X,a,b,z_min,z_max,k_cv,region):
     E = []
 
     z_left,z_right = z_min,z_min
+
     while z_right < z_max:
-        temp = [Z_k[i][pointers[i]].upper for i in range(k_cv)]
+        try :
+            temp = [Z_k[i][pointers[i]].upper for i in range(k_cv)]
+        except :
+            print("temp",temp)
+            print("z_min,z_max",z_min,z_max)
+            print("z_left,z_right",z_left,z_right)
+            print("pinters",pointers)
+            print("Z_kの状態")
+            for x in Z_k:
+                print(x[0].lower,x[-1].upper) 
         next_point = np.argmin(temp)
         z_right = Z_k[next_point][pointers[next_point]].upper
         Z.append(p.closed(z_left,z_right))

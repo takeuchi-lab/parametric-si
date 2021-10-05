@@ -7,6 +7,8 @@ from . import si_cv
 
 from typing import List
 
+np.seterr(divide='ignore', invalid='ignore')
+
 def parametric_lars_si(X:np.matrix,y:np.matrix,k:int):
     """parametric selective inference for lars
 
