@@ -1,0 +1,5 @@
+selective_inference.si module
+=============================
+
+.. automodule:: selective_inference.si
+   :members: SI_result,estimate_sigma,estimate_sigma_lasso

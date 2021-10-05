@@ -6,19 +6,8 @@
 selective_inference package documentation
 =========================================
 
-Contents:
-
 .. toctree::
    :caption: Contents:
-   :maxdepth: 2
+   :maxdepth: 4
 
    modules
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
-

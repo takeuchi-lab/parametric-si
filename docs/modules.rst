@@ -1,4 +1,4 @@
-selective_inference
+selective_inference 
 ===================
 
 .. toctree::

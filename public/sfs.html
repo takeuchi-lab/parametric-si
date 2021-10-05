@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>selective_inference.sfs_si module &mdash; selective_inference v0.1.3 documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> selective_inference
+          </a>
+              <div class="version">
+                v0.1.3
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="selective.html">selective_inference package</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">selective_inference</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>selective_inference.sfs_si module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/sfs.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="module-selective_inference.sfs_si">
+<span id="selective-inference-sfs-si-module"></span><h1>selective_inference.sfs_si module<a class="headerlink" href="#module-selective_inference.sfs_si" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="selective_inference.sfs_si.parametric_sfs_cv_si">
+<code class="sig-prename descclassname">selective_inference.sfs_si.</code><code class="sig-name descname">parametric_sfs_cv_si</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">X</span><span class="p">:</span> <span class="n">numpy.ndarray</span></em>, <em class="sig-param"><span class="n">y</span><span class="p">:</span> <span class="n">numpy.ndarray</span></em>, <em class="sig-param"><span class="n">k_candidates</span><span class="p">:</span> <span class="n">List<span class="p">[</span>float<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">k_folds</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">sigma</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">1</span></em>, <em class="sig-param"><span class="n">alpha</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">0.05</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="si.html#selective_inference.si.SI_result" title="selective_inference.si.SI_result">selective_inference.si.SI_result</a><a class="headerlink" href="#selective_inference.sfs_si.parametric_sfs_cv_si" title="Permalink to this definition">¶</a></dt>
+<dd><p>parametic selective inference for stepwise feature selection with cross validation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>np.ndarray</em>) – design matrix(n x p)</p></li>
+<li><p><strong>y</strong> (<em>np.ndarray</em>) – obejective variable(n x 1)</p></li>
+<li><p><strong>k_candidates</strong> (<em>list</em><em>[</em><em>float</em><em>]</em>) – list of k candidates</p></li>
+<li><p><strong>k_folds</strong> (<em>int</em>) – fold number in cross validation</p></li>
+<li><p><strong>sigma</strong> (<em>float</em><em>, </em><em>optional</em>) – variance for selective inference. Defaults to 1.</p></li>
+<li><p><strong>alpha</strong> (<em>float</em><em>, </em><em>optional</em>) – significance level. Defaults to 0.05.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>please reffer to document of SI_result</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="si.html#selective_inference.si.SI_result" title="selective_inference.si.SI_result">si.SI_result</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="selective_inference.sfs_si.parametric_sfs_si">
+<code class="sig-prename descclassname">selective_inference.sfs_si.</code><code class="sig-name descname">parametric_sfs_si</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">X</span><span class="p">:</span> <span class="n">numpy.ndarray</span></em>, <em class="sig-param"><span class="n">y</span><span class="p">:</span> <span class="n">numpy.ndarray</span></em>, <em class="sig-param"><span class="n">k</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">sigma</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">1</span></em>, <em class="sig-param"><span class="n">alpha</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">0.05</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="si.html#selective_inference.si.SI_result" title="selective_inference.si.SI_result">selective_inference.si.SI_result</a><a class="headerlink" href="#selective_inference.sfs_si.parametric_sfs_si" title="Permalink to this definition">¶</a></dt>
+<dd><p>parametric selective inference for stepwise feature selection</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>np.ndarray</em>) – design matrix(n x p)</p></li>
+<li><p><strong>y</strong> (<em>np.ndarray</em>) – obejective variable(n x 1)</p></li>
+<li><p><strong>k</strong> (<em>int</em>) – number of feature to be selected(hyperparameter)</p></li>
+<li><p><strong>sigma</strong> (<em>int</em><em>, </em><em>optional</em>) – variance for selective inference. Defaults to 1.</p></li>
+<li><p><strong>alpha</strong> (<em>float</em><em>, </em><em>optional</em>) – significance level. Defaults to 0.05.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>reffer to document of SI_result</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="si.html#selective_inference.si.SI_result" title="selective_inference.si.SI_result">si.SI_result</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021 Miwa Daiki.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

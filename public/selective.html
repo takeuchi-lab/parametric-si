@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>selective_inference package &mdash; selective_inference v0.1.0 documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <title>selective_inference package &mdash; selective_inference v0.1.3 documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
@@ -16,7 +16,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="selective_inference" href="modules.html" /> 
+    <link rel="prev" title="selective_inference package documentation" href="index.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -27,7 +27,7 @@
             <a href="index.html" class="icon icon-home"> selective_inference
           </a>
               <div class="version">
-                v0.1.0
+                v0.1.3
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -39,10 +39,11 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="modules.html">selective_inference</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">selective_inference package</a></li>
-</ul>
-</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">selective_inference package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#module-selective_inference.sfs_si">selective_inference.sfs_si module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#module-selective_inference.lasso_si">selective_inference.lasso_si module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#id1">selective_inference.lasso_si module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#module-selective_inference.si">selective_inference.si module</a></li>
 </ul>
 
         </div>
@@ -59,7 +60,6 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="modules.html">selective_inference</a> &raquo;</li>
       <li>selective_inference package</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/selective.rst.txt" rel="nofollow"> View page source</a>
@@ -70,11 +70,187 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="module-selective_inference.si">
-<span id="selective-inference-package"></span><h1>selective_inference package<a class="headerlink" href="#module-selective_inference.si" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="selective-inference-package">
+<h1>selective_inference package<a class="headerlink" href="#selective-inference-package" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="module-selective_inference.sfs_si">
+<span id="selective-inference-sfs-si-module"></span><h1>selective_inference.sfs_si module<a class="headerlink" href="#module-selective_inference.sfs_si" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="selective_inference.sfs_si.parametric_sfs_cv_si">
+<code class="sig-prename descclassname">selective_inference.sfs_si.</code><code class="sig-name descname">parametric_sfs_cv_si</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">X</span><span class="p">:</span> <span class="n">numpy.ndarray</span></em>, <em class="sig-param"><span class="n">y</span><span class="p">:</span> <span class="n">numpy.ndarray</span></em>, <em class="sig-param"><span class="n">k_candidates</span><span class="p">:</span> <span class="n">List<span class="p">[</span>float<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">k_folds</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">sigma</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">1</span></em>, <em class="sig-param"><span class="n">alpha</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">0.05</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#selective_inference.si.SI_result" title="selective_inference.si.SI_result">selective_inference.si.SI_result</a><a class="headerlink" href="#selective_inference.sfs_si.parametric_sfs_cv_si" title="Permalink to this definition">¶</a></dt>
+<dd><p>parametic selective inference for stepwise feature selection with cross validation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>np.ndarray</em>) – design matrix(n x p)</p></li>
+<li><p><strong>y</strong> (<em>np.ndarray</em>) – obejective variable(n x 1)</p></li>
+<li><p><strong>k_candidates</strong> (<em>list</em><em>[</em><em>float</em><em>]</em>) – list of k candidates</p></li>
+<li><p><strong>k_folds</strong> (<em>int</em>) – fold number in cross validation</p></li>
+<li><p><strong>sigma</strong> (<em>float</em><em>, </em><em>optional</em>) – variance for selective inference. Defaults to 1.</p></li>
+<li><p><strong>alpha</strong> (<em>float</em><em>, </em><em>optional</em>) – significance level. Defaults to 0.05.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>please reffer to document of SI_result</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#selective_inference.si.SI_result" title="selective_inference.si.SI_result">si.SI_result</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="selective_inference.sfs_si.parametric_sfs_si">
+<code class="sig-prename descclassname">selective_inference.sfs_si.</code><code class="sig-name descname">parametric_sfs_si</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">X</span><span class="p">:</span> <span class="n">numpy.ndarray</span></em>, <em class="sig-param"><span class="n">y</span><span class="p">:</span> <span class="n">numpy.ndarray</span></em>, <em class="sig-param"><span class="n">k</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">sigma</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">1</span></em>, <em class="sig-param"><span class="n">alpha</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">0.05</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#selective_inference.si.SI_result" title="selective_inference.si.SI_result">selective_inference.si.SI_result</a><a class="headerlink" href="#selective_inference.sfs_si.parametric_sfs_si" title="Permalink to this definition">¶</a></dt>
+<dd><p>parametric selective inference for stepwise feature selection</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>np.ndarray</em>) – design matrix(n x p)</p></li>
+<li><p><strong>y</strong> (<em>np.ndarray</em>) – obejective variable(n x 1)</p></li>
+<li><p><strong>k</strong> (<em>int</em>) – number of feature to be selected(hyperparameter)</p></li>
+<li><p><strong>sigma</strong> (<em>int</em><em>, </em><em>optional</em>) – variance for selective inference. Defaults to 1.</p></li>
+<li><p><strong>alpha</strong> (<em>float</em><em>, </em><em>optional</em>) – significance level. Defaults to 0.05.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>reffer to document of SI_result</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#selective_inference.si.SI_result" title="selective_inference.si.SI_result">si.SI_result</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-selective_inference.lasso_si">
+<span id="selective-inference-lasso-si-module"></span><h1>selective_inference.lasso_si module<a class="headerlink" href="#module-selective_inference.lasso_si" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="selective_inference.lasso_si.lee_et_all_region">
+<code class="sig-prename descclassname">selective_inference.lasso_si.</code><code class="sig-name descname">lee_et_all_region</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">X</span></em>, <em class="sig-param"><span class="n">z</span></em>, <em class="sig-param"><span class="n">alpha</span></em>, <em class="sig-param"><span class="n">a</span></em>, <em class="sig-param"><span class="n">b</span></em><span class="sig-paren">)</span><a class="headerlink" href="#selective_inference.lasso_si.lee_et_all_region" title="Permalink to this definition">¶</a></dt>
+<dd><p>this function is made with reference to the lasso selection event of lee et al(2016)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>[</em><em>type</em><em>]</em>) – [description]</p></li>
+<li><p><strong>z</strong> (<em>[</em><em>type</em><em>]</em>) – [description]</p></li>
+<li><p><strong>alpha</strong> (<em>[</em><em>type</em><em>]</em>) – [description]</p></li>
+<li><p><strong>a</strong> (<em>[</em><em>type</em><em>]</em>) – [description]</p></li>
+<li><p><strong>b</strong> (<em>[</em><em>type</em><em>]</em>) – [description]</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>[description]</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>[type]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="selective_inference.lasso_si.parametric_lasso_cv_si">
+<code class="sig-prename descclassname">selective_inference.lasso_si.</code><code class="sig-name descname">parametric_lasso_cv_si</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">X</span></em>, <em class="sig-param"><span class="n">y</span></em>, <em class="sig-param"><span class="n">k_candidates</span></em>, <em class="sig-param"><span class="n">k_folds</span></em>, <em class="sig-param"><span class="n">sigma</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">alpha</span><span class="o">=</span><span class="default_value">0.05</span></em><span class="sig-paren">)</span><a class="headerlink" href="#selective_inference.lasso_si.parametric_lasso_cv_si" title="Permalink to this definition">¶</a></dt>
+<dd><p>parametic selective inference for lasso with cross validation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>np.ndarray</em>) – design matrix(n x p)</p></li>
+<li><p><strong>y</strong> (<em>np.ndarray</em>) – obejective variable(n x 1)</p></li>
+<li><p><strong>k_candidates</strong> (<em>List</em><em>[</em><em>float</em><em>]</em>) – list of k candidates</p></li>
+<li><p><strong>k_folds</strong> (<em>int</em>) – fold number in cross validation</p></li>
+<li><p><strong>sigma</strong> (<em>float</em><em>, </em><em>optional</em>) – variance for selective inference. Defaults to 1.</p></li>
+<li><p><strong>alpha</strong> (<em>float</em><em>, </em><em>optional</em>) – significance level. Defaults to 0.05.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>please reffer to document of SI_result</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#selective_inference.si.SI_result" title="selective_inference.si.SI_result">si.SI_result</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="selective_inference.lasso_si.parametric_lasso_si">
+<code class="sig-prename descclassname">selective_inference.lasso_si.</code><code class="sig-name descname">parametric_lasso_si</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">X</span></em>, <em class="sig-param"><span class="n">y</span></em>, <em class="sig-param"><span class="n">k</span></em>, <em class="sig-param"><span class="n">sigma</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">alpha</span><span class="o">=</span><span class="default_value">0.05</span></em><span class="sig-paren">)</span><a class="headerlink" href="#selective_inference.lasso_si.parametric_lasso_si" title="Permalink to this definition">¶</a></dt>
+<dd><p>parametric selective inference for lasso</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>np.ndarray</em>) – design matrix(n x p)</p></li>
+<li><p><strong>y</strong> (<em>np.ndarray</em>) – obejective variable(n x 1)</p></li>
+<li><p><strong>k</strong> (<em>float</em>) – regularization parameter for lasso</p></li>
+<li><p><strong>sigma</strong> (<em>int</em><em>, </em><em>optional</em>) – variance for selective inference. Defaults to 1.</p></li>
+<li><p><strong>alpha</strong> (<em>float</em><em>, </em><em>optional</em>) – significance level. Defaults to 0.05.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>reffer to document of SI_result</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#selective_inference.si.SI_result" title="selective_inference.si.SI_result">si.SI_result</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="id1">
+<h1>selective_inference.lasso_si module<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="module-selective_inference.lars_si"></span><dl class="py function">
+<dt id="selective_inference.lars_si.parametric_lars_cv_si">
+<code class="sig-prename descclassname">selective_inference.lars_si.</code><code class="sig-name descname">parametric_lars_cv_si</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">X</span></em>, <em class="sig-param"><span class="n">y</span></em>, <em class="sig-param"><span class="n">k_candidates</span></em>, <em class="sig-param"><span class="n">k_folds</span></em>, <em class="sig-param"><span class="n">sigma</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">alpha</span><span class="o">=</span><span class="default_value">0.05</span></em><span class="sig-paren">)</span><a class="headerlink" href="#selective_inference.lars_si.parametric_lars_cv_si" title="Permalink to this definition">¶</a></dt>
+<dd><p>parametic selective inference for lars with cross validation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>np.ndarray</em>) – design matrix(n x p)</p></li>
+<li><p><strong>y</strong> (<em>np.ndarray</em>) – obejective variable(n x 1)</p></li>
+<li><p><strong>k_candidates</strong> (<em>List</em><em>[</em><em>float</em><em>]</em>) – list of k candidates</p></li>
+<li><p><strong>k_folds</strong> (<em>int</em>) – fold number in cross validation</p></li>
+<li><p><strong>sigma</strong> (<em>float</em><em>, </em><em>optional</em>) – variance for selective inference. Defaults to 1.</p></li>
+<li><p><strong>alpha</strong> (<em>float</em><em>, </em><em>optional</em>) – significance level. Defaults to 0.05.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>please reffer to document of SI_result</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#selective_inference.si.SI_result" title="selective_inference.si.SI_result">si.SI_result</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="selective_inference.lars_si.parametric_lars_si">
+<code class="sig-prename descclassname">selective_inference.lars_si.</code><code class="sig-name descname">parametric_lars_si</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">X</span><span class="p">:</span> <span class="n">numpy.matrix</span></em>, <em class="sig-param"><span class="n">y</span><span class="p">:</span> <span class="n">numpy.matrix</span></em>, <em class="sig-param"><span class="n">k</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">sigma</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">alpha</span><span class="o">=</span><span class="default_value">0.05</span></em><span class="sig-paren">)</span><a class="headerlink" href="#selective_inference.lars_si.parametric_lars_si" title="Permalink to this definition">¶</a></dt>
+<dd><p>parametric selective inference for lars</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>np.ndarray</em>) – design matrix(n x p)</p></li>
+<li><p><strong>y</strong> (<em>np.ndarray</em>) – obejective variable(n x 1)</p></li>
+<li><p><strong>k</strong> (<em>int</em>) – number of feature to be selected(hyperparameter)</p></li>
+<li><p><strong>sigma</strong> (<em>int</em><em>, </em><em>optional</em>) – variance for selective inference. Defaults to 1.</p></li>
+<li><p><strong>alpha</strong> (<em>float</em><em>, </em><em>optional</em>) – significance level. Defaults to 0.05.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>reffer to document of SI_result</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#selective_inference.si.SI_result" title="selective_inference.si.SI_result">si.SI_result</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-selective_inference.si">
+<span id="selective-inference-si-module"></span><h1>selective_inference.si module<a class="headerlink" href="#module-selective_inference.si" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt id="selective_inference.si.SI_result">
-<em class="property">class </em><code class="sig-prename descclassname">selective_inference.si.</code><code class="sig-name descname">SI_result</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">A</span><span class="p">:</span> <span class="n">list</span></em>, <em class="sig-param"><span class="n">k</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">p_values</span><span class="p">:</span> <span class="n">list</span></em>, <em class="sig-param"><span class="n">CIs</span><span class="p">:</span> <span class="n">list</span></em><span class="sig-paren">)</span><a class="headerlink" href="#selective_inference.si.SI_result" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">selective_inference.si.</code><code class="sig-name descname">SI_result</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">A</span><span class="p">:</span> <span class="n">list</span></em>, <em class="sig-param"><span class="n">k</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">sigma</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">p_values</span><span class="p">:</span> <span class="n">list</span></em>, <em class="sig-param"><span class="n">CIs</span><span class="p">:</span> <span class="n">list</span></em><span class="sig-paren">)</span><a class="headerlink" href="#selective_inference.si.SI_result" title="Permalink to this definition">¶</a></dt>
 <dd><p>this class have result of selective inference. each selective inference function return this class.</p>
 <dl class="py attribute">
 <dt id="selective_inference.si.SI_result.A">
@@ -91,6 +267,17 @@
 <dt id="selective_inference.si.SI_result.k">
 <code class="sig-name descname">k</code><a class="headerlink" href="#selective_inference.si.SI_result.k" title="Permalink to this definition">¶</a></dt>
 <dd><p>hyperparameter of feature selection algorithm</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="selective_inference.si.SI_result.sigma">
+<code class="sig-name descname">sigma</code><a class="headerlink" href="#selective_inference.si.SI_result.sigma" title="Permalink to this definition">¶</a></dt>
+<dd><p>variance used for inference.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>float</p>
@@ -122,96 +309,42 @@
 
 </dd></dl>
 
-<span class="target" id="module-selective_inference.lasso_si"></span><dl class="py function">
-<dt id="selective_inference.lasso_si.parametric_lasso_cv_si">
-<code class="sig-prename descclassname">selective_inference.lasso_si.</code><code class="sig-name descname">parametric_lasso_cv_si</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">X</span></em>, <em class="sig-param"><span class="n">y</span></em>, <em class="sig-param"><span class="n">k_candidates</span></em>, <em class="sig-param"><span class="n">k_folds</span></em><span class="sig-paren">)</span><a class="headerlink" href="#selective_inference.lasso_si.parametric_lasso_cv_si" title="Permalink to this definition">¶</a></dt>
-<dd><p>parametic selective inference for lasso with cross validation</p>
+<dl class="py function">
+<dt id="selective_inference.si.estimate_sigma">
+<code class="sig-prename descclassname">selective_inference.si.</code><code class="sig-name descname">estimate_sigma</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">X</span><span class="p">:</span> <span class="n">numpy.ndarray</span></em>, <em class="sig-param"><span class="n">y</span><span class="p">:</span> <span class="n">numpy.ndarray</span></em><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#selective_inference.si.estimate_sigma" title="Permalink to this definition">¶</a></dt>
+<dd><p>this function estimate variance of the mean squared residual with.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>X</strong> (<em>np.ndarray</em>) – design matrix(n x p)</p></li>
 <li><p><strong>y</strong> (<em>np.ndarray</em>) – obejective variable(n x 1)</p></li>
-<li><p><strong>k_candidates</strong> (<em>List</em><em>[</em><em>float</em><em>]</em>) – list of k candidates</p></li>
-<li><p><strong>k_folds</strong> (<em>int</em>) – fold number in cross validation</p></li>
-<li><p><strong>sigma</strong> (<em>int</em><em>, </em><em>optional</em>) – variance for selective inference. Defaults to 1.</p></li>
-<li><p><strong>alpha</strong> (<em>float</em><em>, </em><em>optional</em>) – significance level. Defaults to 0.05.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>please reffer to document of SI_result</p>
+<dd class="field-even"><p>estimated variacnce</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference internal" href="#selective_inference.si.SI_result" title="selective_inference.si.SI_result">si.SI_result</a></p>
+<dd class="field-odd"><p>float</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
-<dt id="selective_inference.lasso_si.parametric_lasso_si">
-<code class="sig-prename descclassname">selective_inference.lasso_si.</code><code class="sig-name descname">parametric_lasso_si</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">X</span></em>, <em class="sig-param"><span class="n">y</span></em>, <em class="sig-param"><span class="n">alpha</span></em><span class="sig-paren">)</span><a class="headerlink" href="#selective_inference.lasso_si.parametric_lasso_si" title="Permalink to this definition">¶</a></dt>
-<dd><p>parametric selective inference for lasso</p>
+<dt id="selective_inference.si.estimate_sigma_lasso">
+<code class="sig-prename descclassname">selective_inference.si.</code><code class="sig-name descname">estimate_sigma_lasso</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">X</span><span class="p">:</span> <span class="n">numpy.ndarray</span></em>, <em class="sig-param"><span class="n">y</span><span class="p">:</span> <span class="n">numpy.ndarray</span></em><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#selective_inference.si.estimate_sigma_lasso" title="Permalink to this definition">¶</a></dt>
+<dd><p>this function estimate variance of the mean squared residual with LassoCV.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>X</strong> (<em>np.ndarray</em>) – design matrix(n x p)</p></li>
 <li><p><strong>y</strong> (<em>np.ndarray</em>) – obejective variable(n x 1)</p></li>
-<li><p><strong>k</strong> (<em>int</em>) – regularization parameter (hyperparameter)</p></li>
-<li><p><strong>sigma</strong> (<em>int</em><em>, </em><em>optional</em>) – variance for selective inference. Defaults to 1.</p></li>
-<li><p><strong>alpha</strong> (<em>float</em><em>, </em><em>optional</em>) – significance level. Defaults to 0.05.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>reffer to document of SI_result</p>
+<dd class="field-even"><p>estimated variacnce</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference internal" href="#selective_inference.si.SI_result" title="selective_inference.si.SI_result">si.SI_result</a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<span class="target" id="module-selective_inference.lars_si"></span><dl class="py function">
-<dt id="selective_inference.lars_si.parametric_lars_cv_si">
-<code class="sig-prename descclassname">selective_inference.lars_si.</code><code class="sig-name descname">parametric_lars_cv_si</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">X</span></em>, <em class="sig-param"><span class="n">y</span></em>, <em class="sig-param"><span class="n">k_candidates</span></em>, <em class="sig-param"><span class="n">k_folds</span></em><span class="sig-paren">)</span><a class="headerlink" href="#selective_inference.lars_si.parametric_lars_cv_si" title="Permalink to this definition">¶</a></dt>
-<dd><p>parametic selective inference for lars with cross validation</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>X</strong> (<em>np.ndarray</em>) – design matrix(n x p)</p></li>
-<li><p><strong>y</strong> (<em>np.ndarray</em>) – obejective variable(n x 1)</p></li>
-<li><p><strong>k_candidates</strong> (<em>List</em><em>[</em><em>float</em><em>]</em>) – list of k candidates</p></li>
-<li><p><strong>k_folds</strong> (<em>int</em>) – fold number in cross validation</p></li>
-<li><p><strong>sigma</strong> (<em>int</em><em>, </em><em>optional</em>) – variance for selective inference. Defaults to 1.</p></li>
-<li><p><strong>alpha</strong> (<em>float</em><em>, </em><em>optional</em>) – significance level. Defaults to 0.05.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>please reffer to document of SI_result</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference internal" href="#selective_inference.si.SI_result" title="selective_inference.si.SI_result">si.SI_result</a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt id="selective_inference.lars_si.parametric_lars_si">
-<code class="sig-prename descclassname">selective_inference.lars_si.</code><code class="sig-name descname">parametric_lars_si</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">X</span><span class="p">:</span> <span class="n">numpy.matrix</span></em>, <em class="sig-param"><span class="n">y</span><span class="p">:</span> <span class="n">numpy.matrix</span></em>, <em class="sig-param"><span class="n">k</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span><a class="headerlink" href="#selective_inference.lars_si.parametric_lars_si" title="Permalink to this definition">¶</a></dt>
-<dd><p>parametric selective inference for lars</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>X</strong> (<em>np.ndarray</em>) – design matrix(n x p)</p></li>
-<li><p><strong>y</strong> (<em>np.ndarray</em>) – obejective variable(n x 1)</p></li>
-<li><p><strong>k</strong> (<em>int</em>) – number of feature to be selected(hyperparameter)</p></li>
-<li><p><strong>sigma</strong> (<em>int</em><em>, </em><em>optional</em>) – variance for selective inference. Defaults to 1.</p></li>
-<li><p><strong>alpha</strong> (<em>float</em><em>, </em><em>optional</em>) – significance level. Defaults to 0.05.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>reffer to document of SI_result</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference internal" href="#selective_inference.si.SI_result" title="selective_inference.si.SI_result">si.SI_result</a></p>
+<dd class="field-odd"><p>float</p>
 </dd>
 </dl>
 </dd></dl>
@@ -222,7 +355,7 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="modules.html" class="btn btn-neutral float-left" title="selective_inference" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="index.html" class="btn btn-neutral float-left" title="selective_inference package documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>

@@ -1,0 +1,5 @@
+selective_inference.lars_si module
+==================================
+
+.. automodule:: selective_inference.lars_si
+   :members:
