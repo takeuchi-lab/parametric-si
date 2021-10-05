@@ -10,13 +10,13 @@ from typing import List
 
 np.seterr(divide='ignore', invalid='ignore')
 
-def parametric_lasso_si(X,y,alpha):
+def parametric_lasso_si(X,y,k,sigma=1,alpha=0.05):
     """parametric selective inference for lasso
 
     Args:
         X (np.ndarray): design matrix(n x p)
         y (np.ndarray): obejective variable(n x 1)
-        k (int): regularization parameter (hyperparameter)
+        k (float): regularization parameter for lasso
         sigma (int, optional): variance for selective inference. Defaults to 1.
         alpha (float, optional): significance level. Defaults to 0.05.
 
@@ -25,12 +25,11 @@ def parametric_lasso_si(X,y,alpha):
     """
 
     A,s = lasso.lasso(X,y,alpha)
-    print(A)
-    Sigma = np.identity(X.shape[0])
+    Sigma = np.identity(X.shape[0]) * sigma
 
-    return si.parametric_si(X,y,A,alpha,Sigma,region)
+    return si.parametric_si(X,y,A,alpha,Sigma,region,alpha)
 
-def parametric_lasso_cv_si(X,y,k_candidates,k_folds):
+def parametric_lasso_cv_si(X,y,k_candidates,k_folds,sigma=1,alpha=0.05):
     """parametic selective inference for lasso with cross validation
 
     Args:
@@ -38,7 +37,7 @@ def parametric_lasso_cv_si(X,y,k_candidates,k_folds):
         y (np.ndarray): obejective variable(n x 1)
         k_candidates (List[float]): list of k candidates
         k_folds (int): fold number in cross validation
-        sigma (int, optional): variance for selective inference. Defaults to 1.
+        sigma (float, optional): variance for selective inference. Defaults to 1.
         alpha (float, optional): significance level. Defaults to 0.05.
 
     Returns:
@@ -47,9 +46,9 @@ def parametric_lasso_cv_si(X,y,k_candidates,k_folds):
     """
 
     A,k = lasso.lasso_CV(X,y,k_candidates,k_folds)
-    Sigma = np.identity(X.shape[0])
+    Sigma = np.identity(X.shape[0]) * sigma
 
-    return si_cv.parametric_si_cv(X,y,A,k,k_candidates,Sigma,region,k_folds)
+    return si_cv.parametric_si_cv(X,y,A,k,k_candidates,Sigma,region,k_folds,alpha)
 
 def region(X,z,alpha,a,b):
 

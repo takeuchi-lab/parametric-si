@@ -9,7 +9,7 @@ from typing import List
 
 np.seterr(divide='ignore', invalid='ignore')
 
-def parametric_lars_si(X:np.matrix,y:np.matrix,k:int):
+def parametric_lars_si(X:np.matrix,y:np.matrix,k:int,sigma=1,alpha=0.05):
     """parametric selective inference for lars
 
     Args:
@@ -24,11 +24,11 @@ def parametric_lars_si(X:np.matrix,y:np.matrix,k:int):
     """
 
     A = lars.lars(X,y,k)[0][-1]
-    Sigma = np.identity(X.shape[0])
+    Sigma = np.identity(X.shape[0]) * sigma
 
-    return si.parametric_si(X,y,A,k,Sigma,region)
+    return si.parametric_si(X,y,A,k,Sigma,region,alpha)
 
-def parametric_lars_cv_si(X,y,k_candidates,k_folds):
+def parametric_lars_cv_si(X,y,k_candidates,k_folds,sigma=1,alpha=0.05):
     """parametic selective inference for lars with cross validation
 
     Args:
@@ -36,7 +36,7 @@ def parametric_lars_cv_si(X,y,k_candidates,k_folds):
         y (np.ndarray): obejective variable(n x 1)
         k_candidates (List[float]): list of k candidates
         k_folds (int): fold number in cross validation
-        sigma (int, optional): variance for selective inference. Defaults to 1.
+        sigma (float, optional): variance for selective inference. Defaults to 1.
         alpha (float, optional): significance level. Defaults to 0.05.
 
     Returns:
@@ -44,9 +44,9 @@ def parametric_lars_cv_si(X,y,k_candidates,k_folds):
     """
 
     A,k = lars.lars_CV(X,y,k_candidates,k_folds)
-    Sigma = np.identity(X.shape[0])
+    Sigma = np.identity(X.shape[0]) * sigma
 
-    return si_cv.parametric_si_cv(X,y,A,k,k_candidates,Sigma,region,k_folds)
+    return si_cv.parametric_si_cv(X,y,A,k,k_candidates,Sigma,region,k_folds,alpha)
     
 def region(X,z,step,a,b):
 
@@ -146,6 +146,8 @@ def region(X,z,step,a,b):
 
     L = max(temp2[temp1 < 0],default=-np.inf)
     U = min(temp2[temp1 > 0],default=np.inf)
+
+    assert L < U
 
     return L,U,A[-1]
 

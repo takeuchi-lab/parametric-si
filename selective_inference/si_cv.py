@@ -1,7 +1,6 @@
 from operator import index
 import numpy as np
 import portion as p
-import matplotlib.pyplot as plt
 
 from .quadratic import Quadratic
 from .cv import train_val_index,train_val_split_mat,train_val_split_vec
@@ -9,7 +8,7 @@ from . import si
 from . import ci
 from .p_value import p_value
 
-def parametric_si_cv(X,y,A,k_obs,k_candidates,Sigma,region,k_folds,alpha=0.05):
+def parametric_si_cv(X,y,A,k_obs,k_candidates,Sigma,region,k_folds,alpha):
 
     p_values = []
     CIs = []
@@ -188,29 +187,29 @@ def compute_Z_CV(k_obs,k_candidates,Z,E):
 
     return Z_CV
 
-def print_Z_CV(k_obs,k_candidates,Z,E,Z_CV):
-    m = 0
-    plt.figure(figsize=(8,6))
+# def print_Z_CV(k_obs,k_candidates,Z,E,Z_CV):
+    # m = 0
+    # plt.figure(figsize=(8,6))
 
-    for i,k in enumerate(k_candidates):
-        x = np.empty(0)
-        y = np.empty(0)
+    # for i,k in enumerate(k_candidates):
+        # x = np.empty(0)
+        # y = np.empty(0)
 
-        for z,e in zip(Z[i],E[i]):
-            x_temp = np.arange(z.lower,z.upper,0.01)
-            y_temp = e.f(x_temp)
-            x = np.hstack([x,x_temp])
-            y = np.hstack([y,y_temp])
+        # for z,e in zip(Z[i],E[i]):
+            # x_temp = np.arange(z.lower,z.upper,0.01)
+            # y_temp = e.f(x_temp)
+            # x = np.hstack([x,x_temp])
+            # y = np.hstack([y,y_temp])
 
-        if k == k_obs:
-            plt.plot(x,y,label=f'k_obs={k_obs}',linewidth=0.5)
-            m = np.min(y)
+        # if k == k_obs:
+            # plt.plot(x,y,label=f'k_obs={k_obs}',linewidth=0.5)
+            # m = np.min(y)
             
-        else:
-            plt.plot(x,y,label=f'k={k}',linewidth=0.5)
+        # else:
+            # plt.plot(x,y,label=f'k={k}',linewidth=0.5)
     
-        plt.legend(bbox_to_anchor=(1, 1), loc='upper right')
-    for z in Z_CV:
-        plt.plot([z.lower,z.upper],[m-1,m-1],color='r',linewidth=1.5)
+        # plt.legend(bbox_to_anchor=(1, 1), loc='upper right')
+    # for z in Z_CV:
+        # plt.plot([z.lower,z.upper],[m-1,m-1],color='r',linewidth=1.5)
 
-    plt.show()
+    # plt.show()

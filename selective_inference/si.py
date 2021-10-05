@@ -1,10 +1,9 @@
 from dataclasses import dataclass
 import numpy as np
 import portion as p
+from sklearn import linear_model
 
 from . import ci
-from . import cv
-from . import si_cv
 from .p_value import p_value
 
 from typing import List
@@ -18,20 +17,55 @@ class SI_result:
     Attributes:
         A(List[int]):selected feature 
         k(float):hyperparameter of feature selection algorithm
+        sigma(float):variance used for inference.
         p_values(List[float]):p-values of selected features
         CIs(List[portion.interval.Interval]):confidence intervals of selected features
     """
 
     A : list
     k : float
+    sigma : float
     p_values: list
     CIs : list
 
 def estimate_sigma(X:np.ndarray,y:np.ndarray)->float:
-    sigma = 1
+    """this function estimate variance of the mean squared residual with.
+    
+
+
+    Args:
+        X (np.ndarray): design matrix(n x p)
+        y (np.ndarray): obejective variable(n x 1)
+
+    Returns:
+        float: estimated variacnce 
+    """
+
+    n,p = X.shape
+
+    e = y - X @ np.linalg.inv(X.T @ X) @ X.T @ y
+    sigma = (e.T @ e) / (n - p - 1)
 
     return sigma
 
+def estimate_sigma_lasso(X:np.ndarray,y:np.ndarray)->float:
+    """this function estimate variance of the mean squared residual with LassoCV.
+
+    Args:
+        X (np.ndarray): design matrix(n x p)
+        y (np.ndarray): obejective variable(n x 1)
+
+    Returns:
+        float: estimated variacnce
+    """
+
+    clf = linear_model.lassoCV()
+    clf.fit(X,y)
+    coef = clf.coef_
+    e = y - X @ coef
+    sigma = (e.T @ e) / (X.shape[0] - np.count_nonzero(coef!=0) - 1)
+
+    return sigma
 
 def construct_teststatistics(A,i,X,y,Sigma):
     """construct variables for selective inference
@@ -99,7 +133,7 @@ def compute_solution_path(k,X,a,b,z_min,z_max,region):
     
     return intervals,models
 
-def parametric_si(X,y,A,k,Sigma,region,alpha=0.05):
+def parametric_si(X,y,A,k,Sigma,region,alpha):
     """calculate selective p-value for each active feature
 
     Args:
@@ -136,7 +170,7 @@ def parametric_si(X,y,A,k,Sigma,region,alpha=0.05):
         p_values.append(p_value(z_obs,intervals,sigma))
         CIs.append(ci.confidence_interval(intervals,z_obs,sigma,alpha))
 
-    return SI_result(A,k,p_values,CIs)
+    return SI_result(A,k,sigma,p_values,CIs)
 
 def parametric_si_ci(X,y,A,k,Sigma,region,alpha=0.05):
     """calculate selective confidence intervals for each active feature
