@@ -22,9 +22,8 @@ def parametric_sfs_si(X:np.ndarray,y:np.ndarray,k:int,sigma:int=1,alpha:float=0.
     """
 
     A,s = sfs.sfs(X,y,k)
-    Sigma = np.identity(X.shape[0]) * sigma
 
-    return si.parametric_si(X,y,A,k,Sigma,region,alpha)
+    return si.parametric_si(X,y,A,k,sigma,region,alpha)
 
 def parametric_sfs_cv_si(X:np.ndarray,y:np.ndarray,k_candidates:List[float],k_folds:int,sigma:int=1,alpha:float=0.05)-> si.SI_result:
     """parametic selective inference for stepwise feature selection with cross validation
@@ -42,9 +41,8 @@ def parametric_sfs_cv_si(X:np.ndarray,y:np.ndarray,k_candidates:List[float],k_fo
     """
 
     A,k = sfs.sfs_CV(X,y,k_candidates,k_folds)
-    Sigma = np.identity(X.shape[0]) * sigma
 
-    return si_cv.parametric_si_cv(X,y,A,k,k_candidates,Sigma,region,k_folds,alpha)
+    return si_cv.parametric_si_cv(X,y,A,k,k_candidates,sigma,region,k_folds,alpha)
 
 def region(X,z,k,a,b):
 

@@ -24,10 +24,9 @@ def parametric_lasso_si(X,y,k,sigma=1,alpha=0.05):
         si.SI_result: reffer to document of SI_result
     """
 
-    A,s = lasso.lasso(X,y,alpha)
-    Sigma = np.identity(X.shape[0]) * sigma
+    A,s = lasso.lasso(X,y,k)
 
-    return si.parametric_si(X,y,A,alpha,Sigma,region,alpha)
+    return si.parametric_si(X,y,A,k,sigma,region,alpha)
 
 def parametric_lasso_cv_si(X,y,k_candidates,k_folds,sigma=1,alpha=0.05):
     """parametic selective inference for lasso with cross validation
@@ -46,9 +45,8 @@ def parametric_lasso_cv_si(X,y,k_candidates,k_folds,sigma=1,alpha=0.05):
     """
 
     A,k = lasso.lasso_CV(X,y,k_candidates,k_folds)
-    Sigma = np.identity(X.shape[0]) * sigma
 
-    return si_cv.parametric_si_cv(X,y,A,k,k_candidates,Sigma,region,k_folds,alpha)
+    return si_cv.parametric_si_cv(X,y,A,k,k_candidates,sigma,region,k_folds,alpha)
 
 def region(X,z,alpha,a,b):
 

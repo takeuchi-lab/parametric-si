@@ -133,7 +133,7 @@ def compute_solution_path(k,X,a,b,z_min,z_max,region):
     
     return intervals,models
 
-def parametric_si(X,y,A,k,Sigma,region,alpha):
+def parametric_si(X,y,A,k,sigma,region,alpha):
     """calculate selective p-value for each active feature
 
     Args:
@@ -148,6 +148,7 @@ def parametric_si(X,y,A,k,Sigma,region,alpha):
         tuple : p_valus is a list of p-value for each active features
                 A is list of active features
     """
+    Sigma = np.identity(X.shape[0]) * sigma
 
     p_values = []
     CIs = []

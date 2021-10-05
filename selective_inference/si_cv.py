@@ -8,7 +8,9 @@ from . import si
 from . import ci
 from .p_value import p_value
 
-def parametric_si_cv(X,y,A,k_obs,k_candidates,Sigma,region,k_folds,alpha):
+def parametric_si_cv(X,y,A,k_obs,k_candidates,sigma,region,k_folds,alpha):
+
+    Sigma = np.identity(X.shape[0]) * sigma
 
     p_values = []
     CIs = []
@@ -38,7 +40,7 @@ def parametric_si_cv(X,y,A,k_obs,k_candidates,Sigma,region,k_folds,alpha):
         p_values.append(p_value(z_obs,Z,sigma))
         CIs.append(ci.confidence_interval(Z,z_obs,sigma,alpha))
 
-    return si.SI_result(A,k_obs,p_values,CIs)
+    return si.SI_result(A,k_obs,sigma,p_values,CIs)
 
 def parametric_si_cv_ci(X,y,A,k_obs,k_candidates,Sigma,region,k_folds,alpha=0.05):
 

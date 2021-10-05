@@ -24,9 +24,8 @@ def parametric_lars_si(X:np.matrix,y:np.matrix,k:int,sigma=1,alpha=0.05):
     """
 
     A = lars.lars(X,y,k)[0][-1]
-    Sigma = np.identity(X.shape[0]) * sigma
 
-    return si.parametric_si(X,y,A,k,Sigma,region,alpha)
+    return si.parametric_si(X,y,A,k,sigma,region,alpha)
 
 def parametric_lars_cv_si(X,y,k_candidates,k_folds,sigma=1,alpha=0.05):
     """parametic selective inference for lars with cross validation
@@ -44,9 +43,8 @@ def parametric_lars_cv_si(X,y,k_candidates,k_folds,sigma=1,alpha=0.05):
     """
 
     A,k = lars.lars_CV(X,y,k_candidates,k_folds)
-    Sigma = np.identity(X.shape[0]) * sigma
 
-    return si_cv.parametric_si_cv(X,y,A,k,k_candidates,Sigma,region,k_folds,alpha)
+    return si_cv.parametric_si_cv(X,y,A,k,k_candidates,sigma,region,k_folds,alpha)
     
 def region(X,z,step,a,b):
 
