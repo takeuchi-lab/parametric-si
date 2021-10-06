@@ -1,9 +1,6 @@
-selective\_inference package
-============================
-
 .. toctree::
    :caption: Contents:
-   :maxdepth: 
+   :maxdepth: 2
 
 selective_inference.sfs_si module
 =================================
