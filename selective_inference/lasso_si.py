@@ -33,7 +33,7 @@ def parametric_lasso_si(X,y,k,sigma=1,alpha=0.05):
 def parametric_lasso_cv_si(X,y,k_candidates,k_folds,sigma=1,alpha=0.05):
     """Compute p-values and confidence intervals for the coefficient estimated by lars at the value of the heyperparameter k using cross-validation.
     
-    This function computes selective p-values and confidence intervals for the coefficient of etimated lasso model at the fixed value of the regularization parameter k using cross-validation.
+    This function computes selective p-values and confidence intervals for the coefficient of lasso model at the fixed value of the regularization parameter k using cross-validation.
 
     Args:
         X (np.ndarray): Matrix of predictors(n x p)

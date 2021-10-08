@@ -90,3 +90,8 @@ ENV/
 
 # Rope project settings
 .ropeproject
+
+# unnessesary files
+test.py
+test2.py
+TODO

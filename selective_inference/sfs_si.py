@@ -8,7 +8,7 @@ from . import si_cv
 from typing import List
 
 def parametric_sfs_si(X:np.ndarray,y:np.ndarray,k:int,sigma:int=1,alpha:float=0.05)-> si.SI_result:
-    """Compute p-values and confidence intervals for the coeeficient of predictors selected by forward sfs at a fixed value of the heyperparameter k.
+    """Compute p-values and confidence intervals for the coeeficient of predictors selected by forward SFS at a fixed value of the heyperparameter k.
 
     This function computes selective p-values and confidence intervals for the coefficient of predictors selected by lars at a fixed value of the heyperparameter k. 
 
