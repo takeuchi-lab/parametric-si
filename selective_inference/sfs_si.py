@@ -8,14 +8,16 @@ from . import si_cv
 from typing import List
 
 def parametric_sfs_si(X:np.ndarray,y:np.ndarray,k:int,sigma:int=1,alpha:float=0.05)-> si.SI_result:
-    """parametric selective inference for stepwise feature selection
+    """Compute p-values and confidence intervals for the coeeficient of predictors selected by forward SFS at a fixed value of the heyperparameter k.
+
+    This function computes selective p-values and confidence intervals for the coefficient of predictors selected by lars at a fixed value of the heyperparameter k. 
 
     Args:
-        X (np.ndarray): design matrix(n x p)
-        y (np.ndarray): obejective variable(n x 1)
-        k (int): number of feature to be selected(hyperparameter)
+        X (np.ndarray): matrix of predictors (n by p)
+        y (np.ndarray): Vector of outcomes (length n)
+        k (int): Number of feature to be selected(hyperparameter)
         sigma (int, optional): variance for selective inference. Defaults to 1.
-        alpha (float, optional): significance level. Defaults to 0.05.
+        alpha (float, optional): significance level for confidence intervals. Defaults to 0.05.
 
     Returns:
         si.SI_result: reffer to document of SI_result
@@ -26,15 +28,17 @@ def parametric_sfs_si(X:np.ndarray,y:np.ndarray,k:int,sigma:int=1,alpha:float=0.
     return si.parametric_si(X,y,A,k,sigma,region,alpha)
 
 def parametric_sfs_cv_si(X:np.ndarray,y:np.ndarray,k_candidates:List[float],k_folds:int,sigma:int=1,alpha:float=0.05)-> si.SI_result:
-    """parametic selective inference for stepwise feature selection with cross validation
+    """Compute p-values and confidence intervals for the coefficient of predictors selected by forward sfs at the value of the heyperparameter k using cross-validation.
+
+    This function computes selective p-values and confidence intervals for the coefficient of predictors selected by forward sfs at the value of the heyperparameter k. 
 
     Args:
-        X (np.ndarray): design matrix(n x p)
-        y (np.ndarray): obejective variable(n x 1)
-        k_candidates (list[float]): list of k candidates
+        X (np.ndarray): Matrix of predictors(n x p)
+        y (np.ndarray): Vector of outcomes(length n)
+        k_candidates (List[float]): list of hyperparameter k candidates
         k_folds (int): fold number in cross validation
-        sigma (float, optional): variance for selective inference. Defaults to 1.
-        alpha (float, optional): significance level. Defaults to 0.05.
+        sigma (int, optional): variance for selective inference. Defaults to 1.
+        alpha (float, optional): significance level for confidence intervals. Defaults to 0.05.
 
     Returns:
         si.SI_result: please reffer to document of SI_result

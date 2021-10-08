@@ -1,14 +1,17 @@
-selective_inference for feature selection algorithm
+package_name
 ===================================================
 
-This package provides selective inference for SFS,Lars,Lasso.
+This package implements a more powerful and general confitional selective inference(SI) for LASSO, stepwise feature selection(SFS) method and least angle regression(LARS) method. 
 
-add desicription about SI
+key reference are the following papers:
+
+    *  https://arxiv.org/abs/2004.09749
+    *  https://arxiv.org/abs/2012.13545
 
 ============
 Requirements
 ============
-selective_inference requires the following packages:
+package_name requires the following packages:
 
 * numpy
 * scipy
@@ -16,54 +19,21 @@ selective_inference requires the following packages:
 * portion
 
 ==============================
-Installing selective_inference
+Installing package_name
 ==============================
-Use pip to install selective_inference package. Required packages will be also installed automatically.
+Use pip to install package_name package. Required packages will be also installed automatically.
 
 .. code-block:: console
     
-    $ pip install selective_inference
+    $ pip install package_name
 
 =======
 Example
 =======
 
-.. code-block:: python
-
-    # import modules
-    import selective_inference as si
-    import numpy as np
-
-    # generate data
-    X = np.random.randn(50,10)
-    beta = np.zeros(10)
-    beta[0:2] = 1
-    y = X @ beta + np.random.randn(50)
-
-    # run selective inference
-    print("---- k = 3 ----")
-    print("lars si resutl")
-    print(si.parametric_lars_si(X,y,3))
-    print()
-    print("sfs si result")
-    print(si.parametric_sfs_si(X,y,3))
-    print()
-    print("lasso si result")
-    print(si.parametric_lasso_si(X,y,0.1))
-    print()
-
-    print("---- with cv ----")
-    print("lars si resutl")
-    print(si.parametric_lars_cv_si(X,y,[1,2,3,4,5],5))
-    print()
-    print("sfs si result")
-    print(si.parametric_sfs_cv_si(X,y,[1,2,3,4,5],5))
-    print()
-    print("lasso si result")
-    print(si.parametric_lasso_cv_si(X,y,[0.01,0.1,1,10,100],5))
-    print()
+It’s still in the works.
 
 =============
 API Reference
 =============
-API reference is available at https://daikimiwa.github.io/selective_inference_document/
+Detailed API reference is available at https://....

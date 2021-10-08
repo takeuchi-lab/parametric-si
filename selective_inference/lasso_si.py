@@ -11,14 +11,16 @@ from typing import List
 np.seterr(divide='ignore', invalid='ignore')
 
 def parametric_lasso_si(X,y,k,sigma=1,alpha=0.05):
-    """parametric selective inference for lasso
+    """Compute p-values and confidence intervals for the coefficients of the estimated lasso model at a fixed value of the hyperparameter k. 
+
+    This function computes selective p-values and confidence intervals for the coefficients of the estimated lasso model at a fixed value of the hyperparameter k.
 
     Args:
-        X (np.ndarray): design matrix(n x p)
-        y (np.ndarray): obejective variable(n x 1)
-        k (float): regularization parameter for lasso
+        X (np.ndarray): matrix of predictors (n by p)
+        y (np.ndarray): Vector of outcomes (length n)
+        k (int): regularization parameter of lasso
         sigma (int, optional): variance for selective inference. Defaults to 1.
-        alpha (float, optional): significance level. Defaults to 0.05.
+        alpha (float, optional): significance level for confidence intervals. Defaults to 0.05.
 
     Returns:
         si.SI_result: reffer to document of SI_result
@@ -29,16 +31,17 @@ def parametric_lasso_si(X,y,k,sigma=1,alpha=0.05):
     return si.parametric_si(X,y,A,k,sigma,region,alpha)
 
 def parametric_lasso_cv_si(X,y,k_candidates,k_folds,sigma=1,alpha=0.05):
-    """parametic selective inference for lasso with cross validation
+    """Compute p-values and confidence intervals for the coefficient estimated by lars at the value of the heyperparameter k using cross-validation.
+    
+    This function computes selective p-values and confidence intervals for the coefficient of lasso model at the fixed value of the regularization parameter k using cross-validation.
 
     Args:
-        X (np.ndarray): design matrix(n x p)
-        y (np.ndarray): obejective variable(n x 1)
+        X (np.ndarray): Matrix of predictors(n x p)
+        y (np.ndarray): Vector of outcomes(length n)
         k_candidates (List[float]): list of k candidates
         k_folds (int): fold number in cross validation
-        sigma (float, optional): variance for selective inference. Defaults to 1.
-        alpha (float, optional): significance level. Defaults to 0.05.
-
+        sigma (int, optional): variance for selective inference. Defaults to 1.
+        alpha (float, optional): significance level for confidence intervals. Defaults to 0.05.
     Returns:
         si.SI_result: please reffer to document of SI_result
 

@@ -8,7 +8,7 @@ from . import ci
 
 from typing import List
 
-EPS = 5e-3
+EPS = 1e-4
 
 @dataclass
 class SI_result:
@@ -123,11 +123,16 @@ def compute_solution_path(k,X,y,a,b,z_min,z_max,region):
     while z < z_max:
 
         L,U,model_z = region(X,y,z,k,a,b)
-        
+        if L > z_max:
+            intervals.append(p.closed(z_max,min(U,z_max)))
+        else :
+            intervals.append(p.closed(max(L,z_min),min(U,z_max)))
         models.append(model_z)
-        intervals.append(p.closed(max(L,z_min),min(U,z_max)))
+
         if type(intervals[-1].upper) == type(p.empty().upper):
+            print(intervals[-1])
             assert False
+
         z = U + EPS
     
     return intervals,models
@@ -166,7 +171,7 @@ def parametric_si(X,y,A,k,sigma,region,alpha):
         for r,model in zip(regions,models):
             if set(A) == set(model):
                 intervals = intervals | r
-        
+
         p_values.append(p_value(z_obs,intervals,std))
         CIs.append(ci.confidence_interval(intervals,z_obs,std,alpha))
 
