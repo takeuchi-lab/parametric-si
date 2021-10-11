@@ -1,7 +1,7 @@
 package_name
 ===================================================
 
-This package implements a more powerful and general confitional selective inference(SI) for LASSO, stepwise feature selection(SFS) method and least angle regression(LARS) method. 
+This package implements a more powerful and general confitional selective inference(SI) with linear regression.
 
 key reference are the following papers:
 
