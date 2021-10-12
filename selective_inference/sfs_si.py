@@ -8,16 +8,16 @@ from . import si_cv
 from typing import List
 
 def parametric_sfs_si(X:np.ndarray,y:np.ndarray,k:int,sigma:int=1,alpha:float=0.05)-> si.SI_result:
-    """Compute p-values and confidence intervals for the coeeficient of predictors selected by forward SFS at a fixed value of the heyperparameter k.
+    """Compute selective p-values and selective confidence intervals for the coefficients of the features selected by forward SFS at a fixed value of the hyperparameter k.
 
-    This function computes selective p-values and confidence intervals for the coefficient of predictors selected by lars at a fixed value of the heyperparameter k. 
+    This function computes selective p-values and selective confidence intervals for the coefficients of the features selected by forward SFS at a fixed value of the hyperparameter k. 
 
     Args:
-        X (np.ndarray): matrix of predictors (n by p)
-        y (np.ndarray): Vector of outcomes (length n)
-        k (int): Number of feature to be selected(hyperparameter)
-        sigma (int, optional): variance for selective inference. Defaults to 1.
-        alpha (float, optional): significance level for confidence intervals. Defaults to 0.05.
+        X (np.ndarray): feature matrix of shape (n_samples, p_features)
+        y (np.ndarray): response vector of shape (n_samples, 1)
+        k (int): number of features to be selected (hyperparameter)
+        sigma (int, optional): variance for selective inference, default=1.0.
+        alpha (float, optional): significance level for confidence intervals, default=0.05.
 
     Returns:
         si.SI_result: reffer to document of SI_result
@@ -28,17 +28,18 @@ def parametric_sfs_si(X:np.ndarray,y:np.ndarray,k:int,sigma:int=1,alpha:float=0.
     return si.parametric_si(X,y,A,k,sigma,region,alpha)
 
 def parametric_sfs_cv_si(X:np.ndarray,y:np.ndarray,k_candidates:List[float],k_folds:int,sigma:int=1,alpha:float=0.05)-> si.SI_result:
-    """Compute p-values and confidence intervals for the coefficient of predictors selected by forward sfs at the value of the heyperparameter k using cross-validation.
+    """Compute selective p-values and selective confidence intervals for the coefficients of the features selected by forward SFS at the value of the hyperparameter k chosen by cross-validation.
 
-    This function computes selective p-values and confidence intervals for the coefficient of predictors selected by forward sfs at the value of the heyperparameter k. 
+    This function computes selective p-values and confidence intervals for the coefficient of the features selected by forward SFS at the value of the hyperparameter k chosen by cross-validation.
 
     Args:
-        X (np.ndarray): Matrix of predictors(n x p)
-        y (np.ndarray): Vector of outcomes(length n)
-        k_candidates (List[float]): list of hyperparameter k candidates
-        k_folds (int): fold number in cross validation
-        sigma (int, optional): variance for selective inference. Defaults to 1.
-        alpha (float, optional): significance level for confidence intervals. Defaults to 0.05.
+        X (np.ndarray): feature matrix of shape (n_samples, p_features)
+        y (np.ndarray): response vector of shape (n_samples, 1)
+        k_candidates (List[float]): list of candidates for hyperparameter k
+        k_folds (int): number of folds in cross validation
+        sigma (int, optional): variance for selective inference, default=1.0.
+        alpha (float, optional): significance level for confidence intervals, default=0.05.
+
 
     Returns:
         si.SI_result: please reffer to document of SI_result
