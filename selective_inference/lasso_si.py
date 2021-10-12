@@ -11,7 +11,7 @@ from typing import List
 np.seterr(divide='ignore', invalid='ignore')
 
 def parametric_lasso_si(X,y,k,sigma=1,alpha=0.05):
-    """Compute selective p-values and selective confidence intervals for the coefficients of the estimated by Lasso at a fixed value of the hyperparameter k. 
+    """Compute selective p-values and selective confidence intervals for the coefficients of features selected by Lasso at a fixed value of the hyperparameter k. 
 
     This function computes selective p-values and selective confidence intervals for the coefficients of features selected by Lasso at a fixed value of the hyperparameter k.
 
@@ -31,7 +31,7 @@ def parametric_lasso_si(X,y,k,sigma=1,alpha=0.05):
     return si.parametric_si(X,y,A,k,sigma,region,alpha)
 
 def parametric_lasso_cv_si(X,y,k_candidates,k_folds,sigma=1,alpha=0.05):
-    """Compute selective p-values and selective confidence intervals for the coefficients estimated by Lasso at the value of the hyperparameter k chosen by cross-validation.
+    """Compute selective p-values and selective confidence intervals for the coefficients of features selected by Lasso at the value of the hyperparameter k chosen by cross-validation.
     
     This function computes selective p-values and selective confidence intervals for the coefficients of features selected by Lasso at the value of the regularization parameter k chosen by cross-validation.
 
