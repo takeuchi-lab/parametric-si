@@ -11,18 +11,18 @@ from typing import List
 np.seterr(divide='ignore', invalid='ignore')
 
 def parametric_lars_si(X:np.matrix,y:np.matrix,k:int,sigma=1,alpha=0.05):
-    """Compute p-values and confidence intervals for the coeeficient estimated by lars at a fixed value of the heyperparameter k.
+    """Compute selective p-values and selective confidence intervals for the coefficients estimated by LARS algorithm at a fixed value of the hyperparameter k.
 
-    This function computes selective p-values and confidence intervals for the coefficient of predictors selected by lars at a fixed value of the heyperparameter k. Matrix of predictors must be centered and scaled, and the response variable must be centered.
+    This function computes selective p-values and selective confidence intervals for the coefficients of features selected by LARS at a fixed value of the hyperparameter k. Feature matrix must be centered and scaled, and the response vector must be centered.
 
     Args:
-        X (np.ndarray): matrix of predictors (n by p)
-        y (np.ndarray): Vector of outcomes (length n)
-        k (int): Number of feature to be selected(hyperparameter)
-        sigma (int, optional): variance for selective inference. Defaults to 1.
-        alpha (float, optional): significance level for confidence intervals. Defaults to 0.05.
+        X (np.ndarray): feature matrix of shape (n_samples, p_features)
+        y (np.ndarray): response vector of shape (n_samples, 1)
+        k (int): number of feature to be selected (hyperparameter)
+        sigma (int, optional): variance for selective inference, default=1.0.
+        alpha (float, optional): significance level for confidence intervals, default=0.05.
     Returns:
-        si.SI_result: reffer to document of SI_result
+        si.SI_result: refer to document of SI_result
     """
 
     A = lars.lars(X,y,k)[0][-1]
@@ -30,20 +30,20 @@ def parametric_lars_si(X:np.matrix,y:np.matrix,k:int,sigma=1,alpha=0.05):
     return si.parametric_si(X,y,A,k,sigma,region,alpha)
 
 def parametric_lars_cv_si(X,y,k_candidates,k_folds,sigma=1,alpha=0.05):
-    """Compute p-values and confidence intervals for the coefficient estimated by lars at the value of the heyperparameter k using cross-validation.
+    """Compute selective p-values and selective confidence intervals for the coefficients estimated by LARS algorithm at the value of the hyperparameter k chosen by cross-validation.
 
-    This function computes selective p-values and confidence intervals for the coefficient of predictors selected by lars at the value of the heyperparameter k. Matrix of predictors must be centered and scaled, and the response variable must be centered.
+    This function computes selective selective p-values and selective confidence intervals for the coefficients of features selected by LARS at the value of the hyperparameter k chosen by cross-validation. Feature matrix must be centered and scaled, and the response vector must be centered.
 
     Args:
-        X (np.ndarray): Matrix of predictors(n x p)
-        y (np.ndarray): Vector of outcomes(length n)
-        k_candidates (List[float]): list of k candidates
-        k_folds (int): fold number in cross validation
-        sigma (int, optional): variance for selective inference. Defaults to 1.
-        alpha (float, optional): significance level for confidence intervals. Defaults to 0.05.
+        X (np.ndarray): feature matrix of shape (n_samples, p_features)
+        y (np.ndarray): response vector of shape (n_samples, 1)
+        k_candidates (List[float]): list of candidates for k
+        k_folds (int): number of folds in cross validation
+        sigma (int, optional): variance for selective inference, default=1.0.
+        alpha (float, optional): significance level for confidence intervals, default=0.05.
 
     Returns:
-        si.SI_result: please reffer to document of SI_result
+        si.SI_result: please refer to document of SI_result
     """
 
     A,k = lars.lars_CV(X,y,k_candidates,k_folds)
