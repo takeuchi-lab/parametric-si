@@ -4,7 +4,6 @@
 
 from setuptools import setup, find_packages
 
-
 with open('README.rst') as f:
     readme = f.read()
 
@@ -12,14 +11,19 @@ with open('LICENSE') as f:
     license = f.read()
 
 setup(
-    name='selective_inference',
-    version='0.1.0',
+    name='package_name',
+    version='0.3.2',
     description='tools for parametric selective inference',
     long_description=readme,
-    author='Daiki Miwa',
-    author_email='me@kennethreitz.com',
-    url='https://github.com/kennethreitz/samplemod',
+    author='Daiki Miwa,Kazuya Sugiyama,Vo Nguyen Le Duy,Takeuchi Ichiro',
+    author_email='miwa.daiki.mllab.nit@gmail.com',
+    url='',
     license=license,
-    packages=find_packages(exclude=('numpy', 'portion', 'scipy.stats'))
+    packages=find_packages(exclude=('tests', 'docs')),
+    install_requires=[
+        "numpy",
+        "scipy",
+        "portion",
+        "sklearn"
+        ]
 )
-

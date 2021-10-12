@@ -1,6 +1,5 @@
 import numpy as np
 import portion as p
-from scipy import stats
 from scipy import optimize
 from . import probability as prob
 
@@ -48,6 +47,6 @@ def f_inverse(p,z,intervals,sigma):
 def confidence_interval(intervals,z,sigma,alpha):
 
     l = f_inverse(1-alpha/2,z,intervals,sigma)
-    u = f_inverse(1+alpha/2,z,intervals,sigma)
+    u = f_inverse(alpha/2,z,intervals,sigma)
 
     return p.closed(l,u)

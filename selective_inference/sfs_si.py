@@ -5,28 +5,51 @@ from . import sfs
 from . import si
 from . import si_cv
 
-def parametric_sfs_si(X,y,k):
+from typing import List
+
+def parametric_sfs_si(X:np.ndarray,y:np.ndarray,k:int,sigma:int=1,alpha:float=0.05)-> si.SI_result:
+    """Compute selective p-values and selective confidence intervals for the coefficients of the features selected by forward SFS at a fixed value of the hyperparameter k.
+
+    This function computes selective p-values and selective confidence intervals for the coefficients of the features selected by forward SFS at a fixed value of the hyperparameter k. 
+
+    Args:
+        X (np.ndarray): feature matrix of shape (n_samples, p_features)
+        y (np.ndarray): response vector of shape (n_samples, 1)
+        k (int): number of features to be selected (hyperparameter)
+        sigma (int, optional): variance for selective inference, default=1.0.
+        alpha (float, optional): significance level for confidence intervals, default=0.05.
+
+    Returns:
+        si.SI_result: reffer to document of SI_result
+    """
 
     A,s = sfs.sfs(X,y,k)
-    Sigma = np.identity(X.shape[0])
 
-    return si.parametric_si_p(X,y,A,k,Sigma,region)
+    return si.parametric_si(X,y,A,k,sigma,region,alpha)
 
-def parametric_sfs_ci(X,y,k):
+def parametric_sfs_cv_si(X:np.ndarray,y:np.ndarray,k_candidates:List[float],k_folds:int,sigma:int=1,alpha:float=0.05)-> si.SI_result:
+    """Compute selective p-values and selective confidence intervals for the coefficients of the features selected by forward SFS at the value of the hyperparameter k chosen by cross-validation.
 
-    A,s = sfs.sfs(X,y,k)
-    Sigma = np.identity(X.shape[0])
+    This function computes selective p-values and confidence intervals for the coefficient of the features selected by forward SFS at the value of the hyperparameter k chosen by cross-validation.
 
-    return si.parametric_si_ci(X,y,A,k,Sigma,region)
+    Args:
+        X (np.ndarray): feature matrix of shape (n_samples, p_features)
+        y (np.ndarray): response vector of shape (n_samples, 1)
+        k_candidates (List[float]): list of candidates for hyperparameter k
+        k_folds (int): number of folds in cross validation
+        sigma (int, optional): variance for selective inference, default=1.0.
+        alpha (float, optional): significance level for confidence intervals, default=0.05.
 
-def parametric_sfs_cv_si(X,y,k_candidates,k_folds):
+
+    Returns:
+        si.SI_result: please reffer to document of SI_result
+    """
 
     A,k = sfs.sfs_CV(X,y,k_candidates,k_folds)
-    Sigma = np.identity(X.shape[0])
 
-    return si_cv.parametric_si_cv_p(X,y,A,k,k_candidates,Sigma,region,k_folds)
+    return si_cv.parametric_si_cv(X,y,A,k,k_candidates,sigma,region,k_folds,alpha)
 
-def region(X,z,k,a,b):
+def region(X,y,z,k,a,b):
 
     y =  a + b * z
 
