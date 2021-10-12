@@ -11,16 +11,16 @@ from typing import List
 np.seterr(divide='ignore', invalid='ignore')
 
 def parametric_lasso_si(X,y,k,sigma=1,alpha=0.05):
-    """Compute p-values and confidence intervals for the coefficients of the estimated lasso model at a fixed value of the hyperparameter k. 
+    """Compute selective p-values and selective confidence intervals for the coefficients of the estimated by Lasso at a fixed value of the hyperparameter k. 
 
-    This function computes selective p-values and confidence intervals for the coefficients of the estimated lasso model at a fixed value of the hyperparameter k.
+    This function computes selective p-values and selective confidence intervals for the coefficients of features selected by Lasso at a fixed value of the hyperparameter k.
 
     Args:
-        X (np.ndarray): matrix of predictors (n by p)
-        y (np.ndarray): Vector of outcomes (length n)
+        X (np.ndarray): feature matrix of shape (n_samples, p_features)
+        y (np.ndarray): response vector of shape (n_samples, 1)
         k (int): regularization parameter of lasso
-        sigma (int, optional): variance for selective inference. Defaults to 1.
-        alpha (float, optional): significance level for confidence intervals. Defaults to 0.05.
+        sigma (int, optional): variance for selective inference, default=1.0.
+        alpha (float, optional): significance level for confidence intervals, default=0.05.
 
     Returns:
         si.SI_result: reffer to document of SI_result
@@ -31,19 +31,19 @@ def parametric_lasso_si(X,y,k,sigma=1,alpha=0.05):
     return si.parametric_si(X,y,A,k,sigma,region,alpha)
 
 def parametric_lasso_cv_si(X,y,k_candidates,k_folds,sigma=1,alpha=0.05):
-    """Compute p-values and confidence intervals for the coefficient estimated by lars at the value of the heyperparameter k using cross-validation.
+    """Compute selective p-values and selective confidence intervals for the coefficients estimated by Lasso at the value of the hyperparameter k chosen by cross-validation.
     
-    This function computes selective p-values and confidence intervals for the coefficient of lasso model at the fixed value of the regularization parameter k using cross-validation.
+    This function computes selective p-values and selective confidence intervals for the coefficients of features selected by Lasso at the value of the regularization parameter k chosen by cross-validation.
 
     Args:
-        X (np.ndarray): Matrix of predictors(n x p)
-        y (np.ndarray): Vector of outcomes(length n)
-        k_candidates (List[float]): list of k candidates
-        k_folds (int): fold number in cross validation
-        sigma (int, optional): variance for selective inference. Defaults to 1.
-        alpha (float, optional): significance level for confidence intervals. Defaults to 0.05.
+        X (np.ndarray): feature matrix of shape (n_samples, p_features)
+        y (np.ndarray): response vector of shape (n_samples, 1)
+        k_candidates (List[float]): list of candidates for k
+        k_folds (int): number of folds in cross validation
+        sigma (int, optional): variance for selective inference, default=1.0.
+        alpha (float, optional): significance level for confidence intervals, default=0.05.
     Returns:
-        si.SI_result: please reffer to document of SI_result
+        si.SI_result: please refer to document of SI_result
 
     """
 
@@ -52,7 +52,7 @@ def parametric_lasso_cv_si(X,y,k_candidates,k_folds,sigma=1,alpha=0.05):
     return si_cv.parametric_si_cv(X,y,A,k,k_candidates,sigma,region,k_folds,alpha)
 
 def lee_et_all_region(X,z,alpha,a,b):
-    """this function is made with reference to the lasso selection event of lee et al(2016)
+    """this function is made with reference to the lasso selection event of Lee et al. (2016)
 
     Args:
         X ([type]): [description]
