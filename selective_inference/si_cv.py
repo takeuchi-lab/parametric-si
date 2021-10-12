@@ -75,8 +75,8 @@ def validation_error(X_train,X_val,a_train,a_val,b_train,b_val):
     """compute validation error for a given model expressed as Quadratic objects
 
     Args:
-        X_train (numpy.ndarray): design matrix for train set
-        X_val ([type]): design matrix for validation set
+        X_train (numpy.ndarray): feature matrix for train set
+        X_val ([type]): feature matrix for validation set
         a_train ([type]): vector of test statistics for train set
         a_val ([type]): vector of test statistics for validation set
         b_train ([type]): vector of test statistics for train set
