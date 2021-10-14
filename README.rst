@@ -15,7 +15,7 @@ This package requires the following packages:
 
 * numpy
 * scipy
-* skelearn
+* sklearn
 * portion
 
 ==============================
