@@ -1,7 +1,7 @@
 package_name
 ===================================================
 
-This package implements a more powerful and general confitional selective inference(SI) with linear regression.
+This package implements a more powerful and general conditional selective inference(SI) with linear regression.
 
 key reference are the following papers:
 
