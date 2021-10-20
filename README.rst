@@ -30,4 +30,4 @@ Use pip to install package_name package. Required packages will be also installe
 =============
 API Reference
 =============
-Detailed API reference is available at https://
+`Detailed API reference is available here <https://>`_
