@@ -5,8 +5,8 @@ This package implements a more powerful and general confitional selective infere
 
 Key references are the following papers:
 
-    *  Parametric Programming Approach for More Powerful and General Lasso Selective Inference https://arxiv.org/abs/2004.09749
-    *  More Powerful and General Selective Inference for Stepwise Feature Selection using the Homotopy Continuation Approach https://arxiv.org/abs/2012.13545
+    *  `Parametric Programming Approach for More Powerful and General Lasso Selective Inference <https://arxiv.org/abs/2004.09749>`_
+    *  `More Powerful and General Selective Inference for Stepwise Feature Selection using the Homotopy Continuation Approach <https://arxiv.org/abs/2012.13545>`_
 
 ============
 Requirements
