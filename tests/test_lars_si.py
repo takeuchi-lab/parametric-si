@@ -1,6 +1,6 @@
 import pytest
 import numpy as np 
-from selective_inference.lars_si import parametric_lars_si,parametric_lars_cv_si
+from parametric_si.lars_si import parametric_lars_si,parametric_lars_cv_si
 
 @pytest.mark.parametrize("p_test,A_test",[([0.02516785736871907, 0.42930776257205366, 0.4697014120604279, 0.66639917133858], [2, 4, 1, 0])])
 def test_lars_si(data_generate,p_test,A_test):

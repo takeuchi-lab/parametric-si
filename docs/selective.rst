@@ -1,27 +1,27 @@
 .. toctree::
    :caption: Contents:
-   :maxdepth: 2
+   :maxdepth: 4
 
-selective_inference.sfs_si module
+parametric_si.sfs_si module
 =================================
 
-.. automodule:: selective_inference.sfs_si
+.. automodule:: parametric_si.sfs_si
    :members:
 
-selective_inference.lasso_si module
+parametric_si.lasso_si module
 ===================================
 
-.. automodule:: selective_inference.lasso_si
+.. automodule:: parametric_si.lasso_si
    :members:
 
-selective_inference.lasso_si module
+parametric_si.lasso_si module
 ===================================
 
-.. automodule:: selective_inference.lars_si
+.. automodule:: parametric_si.lars_si
    :members:
 
-selective_inference.si module
+parametric_si.si module
 =============================
 
-.. automodule:: selective_inference.si
+.. automodule:: parametric_si.si
    :members: SI_result,estimate_sigma,estimate_sigma_lasso

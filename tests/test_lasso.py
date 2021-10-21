@@ -1,6 +1,6 @@
 import pytest
 import numpy as np 
-from selective_inference.lasso import lasso,lasso_CV
+from parametric_si.lasso import lasso,lasso_CV
 
 @pytest.mark.parametrize("A_test",[([0, 1, 2, 4])])
 def test_lasso(data_generate,A_test):

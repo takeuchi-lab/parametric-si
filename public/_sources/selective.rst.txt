@@ -1,6 +1,6 @@
 .. toctree::
    :caption: Contents:
-   :maxdepth: 2
+   :maxdepth: 4
 
 selective_inference.sfs_si module
 =================================

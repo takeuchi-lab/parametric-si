@@ -1,6 +1,6 @@
 import pytest
 import numpy as np 
-from selective_inference.sfs import sfs,sfs_CV
+from parametric_si.sfs import sfs,sfs_CV
 
 @pytest.mark.parametrize("A_test",[([2, 4, 1, 0])])
 def test_sfs(data_generate,A_test):

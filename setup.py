@@ -11,8 +11,8 @@ with open('LICENSE') as f:
     license = f.read()
 
 setup(
-    name='package_name',
-    version='0.3.2',
+    name='parametric_si',
+    version='1.0.0',
     description='tools for parametric selective inference',
     long_description=readme,
     author='Daiki Miwa,Kazuya Sugiyama,Vo Nguyen Le Duy,Takeuchi Ichiro',

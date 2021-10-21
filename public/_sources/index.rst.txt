@@ -11,3 +11,4 @@ package_name package documentation
    :maxdepth: 4
 
    modules
+   example

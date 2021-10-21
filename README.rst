@@ -1,4 +1,4 @@
-package_name
+parametric_si
 ===================================================
 
 This package implements a more powerful and general confitional selective inference(SI) with linear regression.
@@ -19,13 +19,13 @@ This package requires the following packages:
 * portion
 
 ==============================
-Installing package_name
+Installing parametric_si
 ==============================
-Use pip to install package_name package. Required packages will be also installed automatically.
+Use pip to install parametric_si package. Required packages will be also installed automatically.
 
 .. code-block:: console
     
-    $ pip install package_name
+    $ pip install parametric_si
 
 =============
 API Reference

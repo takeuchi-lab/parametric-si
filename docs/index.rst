@@ -3,7 +3,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-package_name package documentation
+parametric_si package documentation
 =========================================
 
 .. toctree::
@@ -11,3 +11,4 @@ package_name package documentation
    :maxdepth: 4
 
    modules
+   example
