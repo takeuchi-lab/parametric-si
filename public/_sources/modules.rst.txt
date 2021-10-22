@@ -1,4 +1,4 @@
-selective_inference  package
+parametric_si  package
 ===================
 
 .. toctree::
