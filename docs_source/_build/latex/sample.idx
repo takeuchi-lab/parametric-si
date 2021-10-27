@@ -1,0 +1,19 @@
+\indexentry{module@\spxentry{module}!selective\_inference.si@\spxentry{selective\_inference.si}|hyperpage}{3}
+\indexentry{selective\_inference.si@\spxentry{selective\_inference.si}!module@\spxentry{module}|hyperpage}{3}
+\indexentry{SI\_result (class in selective\_inference.si)@\spxentry{SI\_result}\spxextra{class in selective\_inference.si}|hyperpage}{3}
+\indexentry{A (selective\_inference.si.SI\_result attribute)@\spxentry{A}\spxextra{selective\_inference.si.SI\_result attribute}|hyperpage}{3}
+\indexentry{k (selective\_inference.si.SI\_result attribute)@\spxentry{k}\spxextra{selective\_inference.si.SI\_result attribute}|hyperpage}{3}
+\indexentry{p\_values (selective\_inference.si.SI\_result attribute)@\spxentry{p\_values}\spxextra{selective\_inference.si.SI\_result attribute}|hyperpage}{3}
+\indexentry{CIs (selective\_inference.si.SI\_result attribute)@\spxentry{CIs}\spxextra{selective\_inference.si.SI\_result attribute}|hyperpage}{3}
+\indexentry{module@\spxentry{module}!selective\_inference.sfs\_si@\spxentry{selective\_inference.sfs\_si}|hyperpage}{3}
+\indexentry{selective\_inference.sfs\_si@\spxentry{selective\_inference.sfs\_si}!module@\spxentry{module}|hyperpage}{3}
+\indexentry{parametric\_sfs\_cv\_si() (in module selective\_inference.sfs\_si)@\spxentry{parametric\_sfs\_cv\_si()}\spxextra{in module selective\_inference.sfs\_si}|hyperpage}{3}
+\indexentry{parametric\_sfs\_si() (in module selective\_inference.sfs\_si)@\spxentry{parametric\_sfs\_si()}\spxextra{in module selective\_inference.sfs\_si}|hyperpage}{3}
+\indexentry{module@\spxentry{module}!selective\_inference.lasso\_si@\spxentry{selective\_inference.lasso\_si}|hyperpage}{4}
+\indexentry{selective\_inference.lasso\_si@\spxentry{selective\_inference.lasso\_si}!module@\spxentry{module}|hyperpage}{4}
+\indexentry{parametric\_lasso\_cv\_si() (in module selective\_inference.lasso\_si)@\spxentry{parametric\_lasso\_cv\_si()}\spxextra{in module selective\_inference.lasso\_si}|hyperpage}{4}
+\indexentry{parametric\_lasso\_si() (in module selective\_inference.lasso\_si)@\spxentry{parametric\_lasso\_si()}\spxextra{in module selective\_inference.lasso\_si}|hyperpage}{4}
+\indexentry{module@\spxentry{module}!selective\_inference.lars\_si@\spxentry{selective\_inference.lars\_si}|hyperpage}{4}
+\indexentry{selective\_inference.lars\_si@\spxentry{selective\_inference.lars\_si}!module@\spxentry{module}|hyperpage}{4}
+\indexentry{parametric\_lars\_cv\_si() (in module selective\_inference.lars\_si)@\spxentry{parametric\_lars\_cv\_si()}\spxextra{in module selective\_inference.lars\_si}|hyperpage}{4}
+\indexentry{parametric\_lars\_si() (in module selective\_inference.lars\_si)@\spxentry{parametric\_lars\_si()}\spxextra{in module selective\_inference.lars\_si}|hyperpage}{5}

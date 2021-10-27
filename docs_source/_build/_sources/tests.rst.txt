@@ -1,0 +1,93 @@
+tests package
+=============
+
+Submodules
+----------
+
+tests.conftest module
+---------------------
+
+.. automodule:: tests.conftest
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+tests.context module
+--------------------
+
+.. automodule:: tests.context
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+tests.test\_advanced module
+---------------------------
+
+.. automodule:: tests.test_advanced
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+tests.test\_basic module
+------------------------
+
+.. automodule:: tests.test_basic
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+tests.test\_lars module
+-----------------------
+
+.. automodule:: tests.test_lars
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+tests.test\_lars\_si module
+---------------------------
+
+.. automodule:: tests.test_lars_si
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+tests.test\_lasso module
+------------------------
+
+.. automodule:: tests.test_lasso
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+tests.test\_lasso\_si module
+----------------------------
+
+.. automodule:: tests.test_lasso_si
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+tests.test\_sfs module
+----------------------
+
+.. automodule:: tests.test_sfs
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+tests.test\_sfs\_si module
+--------------------------
+
+.. automodule:: tests.test_sfs_si
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: tests
+   :members:
+   :undoc-members:
+   :show-inheritance:

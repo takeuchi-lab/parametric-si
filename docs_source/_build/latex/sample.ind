@@ -1,0 +1,54 @@
+\begin{sphinxtheindex}
+\let\bigletter\sphinxstyleindexlettergroup
+\let\spxpagem \sphinxstyleindexpagemain
+\let\spxentry \sphinxstyleindexentry
+\let\spxextra \sphinxstyleindexextra
+
+  \bigletter A
+  \item \spxentry{A}\spxextra{selective\_inference.si.SI\_result attribute}, \hyperpage{3}
+
+  \indexspace
+  \bigletter C
+  \item \spxentry{CIs}\spxextra{selective\_inference.si.SI\_result attribute}, \hyperpage{3}
+
+  \indexspace
+  \bigletter K
+  \item \spxentry{k}\spxextra{selective\_inference.si.SI\_result attribute}, \hyperpage{3}
+
+  \indexspace
+  \bigletter M
+  \item \spxentry{module}
+    \subitem \spxentry{selective\_inference.lars\_si}, \hyperpage{4}
+    \subitem \spxentry{selective\_inference.lasso\_si}, \hyperpage{4}
+    \subitem \spxentry{selective\_inference.sfs\_si}, \hyperpage{3}
+    \subitem \spxentry{selective\_inference.si}, \hyperpage{3}
+
+  \indexspace
+  \bigletter P
+  \item \spxentry{p\_values}\spxextra{selective\_inference.si.SI\_result attribute}, \hyperpage{3}
+  \item \spxentry{parametric\_lars\_cv\_si()}\spxextra{in module selective\_inference.lars\_si}, 
+		\hyperpage{4}
+  \item \spxentry{parametric\_lars\_si()}\spxextra{in module selective\_inference.lars\_si}, 
+		\hyperpage{5}
+  \item \spxentry{parametric\_lasso\_cv\_si()}\spxextra{in module selective\_inference.lasso\_si}, 
+		\hyperpage{4}
+  \item \spxentry{parametric\_lasso\_si()}\spxextra{in module selective\_inference.lasso\_si}, 
+		\hyperpage{4}
+  \item \spxentry{parametric\_sfs\_cv\_si()}\spxextra{in module selective\_inference.sfs\_si}, 
+		\hyperpage{3}
+  \item \spxentry{parametric\_sfs\_si()}\spxextra{in module selective\_inference.sfs\_si}, 
+		\hyperpage{3}
+
+  \indexspace
+  \bigletter S
+  \item \spxentry{selective\_inference.lars\_si}
+    \subitem \spxentry{module}, \hyperpage{4}
+  \item \spxentry{selective\_inference.lasso\_si}
+    \subitem \spxentry{module}, \hyperpage{4}
+  \item \spxentry{selective\_inference.sfs\_si}
+    \subitem \spxentry{module}, \hyperpage{3}
+  \item \spxentry{selective\_inference.si}
+    \subitem \spxentry{module}, \hyperpage{3}
+  \item \spxentry{SI\_result}\spxextra{class in selective\_inference.si}, \hyperpage{3}
+
+\end{sphinxtheindex}
