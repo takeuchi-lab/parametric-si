@@ -1,0 +1,99 @@
+parametric\_si package
+======================
+
+
+parametric\_si.lars module
+--------------------------
+
+.. automodule:: parametric_si.lars
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+parametric\_si.lars\_si module
+------------------------------
+
+.. automodule:: parametric_si.lars_si
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+parametric\_si.lasso module
+---------------------------
+
+.. automodule:: parametric_si.lasso
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+parametric\_si.lasso\_si module
+-------------------------------
+
+.. automodule:: parametric_si.lasso_si
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+parametric\_si.p\_value module
+------------------------------
+
+.. automodule:: parametric_si.p_value
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+parametric\_si.probability module
+---------------------------------
+
+.. automodule:: parametric_si.probability
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+parametric\_si.quadratic module
+-------------------------------
+
+.. automodule:: parametric_si.quadratic
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+parametric\_si.sfs module
+-------------------------
+
+.. automodule:: parametric_si.sfs
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+parametric\_si.sfs\_si module
+-----------------------------
+
+.. automodule:: parametric_si.sfs_si
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+parametric\_si.si module
+------------------------
+
+.. automodule:: parametric_si.si
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+parametric\_si.si\_cv module
+----------------------------
+
+.. automodule:: parametric_si.si_cv
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: parametric_si
+   :members:
+   :undoc-members:
+   :show-inheritance:

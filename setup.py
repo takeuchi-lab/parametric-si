@@ -12,12 +12,12 @@ with open('LICENSE') as f:
 
 setup(
     name='parametric-si',
-    version='1.0.0',
+    version='1.0.1',
     description='tools for parametric selective inference',
     long_description=readme,
-    author='Daiki Miwa,Kazuya Sugiyama,Vo Nguyen Le Duy,Takeuchi Ichiro',
+    author='Takeuchi Lab',
     author_email='miwa.daiki.mllab.nit@gmail.com',
-    url='',
+    url='https://github.com/takeuchi-lab/parametric-si',
     license=license,
     packages=find_packages(exclude=('tests', 'docs')),
     install_requires=[

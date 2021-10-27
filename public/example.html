@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Example &mdash; parametric_si v1.0.0 documentation</title>
+  <title>Example &mdash; parametric_si v1.0.1 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -29,7 +29,7 @@
             <a href="index.html" class="icon icon-home"> parametric_si
           </a>
               <div class="version">
-                v1.0.0
+                v1.0.1
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -75,12 +75,27 @@
 <h1>Example<a class="headerlink" href="#example" title="Permalink to this headline"></a></h1>
 <div class="toctree-wrapper compound">
 </div>
-<p>SI Example</p>
-<ul class="simple">
-<li></li>
-<li></li>
-<li></li>
-</ul>
+<p>Simple example for parametric_si</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># import modules</span>
+<span class="kn">import</span> <span class="nn">parametric_si</span> <span class="k">as</span> <span class="nn">psi</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># generate data</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">beta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">X</span> <span class="o">@</span> <span class="n">beta</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+
+<span class="c1"># execute selective inference</span>
+<span class="n">result_lasso</span>  <span class="o">=</span> <span class="n">psi</span><span class="o">.</span><span class="n">parametric_lasso_si</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">α</span><span class="p">)</span>
+<span class="n">result_stepwise</span> <span class="o">=</span> <span class="n">psi</span><span class="o">.</span><span class="n">parametric_sfs_si</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">k</span><span class="p">)</span>
+<span class="n">result_lars</span> <span class="o">=</span> <span class="n">psi</span><span class="o">.</span><span class="n">parametric_lars_si</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">k</span><span class="p">)</span>
+
+<span class="c1"># execute selective inference with cv</span>
+<span class="n">result_lasso_cv</span> <span class="o">=</span> <span class="n">psi</span><span class="o">.</span><span class="n">parametric_lasso_cv_si</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">,[</span><span class="mf">0.01</span><span class="p">,</span><span class="mf">0.1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">100</span><span class="p">],</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">result_stepwise_cv</span> <span class="o">=</span> <span class="n">psi</span><span class="o">.</span><span class="n">parametric_sfs_cv_si</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">,[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">result_lars_cv</span> <span class="o">=</span> <span class="n">psi</span><span class="o">.</span><span class="n">parametric_lars_cv_si</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">,[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
 </section>
 
 
@@ -93,7 +108,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2021 Daiki Miwa and others.</p>
+    <p>&#169; Copyright 2021 Takeuchi Lab.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
