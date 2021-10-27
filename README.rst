@@ -30,4 +30,4 @@ Use pip to install parametric_si package. Required packages will be also install
 =============
 API Reference
 =============
-`Detailed API reference is available here <https://>`_
+`Detailed API reference is available here <https://takeuchi-lab.github.io/parametric-si/>`_
