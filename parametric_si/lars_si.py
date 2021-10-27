@@ -150,7 +150,9 @@ def region(X,y,z,step,a,b):
     L = max(temp2[temp1 < 0],default=-np.inf)
     U = min(temp2[temp1 > 0],default=np.inf)
 
-    assert L < U
+    if L > U :
+        print("Numerical calculation error occurred.")
+        assert False
 
     return L,U,A[-1]
 

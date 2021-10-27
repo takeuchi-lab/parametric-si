@@ -1,33 +1,33 @@
-package_name
+parametric_si
 ===================================================
 
 This package implements a more powerful and general conditional selective inference(SI) with linear regression.
 
-key reference are the following papers:
+Key references are the following papers:
 
-    *  Parametric Programming Approach for More Powerful and General Lasso Selective Inference https://arxiv.org/abs/2004.09749
-    *  More Powerful and General Selective Inference for Stepwise Feature Selection using the Homotopy Continuation Approach https://arxiv.org/abs/2012.13545
+    *  `Parametric Programming Approach for More Powerful and General Lasso Selective Inference <https://arxiv.org/abs/2004.09749>`_
+    *  `More Powerful and General Selective Inference for Stepwise Feature Selection using the Homotopy Continuation Approach <https://arxiv.org/abs/2012.13545>`_
 
 ============
 Requirements
 ============
-package_name requires the following packages:
+This package requires the following packages:
 
 * numpy
 * scipy
-* skelearn
+* sklearn
 * portion
 
 ==============================
-Installing package_name
+Installing parametric_si
 ==============================
-Use pip to install package_name package. Required packages will be also installed automatically.
+Use pip to install parametric_si package. Required packages will be also installed automatically.
 
 .. code-block:: console
     
-    $ pip install package_name
+    $ pip install parametric_si
 
 =============
 API Reference
 =============
-Detailed API reference is available at https://
+`Detailed API reference is available here <https://>`_
