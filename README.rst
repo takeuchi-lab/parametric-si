@@ -1,4 +1,4 @@
-parametric_si
+parametric-si
 ===================================================
 
 This package implements a more powerful and general conditional selective inference(SI) with linear regression.
@@ -25,7 +25,7 @@ Use pip to install parametric_si package. Required packages will be also install
 
 .. code-block:: console
     
-    $ pip install parametric_si
+    $ pip install parametric-si
 
 =============
 API Reference
