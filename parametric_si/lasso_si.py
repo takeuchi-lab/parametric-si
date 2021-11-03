@@ -52,19 +52,6 @@ def parametric_lasso_cv_si(X,y,k_candidates,k_folds,sigma=1,alpha=0.05):
     return si_cv.parametric_si_cv(X,y,A,k,k_candidates,sigma,region,k_folds,alpha)
 
 def lee_et_all_region(X,z,alpha,a,b):
-    """this function is made with reference to the lasso selection event of Lee et al. (2016)
-
-    Args:
-        X ([type]): [description]
-        z ([type]): [description]
-        alpha ([type]): [description]
-        a ([type]): [description]
-        b ([type]): [description]
-
-    Returns:
-        [type]: [description]
-    """
-
     y = a + b * z
 
     L,U = -np.inf,np.inf
