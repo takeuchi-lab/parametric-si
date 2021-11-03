@@ -1,4 +1,4 @@
-parametric_si
+parametric-si
 ===================================================
 
 This package implements a more powerful and general conditional selective inference(SI) with linear regression.
