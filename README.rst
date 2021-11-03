@@ -19,13 +19,13 @@ This package requires the following packages:
 * portion
 
 ==============================
-Installing parametric_si
+Installing parametric-si
 ==============================
 Use pip to install parametric_si package. Required packages will be also installed automatically.
 
 .. code-block:: console
     
-    $ pip install parametric_si
+    $ pip install parametric-si
 
 =============
 API Reference
